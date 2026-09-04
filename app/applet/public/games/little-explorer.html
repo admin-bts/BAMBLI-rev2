@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Bambli Little Explorer: The Lost Picnic Adventure</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    body {
+      background: #FFFDF0;
+      color: #191A23;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px;
+      touch-action: manipulation;
+    }
+    .game-container {
+      width: 100%;
+      max-width: 760px;
+      background: #FFFDF0;
+      border: 5px solid #000;
+      border-radius: 28px;
+      box-shadow: 8px 8px 0px #000;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+    }
+    .game-header {
+      background: #4ECDC4;
+      border-bottom: 4px solid #000;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .game-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .mascot-avatar {
+      width: 44px;
+      height: 44px;
+      background: #FFD93D;
+      border: 3px solid #000;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      box-shadow: 2px 2px 0px #000;
+      animation: bounce 2s infinite ease-in-out;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .game-title {
+      font-weight: 900;
+      font-size: 1.15rem;
+      line-height: 1.2;
+      color: #000;
+    }
+    .game-sub {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #000;
+      opacity: 0.85;
+    }
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .star-pill {
+      background: #FFD93D;
+      border: 3px solid #000;
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-weight: 900;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 2px 2px 0px #000;
+    }
+    .btn-lang {
+      background: #FFF;
+      border: 3px solid #000;
+      border-radius: 12px;
+      padding: 4px 10px;
+      font-weight: 900;
+      font-size: 0.8rem;
+      cursor: pointer;
+      box-shadow: 2px 2px 0px #000;
+      transition: all 0.1s;
+    }
+    .btn-lang:active {
+      transform: translate(2px, 2px);
+      box-shadow: 0 0 0 #000;
+    }
+    .challenge-tabs {
+      background: #FFF7CC;
+      border-bottom: 4px solid #000;
+      display: flex;
+      overflow-x: auto;
+      padding: 8px;
+      gap: 6px;
+      scrollbar-width: none;
+    }
+    .tab-btn {
+      background: #FFF;
+      border: 3px solid #000;
+      border-radius: 14px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      font-weight: 900;
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 2px 2px 0px #000;
+      transition: all 0.15s;
+    }
+    .tab-btn.active {
+      background: #FF6B6B;
+      color: #FFF;
+      transform: translateY(-2px);
+      box-shadow: 3px 3px 0px #000;
+    }
+    .game-stage {
+      padding: 16px;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .stage-card {
+      width: 100%;
+      background: #FFF;
+      border: 4px solid #000;
+      border-radius: 22px;
+      padding: 16px;
+      box-shadow: 4px 4px 0px #000;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .stage-instruction {
+      font-weight: 900;
+      font-size: 1.15rem;
+      text-align: center;
+      color: #191A23;
+    }
+    .stage-sub-instruction {
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-align: center;
+      color: #666;
+    }
+    /* Mode 1: Hidden Items */
+    .hidden-playground {
+      height: 270px;
+      background: linear-gradient(180deg, #A7F3D0 0%, #34D399 70%, #059669 100%);
+      border: 4px solid #000;
+      border-radius: 18px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .hidden-item {
+      position: absolute;
+      font-size: 38px;
+      cursor: pointer;
+      transition: transform 0.2s;
+      filter: drop-shadow(2px 2px 0px #000);
+    }
+    .hidden-item:hover {
+      transform: scale(1.2);
+    }
+    .hidden-item.found {
+      transform: scale(1.4) rotate(15deg);
+      animation: popOut 0.5s forwards;
+      pointer-events: none;
+    }
+    @keyframes popOut {
+      0% { opacity: 1; transform: scale(1.4); }
+      100% { opacity: 0; transform: scale(2.2); }
+    }
+    .checklist {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .check-item {
+      background: #FFFDF0;
+      border: 3px solid #000;
+      border-radius: 12px;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 2px 2px 0px #000;
+    }
+    .check-item.done {
+      background: #8AC926;
+      color: #FFF;
+      text-decoration: line-through;
+    }
+    /* Mode 2: Color Match */
+    .color-baskets {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .basket-box {
+      border: 3px solid #000;
+      border-radius: 16px;
+      padding: 10px 4px;
+      text-align: center;
+      font-weight: 900;
+      font-size: 0.85rem;
+      box-shadow: 3px 3px 0px #000;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    .basket-box:active {
+      transform: scale(0.96);
+    }
+    .treats-pool {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 8px 0;
+    }
+    .treat-btn {
+      background: #FFF;
+      border: 3px solid #000;
+      border-radius: 16px;
+      padding: 10px 14px;
+      font-size: 28px;
+      box-shadow: 3px 3px 0px #000;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .treat-btn.selected {
+      background: #FFE66D;
+      transform: translateY(-4px) scale(1.1);
+      box-shadow: 4px 4px 0px #000;
+    }
+    /* Mode 3: Shapes */
+    .shape-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .shape-card {
+      border: 3px solid #000;
+      border-radius: 18px;
+      padding: 16px;
+      text-align: center;
+      background: #FFFDF0;
+      cursor: pointer;
+      box-shadow: 3px 3px 0px #000;
+      transition: all 0.15s;
+    }
+    .shape-card:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #000;
+    }
+    /* Mode 4: Counting */
+    .count-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      min-height: 90px;
+      background: #FFF7CC;
+      border: 3px solid #000;
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .count-icon {
+      font-size: 36px;
+      animation: pulse 1s infinite alternate ease-in-out;
+    }
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.15); }
+    }
+    .count-choices {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .count-choice-btn {
+      background: #FFF;
+      border: 3px solid #000;
+      border-radius: 14px;
+      width: 54px;
+      height: 54px;
+      font-size: 1.4rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 3px 3px 0px #000;
+      transition: all 0.1s;
+    }
+    .count-choice-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #000;
+    }
+    /* Mode 5: Memory Match */
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .memory-card {
+      aspect-ratio: 1;
+      background: #8054C2;
+      border: 3px solid #000;
+      border-radius: 14px;
+      font-size: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 3px 3px 0px #000;
+      color: transparent;
+      transition: all 0.2s;
+    }
+    .memory-card.revealed, .memory-card.matched {
+      background: #FFF;
+      color: initial;
+      transform: rotateY(180deg);
+    }
+    .memory-card.matched {
+      background: #A7F3D0;
+      border-color: #059669;
+      pointer-events: none;
+    }
+    .success-banner {
+      background: #8AC926;
+      color: #FFF;
+      border: 4px solid #000;
+      border-radius: 18px;
+      padding: 12px;
+      text-align: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+      box-shadow: 4px 4px 0px #000;
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .next-btn {
+      background: #FFD93D;
+      border: 3px solid #000;
+      border-radius: 14px;
+      padding: 8px 18px;
+      font-weight: 900;
+      font-size: 0.95rem;
+      margin-top: 6px;
+      cursor: pointer;
+      box-shadow: 2px 2px 0px #000;
+    }
+    .footer-note {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 8px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <!-- Game Header -->
+    <header class="game-header">
+      <div class="game-brand">
+        <div class="mascot-avatar">🧺</div>
+        <div>
+          <h1 class="game-title" id="gameTitle">Little Explorer</h1>
+          <p class="game-sub" id="gameSub">The Lost Picnic Adventure • Ages 3–7</p>
+        </div>
+      </div>
+      <div class="header-controls">
+        <div class="star-pill">
+          <span>⭐</span>
+          <span id="starScore">0</span>
+        </div>
+        <button class="btn-lang" id="langToggle" onclick="toggleLanguage()">Bahasa Melayu</button>
+      </div>
+    </header>
+
+    <!-- 5 Challenge Navigation Tabs -->
+    <nav class="challenge-tabs">
+      <button class="tab-btn active" id="tab0" onclick="setMode(0)">
+        <span>🔍</span> <span id="tab0Label">Find Items</span>
+      </button>
+      <button class="tab-btn" id="tab1" onclick="setMode(1)">
+        <span>🎨</span> <span id="tab1Label">Match Colours</span>
+      </button>
+      <button class="tab-btn" id="tab2" onclick="setMode(2)">
+        <span>🔺</span> <span id="tab2Label">Discover Shapes</span>
+      </button>
+      <button class="tab-btn" id="tab3" onclick="setMode(3)">
+        <span>🔢</span> <span id="tab3Label">Count Goodies</span>
+      </button>
+      <button class="tab-btn" id="tab4" onclick="setMode(4)">
+        <span>🧠</span> <span id="tab4Label">Memory Match</span>
+      </button>
+    </nav>
+
+    <!-- Dynamic Stage Area -->
+    <main class="game-stage" id="stageContainer">
+      <!-- Injected via JavaScript -->
+    </main>
+
+    <footer class="footer-note" id="footerNote">
+      100% Kid Safe • No Ads • Offline Standalone Edition • Bambli Playful Learning
+    </footer>
+  </div>
+
+  <script>
+    // Audio synthesis using Web Audio API
+    let audioCtx = null;
+    function getAudioCtx() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playTone(freq, type = 'sine', duration = 0.15) {
+      try {
+        const ctx = getAudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(0.18, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function playFanfare() {
+      playTone(440, 'triangle', 0.1);
+      setTimeout(() => playTone(554.37, 'triangle', 0.1), 100);
+      setTimeout(() => playTone(659.25, 'triangle', 0.2), 200);
+      setTimeout(() => playTone(880, 'triangle', 0.35), 300);
+    }
+
+    function playChime() {
+      playTone(523.25, 'sine', 0.15);
+      setTimeout(() => playTone(659.25, 'sine', 0.25), 100);
+    }
+
+    function playBloop() {
+      playTone(280, 'sine', 0.12);
+    }
+
+    // Bilingual Data
+    const TEXT = {
+      en: {
+        title: 'Little Explorer',
+        sub: 'The Lost Picnic Adventure • Ages 3–7',
+        langBtn: 'Bahasa Melayu',
+        tabs: ['Find Items', 'Match Colours', 'Discover Shapes', 'Count Goodies', 'Memory Match'],
+        m1_instr: 'Help Bambli find the hidden picnic goodies!',
+        m1_sub: 'Tap on the lost items hidden in the Wonder Woods park.',
+        m1_items: { apple: 'Red Apple', sandwich: 'Sandwich', juice: 'Juice Box', fork: 'Picnic Fork', berry: 'Blueberries' },
+        m1_done: 'Hooray! You found all the picnic items! ⭐',
+        m2_instr: 'Match the yummy goodies into their matching coloured basket!',
+        m2_sub: 'First tap a treat, then tap the matching colour basket.',
+        m2_baskets: { red: 'Red', yellow: 'Yellow', blue: 'Blue', green: 'Green' },
+        m2_done: 'Delicious! All goodies sorted into baskets! ⭐',
+        m3_instr: 'Discover the shapes of picnic treats!',
+        m3_sub: 'Can you find the: ',
+        shapes: { circle: 'Circle Cookie 🍪', triangle: 'Triangle Watermelon 🍉', square: 'Square Cheese 🧀', star: 'Star Fruit ⭐' },
+        m3_done: 'Super shape detective! You know your shapes! ⭐',
+        m4_instr: 'Count the picnic goodies with Bambli!',
+        m4_sub: 'How many items can you count below?',
+        m4_done: 'Great counting! You earned another star! ⭐',
+        m5_instr: 'Picnic Memory Game: Find the matching pairs!',
+        m5_sub: 'Flip two cards to find all pairs.',
+        m5_done: 'Brilliant memory! Picnic adventure completed! ⭐',
+        nextChallenge: 'Next Challenge ➔',
+        footer: '100% Kid Safe • No Ads • Offline Standalone Edition • Bambli Playful Learning'
+      },
+      ms: {
+        title: 'Little Explorer',
+        sub: 'Pengembaraan Berkelah Yang Hilang • Umur 3–7',
+        langBtn: 'English',
+        tabs: ['Cari Barang', 'Padan Warna', 'Bentuk Ajaib', 'Kira Makanan', 'Padanan Memori'],
+        m1_instr: 'Bantu Bambli cari makanan berkelah yang hilang!',
+        m1_sub: 'Ketik barang yang tersembunyi di dalam Taman Rimba Keajaiban.',
+        m1_items: { apple: 'Epal Merah', sandwich: 'Roti Sandwic', juice: 'Kotak Jus', fork: 'Garpu Berkelah', berry: 'Beri Biru' },
+        m1_done: 'Hebat! Anda berjaya jumpa semua makanan berkelah! ⭐',
+        m2_instr: 'Padankan makanan lazat ke dalam bakul warna yang sepadan!',
+        m2_sub: 'Ketik makanan, kemudian ketik bakul warna yang betul.',
+        m2_baskets: { red: 'Merah', yellow: 'Kuning', blue: 'Biru', green: 'Hijau' },
+        m2_done: 'Bagus! Semua makanan berjaya disusun! ⭐',
+        m3_instr: 'Terokai bentuk makanan berkelah!',
+        m3_sub: 'Bolehkah anda cari: ',
+        shapes: { circle: 'Biskut Bulat 🍪', triangle: 'Tembikai Segi Tiga 🍉', square: 'Keju Segi Empat 🧀', star: 'Belimbing Bintang ⭐' },
+        m3_done: 'Penyiasat bentuk yang hebat! Anda sangat mahir! ⭐',
+        m4_instr: 'Kira makanan berkelah bersama Bambli!',
+        m4_sub: 'Berapakah bilangan makanan di bawah?',
+        m4_done: 'Kiraan yang tepat! Bintang untuk anda! ⭐',
+        m5_instr: 'Permainan Memori Berkelah: Cari pasangan yang sama!',
+        m5_sub: 'Buka dua kad untuk mencari pasangan yang serupa.',
+        m5_done: 'Ingatan yang cemerlang! Pengembaraan selesai! ⭐',
+        nextChallenge: 'Cabaran Seterusnya ➔',
+        footer: '100% Selamat Kanak-Kanak • Tanpa Iklan • Edisi Luar Talian • Bambli Playful Learning'
+      }
+    };
+
+    let currentLang = 'en';
+    let currentMode = 0;
+    let stars = 0;
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'ms' : 'en';
+      playChime();
+      updateStaticText();
+      renderCurrentMode();
+    }
+
+    function addStar() {
+      stars++;
+      document.getElementById('starScore').innerText = stars;
+      playFanfare();
+    }
+
+    function updateStaticText() {
+      const t = TEXT[currentLang];
+      document.getElementById('gameTitle').innerText = t.title;
+      document.getElementById('gameSub').innerText = t.sub;
+      document.getElementById('langToggle').innerText = t.langBtn;
+      document.getElementById('footerNote').innerText = t.footer;
+      for (let i = 0; i < 5; i++) {
+        document.getElementById(`tab${i}Label`).innerText = t.tabs[i];
+      }
+    }
+
+    function setMode(modeIdx) {
+      currentMode = modeIdx;
+      playChime();
+      for (let i = 0; i < 5; i++) {
+        document.getElementById(`tab${i}`).classList.toggle('active', i === modeIdx);
+      }
+      renderCurrentMode();
+    }
+
+    function renderCurrentMode() {
+      const container = document.getElementById('stageContainer');
+      container.innerHTML = '';
+      if (currentMode === 0) renderModeHiddenItems(container);
+      else if (currentMode === 1) renderModeColorMatch(container);
+      else if (currentMode === 2) renderModeShapes(container);
+      else if (currentMode === 3) renderModeCounting(container);
+      else if (currentMode === 4) renderModeMemory(container);
+    }
+
+    // MODE 0: Hidden Items
+    const hiddenItemsData = [
+      { id: 'apple', icon: '🍎', x: '18%', y: '22%' },
+      { id: 'sandwich', icon: '🥪', x: '72%', y: '35%' },
+      { id: 'juice', icon: '🧃', x: '45%', y: '65%' },
+      { id: 'fork', icon: '🍴', x: '82%', y: '78%' },
+      { id: 'berry', icon: '🫐', x: '15%', y: '70%' },
+    ];
+    let foundHidden = new Set();
+
+    function renderModeHiddenItems(container) {
+      const t = TEXT[currentLang];
+      const isAllFound = foundHidden.size === hiddenItemsData.length;
+
+      let html = `
+        <div class="stage-card">
+          <div class="stage-instruction">${t.m1_instr}</div>
+          <div class="stage-sub-instruction">${t.m1_sub}</div>
+          <div class="hidden-playground">
+            <!-- Decorative Trees & Bushes -->
+            <div style="position: absolute; left: 5%; top: 10%; font-size: 56px;">🌳</div>
+            <div style="position: absolute; right: 8%; top: 15%; font-size: 64px;">🌲</div>
+            <div style="position: absolute; left: 40%; top: 20%; font-size: 48px;">🌸</div>
+            <div style="position: absolute; left: 60%; bottom: 10%; font-size: 52px;">🌿</div>
+            <div style="position: absolute; left: 25%; bottom: 15%; font-size: 46px;">🍄</div>
+      `;
+
+      hiddenItemsData.forEach(item => {
+        const found = foundHidden.has(item.id);
+        html += `
+          <div class="hidden-item ${found ? 'found' : ''}" 
+               style="left: ${item.x}; top: ${item.y};"
+               onclick="clickHiddenItem('${item.id}')">
+            ${item.icon}
+          </div>
+        `;
+      });
+
+      html += `
+          </div>
+          <div class="checklist">
+      `;
+
+      hiddenItemsData.forEach(item => {
+        const found = foundHidden.has(item.id);
+        html += `
+          <div class="check-item ${found ? 'done' : ''}">
+            <span>${item.icon}</span>
+            <span>${t.m1_items[item.id]}</span>
+            <span>${found ? '✓' : '○'}</span>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+
+      if (isAllFound) {
+        html += `
+          <div class="success-banner">
+            <div>${t.m1_done}</div>
+            <button class="next-btn" onclick="setMode(1)">${t.nextChallenge}</button>
+          </div>
+        `;
+      }
+
+      html += `</div>`;
+      container.innerHTML = html;
+    }
+
+    function clickHiddenItem(id) {
+      if (foundHidden.has(id)) return;
+      foundHidden.add(id);
+      playChime();
+      if (foundHidden.size === hiddenItemsData.length) {
+        addStar();
+      }
+      renderCurrentMode();
+    }
+
+    // MODE 1: Color Match
+    const treatsData = [
+      { id: 't1', icon: '🍓', color: 'red' },
+      { id: 't2', icon: '🍌', color: 'yellow' },
+      { id: 't3', icon: '🫐', color: 'blue' },
+      { id: 't4', icon: '🍏', color: 'green' },
+    ];
+    let selectedTreat = null;
+    let matchedTreats = new Set();
+
+    function renderModeColorMatch(container) {
+      const t = TEXT[currentLang];
+      const allMatched = matchedTreats.size === treatsData.length;
+
+      let html = `
+        <div class="stage-card">
+          <div class="stage-instruction">${t.m2_instr}</div>
+          <div class="stage-sub-instruction">${t.m2_sub}</div>
+          <div class="treats-pool">
+      `;
+
+      treatsData.forEach(tItem => {
+        if (!matchedTreats.has(tItem.id)) {
+          const isSel = selectedTreat === tItem.id;
+          html += `
+            <button class="treat-btn ${isSel ? 'selected' : ''}" onclick="selectTreat('${tItem.id}')">
+              ${tItem.icon}
+            </button>
+          `;
+        }
+      });
+
+      html += `
+          </div>
+          <div class="color-baskets">
+            <div class="basket-box" style="background: #FF6B6B; color: #FFF;" onclick="matchBasket('red')">
+              🧺 ${t.m2_baskets.red}
+            </div>
+            <div class="basket-box" style="background: #FFD93D; color: #000;" onclick="matchBasket('yellow')">
+              🧺 ${t.m2_baskets.yellow}
+            </div>
+            <div class="basket-box" style="background: #4ECDC4; color: #000;" onclick="matchBasket('blue')">
+              🧺 ${t.m2_baskets.blue}
+            </div>
+            <div class="basket-box" style="background: #8AC926; color: #FFF;" onclick="matchBasket('green')">
+              🧺 ${t.m2_baskets.green}
+            </div>
+          </div>
+      `;
+
+      if (allMatched) {
+        html += `
+          <div class="success-banner">
+            <div>${t.m2_done}</div>
+            <button class="next-btn" onclick="setMode(2)">${t.nextChallenge}</button>
+          </div>
+        `;
+      }
+
+      html += `</div>`;
+      container.innerHTML = html;
+    }
+
+    function selectTreat(id) {
+      selectedTreat = id;
+      playTone(400, 'sine', 0.1);
+      renderCurrentMode();
+    }
+
+    function matchBasket(color) {
+      if (!selectedTreat) {
+        playBloop();
+        return;
+      }
+      const item = treatsData.find(t => t.id === selectedTreat);
+      if (item && item.color === color) {
+        matchedTreats.add(selectedTreat);
+        selectedTreat = null;
+        playChime();
+        if (matchedTreats.size === treatsData.length) {
+          addStar();
+        }
+      } else {
+        playBloop();
+      }
+      renderCurrentMode();
+    }
+
+    // MODE 2: Shapes
+    const targetShapes = ['circle', 'triangle', 'square', 'star'];
+    let shapeStep = 0;
+
+    function renderModeShapes(container) {
+      const t = TEXT[currentLang];
+      const target = targetShapes[shapeStep];
+      const allDone = shapeStep >= targetShapes.length;
+
+      let html = `
+        <div class="stage-card">
+          <div class="stage-instruction">${t.m3_instr}</div>
+      `;
+
+      if (!allDone) {
+        html += `
+          <div class="stage-sub-instruction" style="font-size: 1.1rem; color: #FF6B6B;">
+            ${t.m3_sub} <strong>${t.shapes[target]}</strong>
+          </div>
+          <div class="shape-grid">
+            <button class="shape-card" onclick="chooseShape('circle')">
+              <span style="font-size: 38px;">🍪</span>
+              <div style="font-weight: 900; margin-top: 4px;">Circle</div>
+            </button>
+            <button class="shape-card" onclick="chooseShape('triangle')">
+              <span style="font-size: 38px;">🍉</span>
+              <div style="font-weight: 900; margin-top: 4px;">Triangle</div>
+            </button>
+            <button class="shape-card" onclick="chooseShape('square')">
+              <span style="font-size: 38px;">🧀</span>
+              <div style="font-weight: 900; margin-top: 4px;">Square</div>
+            </button>
+            <button class="shape-card" onclick="chooseShape('star')">
+              <span style="font-size: 38px;">⭐</span>
+              <div style="font-weight: 900; margin-top: 4px;">Star</div>
+            </button>
+          </div>
+        `;
+      } else {
+        html += `
+          <div class="success-banner">
+            <div>${t.m3_done}</div>
+            <button class="next-btn" onclick="setMode(3)">${t.nextChallenge}</button>
+          </div>
+        `;
+      }
+
+      html += `</div>`;
+      container.innerHTML = html;
+    }
+
+    function chooseShape(shape) {
+      if (shape === targetShapes[shapeStep]) {
+        playChime();
+        shapeStep++;
+        if (shapeStep >= targetShapes.length) {
+          addStar();
+        }
+      } else {
+        playBloop();
+      }
+      renderCurrentMode();
+    }
+
+    // MODE 3: Counting
+    const countChallenges = [
+      { icon: '🍎', count: 3, choices: [2, 3, 5] },
+      { icon: '🥪', count: 4, choices: [3, 4, 6] },
+      { icon: '🥤', count: 5, choices: [4, 5, 7] },
+      { icon: '🧁', count: 6, choices: [5, 6, 8] },
+    ];
+    let countStep = 0;
+
+    function renderModeCounting(container) {
+      const t = TEXT[currentLang];
+      const allDone = countStep >= countChallenges.length;
+
+      let html = `
+        <div class="stage-card">
+          <div class="stage-instruction">${t.m4_instr}</div>
+          <div class="stage-sub-instruction">${t.m4_sub}</div>
+      `;
+
+      if (!allDone) {
+        const cur = countChallenges[countStep];
+        html += `
+          <div class="count-display">
+        `;
+        for (let i = 0; i < cur.count; i++) {
+          html += `<span class="count-icon">${cur.icon}</span>`;
+        }
+        html += `
+          </div>
+          <div class="count-choices">
+        `;
+        cur.choices.forEach(ch => {
+          html += `
+            <button class="count-choice-btn" onclick="guessCount(${ch})">${ch}</button>
+          `;
+        });
+        html += `</div>`;
+      } else {
+        html += `
+          <div class="success-banner">
+            <div>${t.m4_done}</div>
+            <button class="next-btn" onclick="setMode(4)">${t.nextChallenge}</button>
+          </div>
+        `;
+      }
+
+      html += `</div>`;
+      container.innerHTML = html;
+    }
+
+    function guessCount(num) {
+      const cur = countChallenges[countStep];
+      if (num === cur.count) {
+        playChime();
+        countStep++;
+        if (countStep >= countChallenges.length) {
+          addStar();
+        }
+      } else {
+        playBloop();
+      }
+      renderCurrentMode();
+    }
+
+    // MODE 4: Memory Match
+    const memoryEmojis = ['🍎', '🥪', '🧺', '🐥', '🦋', '🍪'];
+    let memoryDeck = [];
+    let flippedIndices = [];
+    let matchedCards = new Set();
+
+    function initMemoryDeck() {
+      memoryDeck = [...memoryEmojis, ...memoryEmojis].sort(() => Math.random() - 0.5);
+      flippedIndices = [];
+      matchedCards = new Set();
+    }
+    initMemoryDeck();
+
+    function renderModeMemory(container) {
+      const t = TEXT[currentLang];
+      const isAllMatched = matchedCards.size === memoryDeck.length;
+
+      let html = `
+        <div class="stage-card">
+          <div class="stage-instruction">${t.m5_instr}</div>
+          <div class="stage-sub-instruction">${t.m5_sub}</div>
+          <div class="memory-grid">
+      `;
+
+      memoryDeck.forEach((emoji, idx) => {
+        const isFlipped = flippedIndices.includes(idx) || matchedCards.has(idx);
+        const isMatched = matchedCards.has(idx);
+        html += `
+          <button class="memory-card ${isFlipped ? 'revealed' : ''} ${isMatched ? 'matched' : ''}"
+                  onclick="flipMemoryCard(${idx})">
+            ${isFlipped ? emoji : '❓'}
+          </button>
+        `;
+      });
+
+      html += `</div>`;
+
+      if (isAllMatched) {
+        html += `
+          <div class="success-banner">
+            <div>${t.m5_done}</div>
+            <button class="next-btn" onclick="setMode(0)">Play Again ↺</button>
+          </div>
+        `;
+      }
+
+      html += `</div>`;
+      container.innerHTML = html;
+    }
+
+    function flipMemoryCard(idx) {
+      if (flippedIndices.length >= 2 || flippedIndices.includes(idx) || matchedCards.has(idx)) return;
+      playTone(450, 'sine', 0.1);
+      flippedIndices.push(idx);
+      renderCurrentMode();
+
+      if (flippedIndices.length === 2) {
+        const [idx1, idx2] = flippedIndices;
+        if (memoryDeck[idx1] === memoryDeck[idx2]) {
+          matchedCards.add(idx1);
+          matchedCards.add(idx2);
+          playChime();
+          flippedIndices = [];
+          if (matchedCards.size === memoryDeck.length) {
+            addStar();
+          }
+          renderCurrentMode();
+        } else {
+          setTimeout(() => {
+            playBloop();
+            flippedIndices = [];
+            renderCurrentMode();
+          }, 800);
+        }
+      }
+    }
+
+    // Initialize game
+    updateStaticText();
+    renderCurrentMode();
+  </script>
+</body>
+</html>

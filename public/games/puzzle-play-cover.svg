@@ -1,0 +1,498 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="ppBgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="40%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#6D28D9"/>
+    </linearGradient>
+    <radialGradient id="ppGlow" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#DDD6FE" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#6D28D9" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Ribbons & Badges -->
+    <linearGradient id="ppYellowRibbon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <linearGradient id="ppTealBadge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2DD4BF"/>
+      <stop offset="100%" stop-color="#0F766E"/>
+    </linearGradient>
+    <linearGradient id="ppPinkBanner" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FB7185"/>
+      <stop offset="50%" stop-color="#F43F5E"/>
+      <stop offset="100%" stop-color="#E11D48"/>
+    </linearGradient>
+    <linearGradient id="ppCtaGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="50%" stop-color="#FDE047"/>
+      <stop offset="100%" stop-color="#EAB308"/>
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="ppShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="3" dy="4" stdDeviation="0" flood-color="#1E1B4B" flood-opacity="0.8"/>
+    </filter>
+    <filter id="ppSoftGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+    <filter id="pp3DText" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="0" flood-color="#2E1065"/>
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="960" height="640" fill="url(#ppBgGrad)"/>
+  <rect width="960" height="640" fill="url(#ppGlow)"/>
+
+  <!-- Botanical corner leaves -->
+  <g opacity="0.45">
+    <path d="M-10 650 Q80 560 60 490 Q20 540 -10 650 Z" fill="#34D399"/>
+    <path d="M-10 650 Q130 600 130 520 Q50 560 -10 650 Z" fill="#10B981"/>
+    <path d="M970 650 Q880 560 900 490 Q940 540 970 650 Z" fill="#34D399"/>
+    <path d="M970 650 Q830 600 830 520 Q910 560 970 650 Z" fill="#10B981"/>
+  </g>
+
+  <!-- Floating 3D Puzzle Pieces in Background -->
+  <!-- Top Left cyan piece -->
+  <g transform="translate(195, 25) scale(0.65) rotate(18)" filter="url(#ppShadow)">
+    <path d="M30 10 C35 10 37 0 45 0 C53 0 55 10 60 10 L80 10 L80 30 C80 35 90 37 90 45 C90 53 80 55 80 60 L80 80 L60 80 C55 80 53 90 45 90 C37 90 35 80 30 80 L10 80 L10 60 C10 55 0 53 0 45 C0 37 10 35 10 30 L10 10 Z" fill="#2DD4BF" stroke="#134E4A" stroke-width="3"/>
+  </g>
+
+  <!-- Top Right big purple jigsaw piece -->
+  <g transform="translate(700, 20) scale(0.85) rotate(-15)" filter="url(#ppShadow)">
+    <path d="M30 10 C35 10 37 0 45 0 C53 0 55 10 60 10 L80 10 L80 30 C80 35 90 37 90 45 C90 53 80 55 80 60 L80 80 L60 80 C55 80 53 90 45 90 C37 90 35 80 30 80 L10 80 L10 60 C10 55 0 53 0 45 C0 37 10 35 10 30 L10 10 Z" fill="#A855F7" stroke="#4C1D95" stroke-width="3.5"/>
+    <circle cx="50" cy="45" r="7" fill="#C084FC" opacity="0.6"/>
+  </g>
+
+  <!-- Small floating stars & sparkles -->
+  <g fill="#FDE047" opacity="0.85">
+    <!-- Star 1 -->
+    <path d="M280 60 Q285 60 285 55 Q285 60 290 60 Q285 60 285 65 Q285 60 280 60 Z"/>
+    <!-- Star 2 -->
+    <path d="M650 105 Q657 105 657 98 Q657 105 664 105 Q657 105 657 112 Q657 105 650 105 Z"/>
+    <!-- Star 3 near title -->
+    <path d="M770 170 Q782 170 782 158 Q782 170 794 170 Q782 170 782 182 Q782 170 770 170 Z" fill="#FACC15" filter="url(#ppShadow)"/>
+    <!-- Tiny pastel confetti circles -->
+    <circle cx="215" cy="115" r="4" fill="#F472B6"/>
+    <circle cx="680" cy="55" r="3.5" fill="#38BDF8"/>
+    <circle cx="890" cy="220" r="5" fill="#FDE047"/>
+    <circle cx="930" cy="340" r="4" fill="#A7F3D0"/>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- TOP LEFT: 25 PUZZLES RIBBON BANNER -->
+  <!-- ========================================== -->
+  <g transform="translate(25, 0)" filter="url(#ppShadow)">
+    <!-- Main Ribbon Body -->
+    <path d="M0 0 L150 0 L150 175 L75 200 L0 175 Z" fill="url(#ppYellowRibbon)" stroke="#B45309" stroke-width="4"/>
+    <!-- Stitched border inside ribbon -->
+    <path d="M12 4 L138 4 L138 165 L75 186 L12 165 Z" fill="none" stroke="#78350F" stroke-width="2" stroke-dasharray="4 4" opacity="0.5"/>
+    <!-- Big number 25 -->
+    <text x="75" y="70" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="62" fill="#1E1B4B" text-anchor="middle">25</text>
+    <text x="75" y="94" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="16" fill="#1E1B4B" letter-spacing="1.5" text-anchor="middle">PUZZLES!</text>
+    <!-- Sub-badge -->
+    <rect x="14" y="106" width="122" height="48" rx="8" fill="#FBBF24" stroke="#D97706" stroke-width="2"/>
+    <text x="75" y="123" font-family="'Nunito', sans-serif" font-weight="900" font-size="11" fill="#78350F" text-anchor="middle">5 CATEGORIES</text>
+    <text x="75" y="137" font-family="'Nunito', sans-serif" font-weight="800" font-size="10" fill="#92400E" text-anchor="middle">EASY TO</text>
+    <text x="75" y="149" font-family="'Nunito', sans-serif" font-weight="800" font-size="10" fill="#92400E" text-anchor="middle">ADVANCED</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- TOP RIGHT: AGES 5-10 CIRCLE BADGE -->
+  <!-- ========================================== -->
+  <g transform="translate(850, 80)" filter="url(#ppShadow)">
+    <circle cx="0" cy="0" r="58" fill="url(#ppTealBadge)" stroke="#042F2E" stroke-width="4.5"/>
+    <circle cx="0" cy="0" r="50" fill="none" stroke="#FFF" stroke-width="2.5" stroke-dasharray="5 4" opacity="0.8"/>
+    <text x="0" y="-12" font-family="'Nunito', sans-serif" font-weight="900" font-size="17" fill="#CCFBF1" text-anchor="middle" letter-spacing="1">AGES</text>
+    <text x="0" y="26" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="40" fill="#FFFFFF" text-anchor="middle">5-10</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- TOP CENTER: BAMBLI LOGO & SUBTITLE -->
+  <!-- ========================================== -->
+  <g transform="translate(480, 52)">
+    <!-- White rounded pill backing -->
+    <rect x="-105" y="-36" width="210" height="74" rx="20" fill="#FFFFFF" stroke="#312E81" stroke-width="3.5" filter="url(#ppShadow)"/>
+    <!-- Bambli Colorful Wordmark -->
+    <g transform="translate(0, -5)">
+      <!-- Letters: B a m b l i with sprout -->
+      <text x="0" y="8" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="42" text-anchor="middle">
+        <tspan fill="#8B5CF6">B</tspan>
+        <tspan fill="#EC4899">a</tspan>
+        <tspan fill="#14B8A6">m</tspan>
+        <tspan fill="#F59E0B">b</tspan>
+        <tspan fill="#84CC16">l</tspan>
+        <tspan fill="#06B6D4">i</tspan>
+      </text>
+      <!-- Sprout on the 'i' -->
+      <path d="M72 -18 C70 -26 62 -32 55 -28 C48 -24 54 -16 64 -18 Z" fill="#84CC16" stroke="#166534" stroke-width="1.5"/>
+      <path d="M72 -18 C75 -27 84 -30 89 -25 C94 -20 86 -14 77 -17 Z" fill="#84CC16" stroke="#166534" stroke-width="1.5"/>
+      <path d="M72 -12 L72 -18" stroke="#166534" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+    <!-- Pill subtitle: PLAYFUL LEARNING -->
+    <text x="0" y="26" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="11" fill="#1E1B4B" text-anchor="middle" letter-spacing="2">PLAYFUL LEARNING</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- MAIN TITLE: PUZZLE PLAY -->
+  <!-- ========================================== -->
+  <g transform="translate(480, 220)">
+    <!-- 3D Shadow Layers for "PUZZLE PLAY" -->
+    <text x="4" y="6" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="82" fill="#241442" text-anchor="middle" letter-spacing="3">PUZZLE PLAY</text>
+    <text x="0" y="0" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="82" fill="#FFFFFF" stroke="#312E81" stroke-width="6" stroke-linejoin="round" text-anchor="middle" letter-spacing="3">PUZZLE PLAY</text>
+    <!-- Interior vibrant colored fill for playful 3D look -->
+    <text x="0" y="0" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="82" text-anchor="middle" letter-spacing="3">
+      <tspan fill="#818CF8">P</tspan>
+      <tspan fill="#A78BFA">U</tspan>
+      <tspan fill="#C084FC">Z</tspan>
+      <tspan fill="#E879F9">Z</tspan>
+      <tspan fill="#F472B6">L</tspan>
+      <tspan fill="#FB7185">E</tspan>
+      <tspan fill="#FFFFFF"> </tspan>
+      <tspan fill="#2DD4BF">P</tspan>
+      <tspan fill="#38BDF8">L</tspan>
+      <tspan fill="#60A5FA">A</tspan>
+      <tspan fill="#818CF8">Y</tspan>
+    </text>
+
+    <!-- Subtitle Ribbon: WORD SEARCH ADVENTURES -->
+    <g transform="translate(0, 32)" filter="url(#ppShadow)">
+      <!-- Ribbon shape with swallowtails -->
+      <path d="M-220 0 L220 0 L235 15 L220 30 L-220 30 L-235 15 Z" fill="url(#ppPinkBanner)" stroke="#9F1239" stroke-width="2.5"/>
+      <!-- Ribbon folds -->
+      <text x="0" y="21" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="16" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">
+        ★ WORD SEARCH ADVENTURES ★
+      </text>
+    </g>
+
+    <!-- Tagline: Find the words. Train your brain. Have fun! -->
+    <text x="0" y="78" font-family="'Nunito', sans-serif" font-weight="900" font-size="16" fill="#EDE9FE" text-anchor="middle">
+      Find the words. Train your brain. Have fun!
+    </text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- LEFT: BAMBLI MASCOT WITH PENCIL & SPEECH BUBBLE -->
+  <!-- ========================================== -->
+  <g transform="translate(145, 480)">
+    <!-- Speech Bubble -->
+    <g transform="translate(-10, -185)" filter="url(#ppShadow)">
+      <rect x="-80" y="-35" width="160" height="52" rx="20" fill="#FFFFFF" stroke="#312E81" stroke-width="3"/>
+      <!-- Bubble tail -->
+      <path d="M-10 17 L0 32 L15 17 Z" fill="#FFFFFF" stroke="#312E81" stroke-width="3"/>
+      <path d="M-8 16 L13 16" stroke="#FFFFFF" stroke-width="4"/>
+      <text x="0" y="-14" font-family="'Nunito', sans-serif" font-weight="900" font-size="11.5" fill="#1E1B4B" text-anchor="middle">Can you find all the</text>
+      <text x="0" y="3" font-family="'Nunito', sans-serif" font-weight="900" font-size="12" fill="#4338CA" text-anchor="middle">hidden words?</text>
+    </g>
+
+    <!-- Mascot Figure -->
+    <g filter="url(#ppShadow)">
+      <!-- Sprout on Head -->
+      <g transform="translate(0, -90)">
+        <path d="M0 0 C-3 -15 -14 -22 -22 -17 C-30 -12 -23 -3 -12 -4 Z" fill="#84CC16" stroke="#14532D" stroke-width="2.5"/>
+        <path d="M0 0 C3 -16 16 -20 22 -15 C28 -10 20 -2 10 -3 Z" fill="#84CC16" stroke="#14532D" stroke-width="2.5"/>
+        <path d="M0 8 L0 -4" stroke="#14532D" stroke-width="3.5" stroke-linecap="round"/>
+      </g>
+
+      <!-- Purple Ear Pods -->
+      <circle cx="-50" cy="-35" r="16" fill="#8B5CF6" stroke="#1E1B4B" stroke-width="3.5"/>
+      <circle cx="50" cy="-35" r="16" fill="#8B5CF6" stroke="#1E1B4B" stroke-width="3.5"/>
+
+      <!-- Teal Helmet/Hood -->
+      <circle cx="0" cy="-30" r="54" fill="#2DD4BF" stroke="#1E1B4B" stroke-width="4.5"/>
+      <!-- Face opening -->
+      <circle cx="0" cy="-24" r="41" fill="#FEF3C7" stroke="#1E1B4B" stroke-width="3.5"/>
+
+      <!-- Big Eyes (Winking!) -->
+      <!-- Left Eye: Big sparkle eye -->
+      <ellipse cx="-16" cy="-28" rx="7" ry="9" fill="#1E1B4B"/>
+      <circle cx="-18" cy="-32" r="3" fill="#FFF"/>
+      <circle cx="-14" cy="-26" r="1.5" fill="#FFF"/>
+      <!-- Right Eye: Playful Wink -->
+      <path d="M8 -26 Q18 -34 26 -26" stroke="#1E1B4B" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+
+      <!-- Cheerful Eyebrows -->
+      <path d="M-24 -42 Q-16 -46 -8 -42" stroke="#1E1B4B" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <path d="M8 -42 Q16 -46 24 -42" stroke="#1E1B4B" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+      <!-- Rosy Pink Cheeks -->
+      <circle cx="-25" cy="-14" r="7.5" fill="#FB7185" opacity="0.9"/>
+      <circle cx="25" cy="-14" r="7.5" fill="#FB7185" opacity="0.9"/>
+
+      <!-- Big Open Smile with Tongue -->
+      <path d="M-10 -12 C-10 -2 10 -2 10 -12 Z" fill="#DC2626" stroke="#1E1B4B" stroke-width="2.5"/>
+      <path d="M-6 -6 C-3 -3 3 -3 6 -6 Z" fill="#FDA4AF"/>
+
+      <!-- Teal Body / Suit -->
+      <path d="M-30 20 C-30 8 30 8 30 20 L34 56 C34 65 -34 65 -34 56 Z" fill="#2DD4BF" stroke="#1E1B4B" stroke-width="4"/>
+      <!-- Sprout Chest Badge -->
+      <circle cx="0" cy="35" r="14" fill="#FEF3C7" stroke="#1E1B4B" stroke-width="2.5"/>
+      <path d="M0 38 L0 32 M-3 33 C-6 30 -6 34 -3 35 M3 33 C6 30 6 34 3 35" stroke="#16A34A" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+      <!-- Left Hand: Holding Big Purple Pencil -->
+      <g transform="translate(-45, 15) rotate(-25)">
+        <!-- Pencil Body -->
+        <rect x="-7" y="-55" width="14" height="65" rx="3" fill="#8B5CF6" stroke="#1E1B4B" stroke-width="2.5"/>
+        <rect x="-7" y="10" width="14" height="12" fill="#E2E8F0" stroke="#1E1B4B" stroke-width="2"/>
+        <rect x="-7" y="22" width="14" height="8" rx="2" fill="#FB7185" stroke="#1E1B4B" stroke-width="2"/>
+        <!-- Wooden Sharpened Tip -->
+        <polygon points="-7,-55 7,-55 0,-72" fill="#FDE68A" stroke="#1E1B4B" stroke-width="2"/>
+        <polygon points="-3,-65 3,-65 0,-72" fill="#1E1B4B"/>
+        <!-- Hand gripping pencil -->
+        <circle cx="0" cy="-10" r="10" fill="#FEF3C7" stroke="#1E1B4B" stroke-width="3"/>
+      </g>
+
+      <!-- Right Hand: Waving High -->
+      <circle cx="48" cy="18" r="10" fill="#FEF3C7" stroke="#1E1B4B" stroke-width="3"/>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- CENTER: WORD SEARCH PUZZLE BOARD -->
+  <!-- ========================================== -->
+  <g transform="translate(280, 290)" filter="url(#ppSoftGlow)">
+    <!-- Board Base Card -->
+    <rect x="0" y="0" width="350" height="235" rx="24" fill="#FFFFFF" stroke="#312E81" stroke-width="4.5"/>
+
+    <!-- Grid Rows with Colorful Found Word Highlights -->
+    <!-- Row 1: B  [C A T]  [D O G]  Z -->
+    <!-- Highlight CAT (Yellow) -->
+    <rect x="42" y="14" width="112" height="26" rx="13" fill="#FDE047" stroke="#EAB308" stroke-width="2"/>
+    <!-- Highlight DOG (Yellow) -->
+    <rect x="160" y="14" width="112" height="26" rx="13" fill="#FDE047" stroke="#EAB308" stroke-width="2"/>
+
+    <!-- Row 2: [E L E P H A N T] (Mint Green) -->
+    <rect x="18" y="44" width="314" height="26" rx="13" fill="#6EE7B7" stroke="#10B981" stroke-width="2"/>
+
+    <!-- Row 3: [L I O N] (Peach/Orange) -->
+    <rect x="18" y="74" width="154" height="26" rx="13" fill="#FED7AA" stroke="#F97316" stroke-width="2"/>
+
+    <!-- Row 4: [D O L P H I N] (Pink) -->
+    <rect x="18" y="104" width="275" height="26" rx="13" fill="#FBCFE8" stroke="#F43F5E" stroke-width="2"/>
+
+    <!-- Row 5: [Z E B R A] (Lavender Purple) -->
+    <rect x="18" y="134" width="195" height="26" rx="13" fill="#DDD6FE" stroke="#8B5CF6" stroke-width="2"/>
+
+    <!-- Row 6: [G I R A F F E] (Warm Amber) -->
+    <rect x="18" y="164" width="275" height="26" rx="13" fill="#FDE68A" stroke="#D97706" stroke-width="2"/>
+
+    <!-- Row 7: [M O N K E Y] (Lime Green) -->
+    <rect x="18" y="194" width="235" height="26" rx="13" fill="#BEF264" stroke="#84CC16" stroke-width="2"/>
+
+    <!-- Letters Grid Text (8 columns: x = 32, 72, 112, 152, 192, 232, 272, 312) -->
+    <g font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="18" fill="#1E1B4B" text-anchor="middle">
+      <!-- Row 1 -->
+      <text x="32" y="33">B</text>
+      <text x="72" y="33">C</text>
+      <text x="112" y="33">A</text>
+      <text x="152" y="33">T</text>
+      <text x="192" y="33">D</text>
+      <text x="232" y="33">O</text>
+      <text x="272" y="33">G</text>
+      <text x="312" y="33">Z</text>
+
+      <!-- Row 2 -->
+      <text x="32" y="63">E</text>
+      <text x="72" y="63">L</text>
+      <text x="112" y="63">E</text>
+      <text x="152" y="63">P</text>
+      <text x="192" y="63">H</text>
+      <text x="232" y="63">A</text>
+      <text x="272" y="63">N</text>
+      <text x="312" y="63">T</text>
+
+      <!-- Row 3 -->
+      <text x="32" y="93">L</text>
+      <text x="72" y="93">I</text>
+      <text x="112" y="93">O</text>
+      <text x="152" y="93">N</text>
+      <text x="192" y="93">B</text>
+      <text x="232" y="93">U</text>
+      <text x="272" y="93">S</text>
+      <text x="312" y="93">P</text>
+
+      <!-- Row 4 -->
+      <text x="32" y="123">D</text>
+      <text x="72" y="123">O</text>
+      <text x="112" y="123">L</text>
+      <text x="152" y="123">P</text>
+      <text x="192" y="123">H</text>
+      <text x="232" y="123">I</text>
+      <text x="272" y="123">N</text>
+      <text x="312" y="123">E</text>
+
+      <!-- Row 5 -->
+      <text x="32" y="153">Z</text>
+      <text x="72" y="153">E</text>
+      <text x="112" y="153">B</text>
+      <text x="152" y="153">R</text>
+      <text x="192" y="153">A</text>
+      <text x="232" y="153">F</text>
+      <text x="272" y="153">S</text>
+      <text x="312" y="153">K</text>
+
+      <!-- Row 6 -->
+      <text x="32" y="183">G</text>
+      <text x="72" y="183">I</text>
+      <text x="112" y="183">R</text>
+      <text x="152" y="183">A</text>
+      <text x="192" y="183">F</text>
+      <text x="232" y="183">F</text>
+      <text x="272" y="183">E</text>
+      <text x="312" y="183">Q</text>
+
+      <!-- Row 7 -->
+      <text x="32" y="213">M</text>
+      <text x="72" y="213">O</text>
+      <text x="112" y="213">N</text>
+      <text x="152" y="213">K</text>
+      <text x="192" y="213">E</text>
+      <text x="232" y="213">Y</text>
+      <text x="272" y="213">T</text>
+      <text x="312" y="213">R</text>
+    </g>
+
+    <!-- Interactive Magnifying Glass over letters Y, N on right -->
+    <g transform="translate(290, 165)" filter="url(#ppShadow)">
+      <!-- Glass Lens -->
+      <circle cx="0" cy="0" r="38" fill="#EDE9FE" fill-opacity="0.85" stroke="#4C1D95" stroke-width="5"/>
+      <!-- Glass Reflection Highlight -->
+      <path d="M-22 -18 C-10 -28 12 -28 22 -18" stroke="#FFF" stroke-width="4" stroke-linecap="round" fill="none"/>
+      <!-- Magnified Letters inside lens -->
+      <text x="-12" y="10" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="28" fill="#4338CA" text-anchor="middle">Y</text>
+      <text x="14" y="10" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="28" fill="#4338CA" text-anchor="middle">N</text>
+      <!-- Purple Handle -->
+      <g transform="rotate(45) translate(38, -6)">
+        <rect x="0" y="0" width="38" height="14" rx="7" fill="#6D28D9" stroke="#312E81" stroke-width="3"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- RIGHT: 5 FUN CATEGORIES CARD -->
+  <!-- ========================================== -->
+  <g transform="translate(660, 275)" filter="url(#ppSoftGlow)">
+    <!-- Main Card Body -->
+    <rect x="0" y="0" width="275" height="250" rx="24" fill="#FFFFFF" stroke="#312E81" stroke-width="4"/>
+
+    <!-- Top Category Tab Header -->
+    <g transform="translate(35, -16)" filter="url(#ppShadow)">
+      <rect x="0" y="0" width="205" height="34" rx="17" fill="#4338CA" stroke="#1E1B4B" stroke-width="2.5"/>
+      <text x="102" y="23" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="13" fill="#FFFFFF" text-anchor="middle" letter-spacing="1.5">
+        5 FUN CATEGORIES
+      </text>
+    </g>
+
+    <!-- 5 Rows -->
+    <!-- Row 1: Animals -->
+    <g transform="translate(16, 32)">
+      <circle cx="16" cy="14" r="14" fill="#22C55E"/>
+      <text x="16" y="20" font-size="16" text-anchor="middle">🐾</text>
+      <text x="40" y="20" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="13" fill="#15803D">ANIMALS</text>
+      <text x="228" y="21" font-size="18">🐱</text>
+      <line x1="10" y1="36" x2="235" y2="36" stroke="#F1F5F9" stroke-width="1.5"/>
+    </g>
+
+    <!-- Row 2: Fruits & Food -->
+    <g transform="translate(16, 74)">
+      <circle cx="16" cy="14" r="14" fill="#F43F5E"/>
+      <text x="16" y="20" font-size="16" text-anchor="middle">🍎</text>
+      <text x="40" y="20" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="13" fill="#BE123C">FRUITS &amp; FOOD</text>
+      <text x="228" y="21" font-size="18">🍓</text>
+      <line x1="10" y1="36" x2="235" y2="36" stroke="#F1F5F9" stroke-width="1.5"/>
+    </g>
+
+    <!-- Row 3: Space & Sky -->
+    <g transform="translate(16, 116)">
+      <circle cx="16" cy="14" r="14" fill="#8B5CF6"/>
+      <text x="16" y="20" font-size="16" text-anchor="middle">🚀</text>
+      <text x="40" y="20" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="13" fill="#6D28D9">SPACE &amp; SKY</text>
+      <text x="228" y="21" font-size="18">🪐</text>
+      <line x1="10" y1="36" x2="235" y2="36" stroke="#F1F5F9" stroke-width="1.5"/>
+    </g>
+
+    <!-- Row 4: Nature & Ocean -->
+    <g transform="translate(16, 158)">
+      <circle cx="16" cy="14" r="14" fill="#06B6D4"/>
+      <text x="16" y="20" font-size="16" text-anchor="middle">🌿</text>
+      <text x="40" y="20" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="13" fill="#0E7490">NATURE &amp; OCEAN</text>
+      <text x="228" y="21" font-size="18">🐬</text>
+      <line x1="10" y1="36" x2="235" y2="36" stroke="#F1F5F9" stroke-width="1.5"/>
+    </g>
+
+    <!-- Row 5: Vehicles & Adventure -->
+    <g transform="translate(16, 200)">
+      <circle cx="16" cy="14" r="14" fill="#F97316"/>
+      <text x="16" y="20" font-size="16" text-anchor="middle">🚗</text>
+      <text x="40" y="20" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="13" fill="#C2410C">VEHICLES</text>
+      <text x="228" y="21" font-size="18">🏎️</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- BOTTOM STRIP: FEATURE STATS & BIG CTA BUTTON -->
+  <!-- ========================================== -->
+  <g transform="translate(30, 545)" filter="url(#ppShadow)">
+    <!-- Bottom White Bar -->
+    <rect x="0" y="0" width="590" height="66" rx="33" fill="#FFFFFF" stroke="#312E81" stroke-width="3.5"/>
+
+    <!-- 5 Feature Badges -->
+    <!-- 1: Easy to Advanced -->
+    <g transform="translate(20, 13)">
+      <circle cx="20" cy="20" r="17" fill="#FEF08A" stroke="#EAB308" stroke-width="1.5"/>
+      <text x="20" y="26" font-size="16" text-anchor="middle">⭐</text>
+      <text x="46" y="16" font-family="'Nunito', sans-serif" font-weight="900" font-size="9" fill="#713F12">EASY TO</text>
+      <text x="46" y="28" font-family="'Nunito', sans-serif" font-weight="900" font-size="9" fill="#713F12">ADVANCED</text>
+    </g>
+    <line x1="120" y1="16" x2="120" y2="50" stroke="#E2E8F0" stroke-width="2"/>
+
+    <!-- 2: Hints Available -->
+    <g transform="translate(130, 13)">
+      <circle cx="20" cy="20" r="17" fill="#FCE7F3" stroke="#F43F5E" stroke-width="1.5"/>
+      <text x="20" y="26" font-size="16" text-anchor="middle">💡</text>
+      <text x="46" y="16" font-family="'Nunito', sans-serif" font-weight="900" font-size="9" fill="#9F1239">HINTS</text>
+      <text x="46" y="28" font-family="'Nunito', sans-serif" font-weight="900" font-size="9" fill="#9F1239">AVAILABLE</text>
+    </g>
+    <line x1="230" y1="16" x2="230" y2="50" stroke="#E2E8F0" stroke-width="2"/>
+
+    <!-- 3: Sound Effects -->
+    <g transform="translate(240, 13)">
+      <circle cx="20" cy="20" r="17" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.5"/>
+      <text x="20" y="26" font-size="16" text-anchor="middle">🔊</text>
+      <text x="46" y="16" font-family="'Nunito', sans-serif" font-weight="900" font-size="9" fill="#075985">SOUND</text>
+      <text x="46" y="28" font-family="'Nunito', sans-serif" font-weight="900" font-size="9" fill="#075985">EFFECTS</text>
+    </g>
+    <line x1="340" y1="16" x2="340" y2="50" stroke="#E2E8F0" stroke-width="2"/>
+
+    <!-- 4: Earn Stars -->
+    <g transform="translate(350, 13)">
+      <circle cx="20" cy="20" r="17" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+      <text x="20" y="26" font-size="16" text-anchor="middle">🏆</text>
+      <text x="46" y="16" font-family="'Nunito', sans-serif" font-weight="900" font-size="9" fill="#14532D">EARN</text>
+      <text x="46" y="28" font-family="'Nunito', sans-serif" font-weight="900" font-size="9" fill="#14532D">STARS</text>
+    </g>
+    <line x1="450" y1="16" x2="450" y2="50" stroke="#E2E8F0" stroke-width="2"/>
+
+    <!-- 5: Build Vocab -->
+    <g transform="translate(460, 13)">
+      <circle cx="20" cy="20" r="17" fill="#F3E8FF" stroke="#9333EA" stroke-width="1.5"/>
+      <text x="20" y="26" font-size="16" text-anchor="middle">📊</text>
+      <text x="46" y="16" font-family="'Nunito', sans-serif" font-weight="900" font-size="9" fill="#581C87">BUILD VOCAB</text>
+      <text x="46" y="28" font-family="'Nunito', sans-serif" font-weight="900" font-size="9" fill="#581C87">&amp; FOCUS</text>
+    </g>
+  </g>
+
+  <!-- Big Yellow "PLAY FREE" Button on Bottom Right -->
+  <g transform="translate(640, 542)" filter="url(#ppShadow)">
+    <rect x="0" y="0" width="290" height="72" rx="36" fill="url(#ppCtaGrad)" stroke="#78350F" stroke-width="4"/>
+    <text x="145" y="38" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="30" fill="#4338CA" text-anchor="middle" letter-spacing="2">
+      PLAY FREE
+    </text>
+    <text x="145" y="58" font-family="'Nunito', sans-serif" font-weight="900" font-size="11" fill="#1E1B4B" text-anchor="middle" letter-spacing="1">
+      START YOUR ADVENTURE NOW! 💕
+    </text>
+  </g>
+</svg>

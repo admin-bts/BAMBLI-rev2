@@ -1,0 +1,201 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <!-- Soft Glow Filter for Cheek Blushes and Shadows -->
+    <filter id="blush-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7" result="blur" />
+    </filter>
+    <filter id="drop-shadow-soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.12" />
+    </filter>
+    <filter id="badge-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#553010" flood-opacity="0.08" />
+    </filter>
+
+    <!-- Linear Gradients for 3D Character & Suit Depth -->
+    <linearGradient id="hoodGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#22CEBC" />
+      <stop offset="100%" stop-color="#0CA697" />
+    </linearGradient>
+    <linearGradient id="suitGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1BC6B4" />
+      <stop offset="100%" stop-color="#0A9B8C" />
+    </linearGradient>
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7CD32D" />
+      <stop offset="100%" stop-color="#55A817" />
+    </linearGradient>
+    <linearGradient id="earPodGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8A58BA" />
+      <stop offset="100%" stop-color="#693B98" />
+    </linearGradient>
+    <linearGradient id="faceGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8EE" />
+      <stop offset="100%" stop-color="#FFE7D0" />
+    </linearGradient>
+
+    <!-- Path for the Curved Tagline "Big Learning for Little Minds" -->
+    <path id="taglinePath" d="M 90 395 A 190 190 0 0 0 410 395" fill="none" />
+  </defs>
+
+  <!-- Circular Outer Badge -->
+  <g filter="url(#badge-shadow)">
+    <!-- Main Badge Cream Background -->
+    <circle cx="250" cy="250" r="236" fill="#FFFBF2" stroke="#F1DEC6" stroke-width="4" />
+    <circle cx="250" cy="250" r="226" fill="#FFFDF8" stroke="#F8EAD7" stroke-width="1.5" />
+  </g>
+
+  <!-- Background Decorative Confetti & Stars -->
+  <!-- Top Left Elements -->
+  <circle cx="142" cy="90" r="8" fill="#FF5388" />
+  <!-- Golden 5-point Star -->
+  <path d="M 94 165 L 97.5 153 L 109 153 L 99.8 145.8 L 103.2 134 L 94 141.2 L 84.8 134 L 88.2 145.8 L 79 153 L 90.5 153 Z" fill="#FFAF02" />
+  <!-- Mint Teal Cross '+' -->
+  <path d="M 68 210 L 68 226 M 60 218 L 76 218" stroke="#1ABEB4" stroke-width="6.5" stroke-linecap="round" />
+
+  <!-- Top Right Elements -->
+  <circle cx="364" cy="95" r="5.5" fill="#FFB703" />
+  <circle cx="400" cy="126" r="7.5" fill="#FF833A" />
+  <!-- Teal 4-point Sparkle Star -->
+  <path d="M 425 166 Q 425 180 439 180 Q 425 180 425 194 Q 425 180 411 180 Q 425 180 425 166 Z" fill="#1ABEB4" />
+  <!-- Purple Dot -->
+  <circle cx="430" cy="236" r="9.5" fill="#7D4EAC" />
+
+  <!-- The Bambli Mascot Character -->
+  <g id="mascot">
+    <!-- Waving Left Arm & Hand -->
+    <g id="left-arm">
+      <path d="M 198 250 C 172 238 148 218 138 212 C 132 208 142 196 150 200 C 158 204 175 220 196 232 Z" fill="url(#suitGrad)" />
+      <!-- Left Chubby Hand -->
+      <!-- Palm & 4 cute spread fingers -->
+      <path d="M 132 215 C 124 212 119 203 125 196 C 129 191 135 194 139 198 C 137 192 139 185 145 185 C 149 185 152 189 153 194 C 154 188 158 184 163 186 C 168 188 168 194 166 199 C 170 196 175 197 176 202 C 177 207 172 212 165 218 C 154 226 142 222 132 215 Z" fill="#FFE6CD" />
+    </g>
+
+    <!-- Waving Right Arm & Hand -->
+    <g id="right-arm">
+      <path d="M 302 250 C 328 238 352 218 362 212 C 368 208 358 196 350 200 C 342 204 325 220 304 232 Z" fill="url(#suitGrad)" />
+      <!-- Right Chubby Hand -->
+      <!-- Palm & 4 cute spread fingers -->
+      <path d="M 368 215 C 376 212 381 203 375 196 C 371 191 365 194 361 198 C 363 192 361 185 355 185 C 351 185 348 189 347 194 C 346 188 342 184 337 186 C 332 188 332 194 334 199 C 330 196 325 197 324 202 C 323 207 328 212 335 218 C 346 226 358 222 368 215 Z" fill="#FFE6CD" />
+    </g>
+
+    <!-- Torso & Suit -->
+    <g id="body">
+      <path d="M 180 260 C 180 236 320 236 320 260 C 326 288 318 315 250 316 C 182 315 174 288 180 260 Z" fill="url(#suitGrad)" />
+      <!-- Cream Tummy Patch -->
+      <ellipse cx="250" cy="280" rx="38" ry="24" fill="#FFF4E6" />
+    </g>
+
+    <!-- Mascot Head & Hood -->
+    <g id="head">
+      <!-- Two Purple Ear Capsule Pads -->
+      <g id="ear-pods">
+        <ellipse cx="178" cy="142" rx="24" ry="18" transform="rotate(-30 178 142)" fill="url(#earPodGrad)" />
+        <ellipse cx="322" cy="142" rx="24" ry="18" transform="rotate(30 322 142)" fill="url(#earPodGrad)" />
+      </g>
+
+      <!-- Main Turquoise / Teal Hood -->
+      <circle cx="250" cy="186" rx="98" ry="94" fill="url(#hoodGrad)" />
+
+      <!-- Sprout On Top of Head -->
+      <g id="sprout">
+        <!-- Sprout stem base -->
+        <path d="M 248 94 C 248 84 252 84 252 94 Z" fill="#4B9417" />
+        <!-- Left Leaf -->
+        <path d="M 250 94 C 232 82 208 90 216 108 C 224 122 244 106 250 94 Z" fill="url(#leafGrad)" stroke="#4A9916" stroke-width="1.5" />
+        <!-- Right Leaf -->
+        <path d="M 250 94 C 268 76 304 88 296 112 C 288 126 260 106 250 94 Z" fill="url(#leafGrad)" stroke="#4A9916" stroke-width="1.5" />
+        <!-- Subtle leaf center veins -->
+        <path d="M 246 97 Q 230 96 222 106" stroke="#489417" stroke-width="1.5" fill="none" stroke-linecap="round" />
+        <path d="M 254 97 Q 274 94 286 108" stroke="#489417" stroke-width="1.5" fill="none" stroke-linecap="round" />
+      </g>
+
+      <!-- Chubby Face -->
+      <g id="face">
+        <!-- Rounded Face Contour -->
+        <ellipse cx="250" cy="195" rx="78" ry="72" fill="url(#faceGrad)" />
+
+        <!-- Rosy Cheek Blushes -->
+        <circle cx="196" cy="223" r="18" fill="#FF6584" opacity="0.65" filter="url(#blush-glow)" />
+        <circle cx="304" cy="223" r="18" fill="#FF6584" opacity="0.65" filter="url(#blush-glow)" />
+
+        <!-- Cute Arched Eyebrows -->
+        <path d="M 206 166 C 214 160 226 162 230 168" stroke="#2D1A0D" stroke-width="3.5" stroke-linecap="round" fill="none" />
+        <path d="M 270 168 C 274 162 286 160 294 166" stroke="#2D1A0D" stroke-width="3.5" stroke-linecap="round" fill="none" />
+
+        <!-- Big Sparkling Anime Cartoon Eyes -->
+        <!-- Left Eye -->
+        <g id="left-eye">
+          <ellipse cx="218" cy="191" rx="14" ry="17" fill="#141923" />
+          <!-- Large Top-Left Catchlight -->
+          <circle cx="214" cy="184" r="5.5" fill="#FFFFFF" />
+          <!-- Small Bottom-Right Catchlight -->
+          <circle cx="223" cy="197" r="2.5" fill="#FFFFFF" />
+        </g>
+
+        <!-- Right Eye -->
+        <g id="right-eye">
+          <ellipse cx="282" cy="191" rx="14" ry="17" fill="#141923" />
+          <!-- Large Top-Left Catchlight -->
+          <circle cx="278" cy="184" r="5.5" fill="#FFFFFF" />
+          <!-- Small Bottom-Right Catchlight -->
+          <circle cx="287" cy="197" r="2.5" fill="#FFFFFF" />
+        </g>
+
+        <!-- Cute Tiny Baby Nose -->
+        <circle cx="250" cy="204" r="2.5" fill="#F49E82" />
+
+        <!-- Big Joyful Open Mouth -->
+        <g id="mouth">
+          <!-- Mouth Interior -->
+          <path d="M 230 216 C 230 242 270 242 270 216 C 260 212 240 212 230 216 Z" fill="#801423" />
+          <!-- Sweet Pink Tongue -->
+          <path d="M 237 232 C 243 226 257 226 263 232 C 258 240 242 240 237 232 Z" fill="#FF6584" />
+          <!-- Top Lips Outline -->
+          <path d="M 228 216 C 239 212 261 212 272 216" stroke="#2D1A0D" stroke-width="2.5" stroke-linecap="round" fill="none" />
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- 3D Bubbly "Bambli" Logo Wordmark (Overlaying character body) -->
+  <g id="bambli-logo" filter="url(#drop-shadow-soft)">
+    <!-- White Sticker Die-Cut Border Underlay for the wordmark -->
+    <g stroke="#FFFFFF" stroke-width="16" stroke-linejoin="round" stroke-linecap="round">
+      <!-- 'B' in Purple -->
+      <text x="52" y="362" font-family="'Fredoka', 'Nunito', 'Arial Rounded MT Bold', sans-serif" font-weight="900" font-size="124" fill="#FFFFFF">B</text>
+      <!-- 'a' in Pink -->
+      <text x="146" y="360" font-family="'Fredoka', 'Nunito', 'Arial Rounded MT Bold', sans-serif" font-weight="900" font-size="120" fill="#FFFFFF">a</text>
+      <!-- 'm' in Cyan -->
+      <text x="214" y="361" font-family="'Fredoka', 'Nunito', 'Arial Rounded MT Bold', sans-serif" font-weight="900" font-size="120" fill="#FFFFFF">m</text>
+      <!-- 'b' in Orange -->
+      <text x="312" y="362" font-family="'Fredoka', 'Nunito', 'Arial Rounded MT Bold', sans-serif" font-weight="900" font-size="122" fill="#FFFFFF">b</text>
+      <!-- 'l' in Purple -->
+      <text x="378" y="363" font-family="'Fredoka', 'Nunito', 'Arial Rounded MT Bold', sans-serif" font-weight="900" font-size="122" fill="#FFFFFF">l</text>
+      <!-- 'i' in Cyan -->
+      <text x="408" y="363" font-family="'Fredoka', 'Nunito', 'Arial Rounded MT Bold', sans-serif" font-weight="900" font-size="122" fill="#FFFFFF">i</text>
+    </g>
+
+    <!-- Colored Bubbly Letters -->
+    <!-- 'B' : Purple -->
+    <text x="52" y="362" font-family="'Fredoka', 'Nunito', 'Arial Rounded MT Bold', sans-serif" font-weight="900" font-size="124" fill="#6F3FA3">B</text>
+    <!-- 'a' : Vibrant Pink -->
+    <text x="146" y="360" font-family="'Fredoka', 'Nunito', 'Arial Rounded MT Bold', sans-serif" font-weight="900" font-size="120" fill="#FF4E78">a</text>
+    <!-- 'm' : Bright Cyan / Teal -->
+    <text x="214" y="361" font-family="'Fredoka', 'Nunito', 'Arial Rounded MT Bold', sans-serif" font-weight="900" font-size="120" fill="#08B3A4">m</text>
+    <!-- 'b' : Warm Honey Orange -->
+    <text x="312" y="362" font-family="'Fredoka', 'Nunito', 'Arial Rounded MT Bold', sans-serif" font-weight="900" font-size="122" fill="#FFA300">b</text>
+    <!-- 'l' : Purple -->
+    <text x="378" y="363" font-family="'Fredoka', 'Nunito', 'Arial Rounded MT Bold', sans-serif" font-weight="900" font-size="122" fill="#6F3FA3">l</text>
+    <!-- 'i' : Bright Cyan / Teal with dot -->
+    <text x="408" y="363" font-family="'Fredoka', 'Nunito', 'Arial Rounded MT Bold', sans-serif" font-weight="900" font-size="122" fill="#08B3A4">i</text>
+  </g>
+
+  <!-- Tagline Curved Along Bottom Arc: "Big Learning for Little Minds" -->
+  <g id="curved-tagline">
+    <text fill="#0F243B" font-family="'Nunito', 'Quicksand', 'Arial Rounded MT Bold', sans-serif" font-size="24.5" font-weight="900" letter-spacing="0.5px">
+      <textPath href="#taglinePath" startOffset="50%" text-anchor="middle">
+        Big Learning for Little Minds
+      </textPath>
+    </text>
+  </g>
+</svg>

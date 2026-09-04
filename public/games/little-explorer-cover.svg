@@ -1,0 +1,499 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" width="100%" height="100%">
+  <defs>
+    <!-- Background Sky & Hill Gradients -->
+    <linearGradient id="leSkyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="45%" stop-color="#7DD3FC"/>
+      <stop offset="100%" stop-color="#BAE6FD"/>
+    </linearGradient>
+    <linearGradient id="leHillGrad1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#84CC16"/>
+      <stop offset="100%" stop-color="#4D7C0F"/>
+    </linearGradient>
+    <linearGradient id="leHillGrad2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A3E635"/>
+      <stop offset="100%" stop-color="#65A30D"/>
+    </linearGradient>
+
+    <!-- Wood Plank Texture -->
+    <linearGradient id="leWoodPlank" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D97706"/>
+      <stop offset="50%" stop-color="#B45309"/>
+      <stop offset="100%" stop-color="#78350F"/>
+    </linearGradient>
+
+    <!-- Wicker Basket Gradient -->
+    <linearGradient id="leBasketGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="leShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="3" dy="4" stdDeviation="0" flood-color="#0F172A" flood-opacity="0.75"/>
+    </filter>
+    <filter id="leSoftShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0F172A" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- Sky Canvas -->
+  <rect width="960" height="640" fill="url(#leSkyGrad)"/>
+
+  <!-- Fluffy White Clouds -->
+  <g fill="#FFFFFF" opacity="0.92">
+    <path d="M120 75 C120 55 140 40 160 45 C170 25 200 25 215 40 C230 30 255 40 255 60 C270 65 275 80 265 95 C255 105 130 105 120 75 Z" filter="url(#leSoftShadow)"/>
+    <path d="M680 60 C680 40 700 30 720 35 C730 15 760 15 775 30 C790 20 815 30 815 50 C830 55 835 70 825 85 C815 95 690 95 680 60 Z" filter="url(#leSoftShadow)"/>
+    <path d="M420 40 C420 28 435 20 450 25 C460 10 480 10 490 20 C500 15 515 20 515 35 C525 40 528 50 520 60 C510 65 425 65 420 40 Z" opacity="0.7"/>
+  </g>
+
+  <!-- Colorful Bunting Flags across top -->
+  <g filter="url(#leShadow)">
+    <path d="M0 45 Q480 90 960 45" fill="none" stroke="#78350F" stroke-width="2.5"/>
+    <!-- Triangle Flags -->
+    <polygon points="40,48 70,49 55,85" fill="#EF4444"/>
+    <polygon points="90,52 120,54 105,90" fill="#F59E0B"/>
+    <polygon points="140,56 170,58 155,95" fill="#10B981"/>
+    <polygon points="190,60 220,62 205,100" fill="#3B82F6"/>
+    <polygon points="240,64 270,66 255,104" fill="#EC4899"/>
+    <polygon points="690,65 720,63 705,103" fill="#8B5CF6"/>
+    <polygon points="740,61 770,59 755,98" fill="#F59E0B"/>
+    <polygon points="790,57 820,55 805,94" fill="#10B981"/>
+    <polygon points="840,53 870,51 855,90" fill="#EF4444"/>
+    <polygon points="890,49 920,47 905,86" fill="#3B82F6"/>
+  </g>
+
+  <!-- Distant Rolling Wonder Woods Hills -->
+  <path d="M-50 420 Q160 310 460 360 T1010 330 L1010 640 L-50 640 Z" fill="url(#leHillGrad1)"/>
+  <path d="M-50 460 Q280 380 640 430 T1010 400 L1010 640 L-50 640 Z" fill="url(#leHillGrad2)"/>
+
+  <!-- Forest Trees Framing Scene -->
+  <!-- Left Trees -->
+  <g transform="translate(0, 180)">
+    <rect x="25" y="140" width="28" height="150" fill="#78350F" stroke="#000" stroke-width="3"/>
+    <circle cx="39" cy="120" r="75" fill="#15803D" stroke="#000" stroke-width="3.5" filter="url(#leSoftShadow)"/>
+    <circle cx="20" cy="90" r="55" fill="#16A34A" stroke="#000" stroke-width="3"/>
+    <circle cx="55" cy="85" r="50" fill="#22C55E" stroke="#000" stroke-width="3"/>
+  </g>
+  <!-- Right Trees -->
+  <g transform="translate(860, 160)">
+    <rect x="35" y="160" width="30" height="150" fill="#78350F" stroke="#000" stroke-width="3"/>
+    <circle cx="50" cy="140" r="80" fill="#15803D" stroke="#000" stroke-width="3.5" filter="url(#leSoftShadow)"/>
+    <circle cx="65" cy="105" r="60" fill="#16A34A" stroke="#000" stroke-width="3"/>
+    <circle cx="30" cy="100" r="55" fill="#22C55E" stroke="#000" stroke-width="3"/>
+  </g>
+
+  <!-- Winding Path from distance -->
+  <path d="M640 370 Q620 430 580 480 Q520 540 480 640 L380 640 Q440 540 480 470 Q520 420 560 370 Z" fill="#FDE68A" stroke="#D97706" stroke-width="2" opacity="0.65"/>
+
+  <!-- ========================================== -->
+  <!-- TOP LEFT: AGES 3-7 & DUAL LANGUAGE BADGES -->
+  <!-- ========================================== -->
+  <!-- Circular AGES 3-7 Stitched Badge -->
+  <g transform="translate(85, 75)" filter="url(#leShadow)">
+    <circle cx="0" cy="0" r="54" fill="#7C3AED" stroke="#2E1065" stroke-width="4"/>
+    <circle cx="0" cy="0" r="46" fill="none" stroke="#FDE047" stroke-width="2.5" stroke-dasharray="5 4"/>
+    <text x="0" y="-10" font-family="'Nunito', sans-serif" font-weight="900" font-size="16" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">AGES</text>
+    <text x="0" y="28" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="38" fill="#FDE047" text-anchor="middle">3-7</text>
+  </g>
+
+  <!-- English / Bahasa Melayu Pill Badge -->
+  <g transform="translate(25, 140)" filter="url(#leShadow)">
+    <rect x="0" y="0" width="168" height="52" rx="14" fill="#FFFFFF" stroke="#312E81" stroke-width="3"/>
+    <!-- English Flag icon + text -->
+    <g transform="translate(10, 8)">
+      <rect x="0" y="0" width="22" height="15" rx="3" fill="#0284C7" stroke="#000" stroke-width="1"/>
+      <path d="M0 7.5 L22 7.5 M11 0 L11 15" stroke="#EF4444" stroke-width="3"/>
+      <text x="28" y="12" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="10" fill="#1E1B4B">ENGLISH</text>
+    </g>
+    <!-- Malay Flag icon + text -->
+    <g transform="translate(10, 28)">
+      <rect x="0" y="0" width="22" height="15" rx="3" fill="#EF4444" stroke="#000" stroke-width="1"/>
+      <rect x="0" y="0" width="11" height="8" fill="#1E3A8A"/>
+      <circle cx="5" cy="4" r="2.5" fill="#FDE047"/>
+      <text x="28" y="12" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="9.5" fill="#1E1B4B">BAHASA MELAYU</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- TOP RIGHT: 20 FUN CHALLENGES RIBBON -->
+  <!-- ========================================== -->
+  <g transform="translate(850, 0)" filter="url(#leShadow)">
+    <path d="M-55 0 L55 0 L55 125 L0 145 L-55 125 Z" fill="#6D28D9" stroke="#2E1065" stroke-width="3.5"/>
+    <path d="M-45 4 L45 4 L45 118 L0 135 L-45 118 Z" fill="none" stroke="#DDD6FE" stroke-width="1.8" stroke-dasharray="4 3"/>
+    <text x="0" y="55" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="52" fill="#FDE047" text-anchor="middle">20</text>
+    <text x="0" y="78" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="14" fill="#FFFFFF" text-anchor="middle">FUN</text>
+    <text x="0" y="98" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="11" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.5">CHALLENGES!</text>
+    <!-- Gold Star at tip -->
+    <path d="M0 114 Q4 114 4 110 Q4 114 8 114 Q4 114 4 118 Q4 114 0 114 Z" fill="#FDE047"/>
+    <polygon points="0,110 2.5,117 10,117 4,121 6.5,128 0,124 -6.5,128 -4,121 -10,117 -2.5,117" fill="#FDE047" stroke="#78350F" stroke-width="1"/>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- TOP CENTER: BAMBLI LOGO -->
+  <!-- ========================================== -->
+  <g transform="translate(480, 48)">
+    <rect x="-105" y="-34" width="210" height="68" rx="18" fill="#FFFFFF" stroke="#1E1B4B" stroke-width="3.5" filter="url(#leShadow)"/>
+    <g transform="translate(0, -6)">
+      <text x="0" y="8" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="42" text-anchor="middle">
+        <tspan fill="#8B5CF6">B</tspan>
+        <tspan fill="#EC4899">a</tspan>
+        <tspan fill="#14B8A6">m</tspan>
+        <tspan fill="#F59E0B">b</tspan>
+        <tspan fill="#84CC16">l</tspan>
+        <tspan fill="#06B6D4">i</tspan>
+      </text>
+      <!-- Sprout on 'i' -->
+      <path d="M72 -18 C70 -26 62 -32 55 -28 C48 -24 54 -16 64 -18 Z" fill="#84CC16" stroke="#166534" stroke-width="1.5"/>
+      <path d="M72 -18 C75 -27 84 -30 89 -25 C94 -20 86 -14 77 -17 Z" fill="#84CC16" stroke="#166534" stroke-width="1.5"/>
+      <path d="M72 -12 L72 -18" stroke="#166534" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+    <text x="0" y="24" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="11" fill="#1E1B4B" text-anchor="middle" letter-spacing="2">PLAYFUL LEARNING</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- MAIN TITLE: Little Explorer -->
+  <!-- ========================================== -->
+  <g transform="translate(480, 215)">
+    <!-- 3D Layered Title "Little Explorer" -->
+    <!-- Line 1: Little (Bubbly Cyan/Teal with Purple 3D Shadow) -->
+    <text x="3" y="-35" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="80" fill="#3B0764" text-anchor="middle" letter-spacing="2">Little</text>
+    <text x="0" y="-38" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="80" fill="#2DD4BF" stroke="#1E1B4B" stroke-width="6" stroke-linejoin="round" text-anchor="middle" letter-spacing="2">Little</text>
+    <text x="0" y="-38" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="80" fill="#38BDF8" text-anchor="middle" letter-spacing="2">
+      <tspan fill="#67E8F9">L</tspan>
+      <tspan fill="#2DD4BF">i</tspan>
+      <tspan fill="#38BDF8">t</tspan>
+      <tspan fill="#818CF8">t</tspan>
+      <tspan fill="#A78BFA">l</tspan>
+      <tspan fill="#C084FC">e</tspan>
+    </text>
+
+    <!-- Line 2: Explorer (Warm Orange/Peach/Coral with Sprout) -->
+    <text x="3" y="42" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="86" fill="#7C2D12" text-anchor="middle" letter-spacing="2">Explorer</text>
+    <text x="0" y="38" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="86" fill="#F97316" stroke="#1E1B4B" stroke-width="6" stroke-linejoin="round" text-anchor="middle" letter-spacing="2">Explorer</text>
+    <text x="0" y="38" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="86" fill="#FB923C" text-anchor="middle" letter-spacing="2">
+      <tspan fill="#FB7185">E</tspan>
+      <tspan fill="#F43F5E">x</tspan>
+      <tspan fill="#FB923C">p</tspan>
+      <tspan fill="#FBBF24">l</tspan>
+      <tspan fill="#F59E0B">o</tspan>
+      <tspan fill="#F97316">r</tspan>
+      <tspan fill="#FB7185">e</tspan>
+      <tspan fill="#34D399">r</tspan>
+    </text>
+
+    <!-- Sprout leaf over the 'r' -->
+    <path d="M195 -10 C195 -22 210 -25 218 -20 C225 -15 215 -5 204 -8 Z" fill="#84CC16" stroke="#14532D" stroke-width="2"/>
+    <path d="M192 -6 L198 -12" stroke="#14532D" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Wooden Plank: The Lost Picnic -->
+    <g transform="translate(0, 75)" filter="url(#leShadow)">
+      <rect x="-170" y="0" width="340" height="42" rx="10" fill="url(#leWoodPlank)" stroke="#451A03" stroke-width="3.5"/>
+      <!-- Screws/Nails on corners -->
+      <circle cx="-155" cy="21" r="4" fill="#D1D5DB" stroke="#374151" stroke-width="1.5"/>
+      <circle cx="155" cy="21" r="4" fill="#D1D5DB" stroke="#374151" stroke-width="1.5"/>
+      <text x="0" y="28" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="22" fill="#FEF3C7" text-anchor="middle" letter-spacing="1">
+        The Lost Picnic
+      </text>
+    </g>
+
+    <!-- ADVENTURE Blue Pill -->
+    <g transform="translate(0, 128)" filter="url(#leShadow)">
+      <rect x="-120" y="0" width="240" height="30" rx="15" fill="#0284C7" stroke="#0C4A6E" stroke-width="2.5"/>
+      <text x="0" y="20" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="14" fill="#FFFFFF" text-anchor="middle" letter-spacing="3">
+        ✦ ADVENTURE ✦
+      </text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- LEFT: SIGNPOST & BAMBLI WITH MAGNIFYING GLASS -->
+  <!-- ========================================== -->
+  <!-- Wooden Signpost: LET'S EXPLORE! -->
+  <g transform="translate(15, 360)" filter="url(#leShadow)">
+    <rect x="35" y="40" width="14" height="90" fill="#78350F" stroke="#451A03" stroke-width="2"/>
+    <!-- Arrow pointing left -->
+    <path d="M10 25 L85 25 L95 0 L85 -25 L10 -25 L-5 0 Z" fill="#D97706" stroke="#451A03" stroke-width="3" transform="translate(40, 20)"/>
+    <text x="80" y="26" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="11" fill="#FEF3C7" text-anchor="middle">
+      LET'S
+    </text>
+    <text x="80" y="38" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="10" fill="#FEF3C7" text-anchor="middle">
+      EXPLORE!
+    </text>
+  </g>
+
+  <!-- Bambli Explorer Character -->
+  <g transform="translate(190, 510)" filter="url(#leShadow)">
+    <!-- Backpack -->
+    <rect x="-42" y="0" width="20" height="38" rx="8" fill="#F59E0B" stroke="#1E1B4B" stroke-width="3"/>
+    <path d="M-30 8 L-18 18" stroke="#1E1B4B" stroke-width="3"/>
+
+    <!-- Sprout on Head -->
+    <g transform="translate(0, -95)">
+      <path d="M0 0 C-4 -16 -15 -24 -24 -18 C-32 -13 -25 -3 -14 -4 Z" fill="#84CC16" stroke="#14532D" stroke-width="2.5"/>
+      <path d="M0 0 C4 -18 18 -22 24 -16 C30 -11 22 -2 12 -3 Z" fill="#84CC16" stroke="#14532D" stroke-width="2.5"/>
+      <path d="M0 8 L0 -4" stroke="#14532D" stroke-width="3.5" stroke-linecap="round"/>
+    </g>
+
+    <!-- Purple Ear Pods -->
+    <circle cx="-54" cy="-40" r="16" fill="#8B5CF6" stroke="#1E1B4B" stroke-width="3.5"/>
+    <circle cx="54" cy="-40" r="16" fill="#8B5CF6" stroke="#1E1B4B" stroke-width="3.5"/>
+
+    <!-- Teal Helmet / Hood -->
+    <circle cx="0" cy="-35" r="56" fill="#2DD4BF" stroke="#1E1B4B" stroke-width="4.5"/>
+    <!-- Cute Face Opening -->
+    <circle cx="0" cy="-28" r="43" fill="#FEF3C7" stroke="#1E1B4B" stroke-width="3.5"/>
+
+    <!-- Big Cheerful Sparkling Eyes -->
+    <g>
+      <ellipse cx="-18" cy="-30" rx="8" ry="10" fill="#1E1B4B"/>
+      <circle cx="-20" cy="-34" r="3" fill="#FFF"/>
+      <circle cx="-16" cy="-28" r="1.5" fill="#FFF"/>
+    </g>
+    <g>
+      <ellipse cx="18" cy="-30" rx="8" ry="10" fill="#1E1B4B"/>
+      <circle cx="16" cy="-34" r="3" fill="#FFF"/>
+      <circle cx="20" cy="-28" r="1.5" fill="#FFF"/>
+    </g>
+
+    <!-- Eyebrows -->
+    <path d="M-26 -44 Q-18 -48 -10 -44" stroke="#1E1B4B" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M10 -44 Q18 -48 26 -44" stroke="#1E1B4B" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+    <!-- Rosy Cheeks -->
+    <circle cx="-28" cy="-16" r="8" fill="#FB7185" opacity="0.85"/>
+    <circle cx="28" cy="-16" r="8" fill="#FB7185" opacity="0.85"/>
+
+    <!-- Happy Open Smile with Tongue -->
+    <path d="M-12 -12 C-12 -1 12 -1 12 -12 Z" fill="#DC2626" stroke="#1E1B4B" stroke-width="2.5"/>
+    <path d="M-7 -6 C-3 -3 3 -3 7 -6 Z" fill="#FDA4AF"/>
+
+    <!-- Teal Body Suit -->
+    <path d="M-34 18 C-34 8 34 8 34 18 L38 58 C38 68 -38 68 -38 58 Z" fill="#2DD4BF" stroke="#1E1B4B" stroke-width="4"/>
+    <circle cx="0" cy="38" r="15" fill="#FEF3C7" stroke="#1E1B4B" stroke-width="2.5"/>
+    <path d="M0 41 L0 35 M-3 36 C-6 33 -6 37 -3 38 M3 36 C6 33 6 37 3 38" stroke="#16A34A" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+    <!-- Left Waving Hand -->
+    <circle cx="-52" cy="12" r="11" fill="#FEF3C7" stroke="#1E1B4B" stroke-width="3"/>
+
+    <!-- Right Hand: Holding Round Magnifying Glass -->
+    <g transform="translate(62, 10)">
+      <circle cx="20" cy="-8" r="24" fill="#BAE6FD" fill-opacity="0.6" stroke="#64748B" stroke-width="4"/>
+      <!-- Glass reflection highlight -->
+      <path d="M6 -18 C14 -24 28 -24 34 -18" stroke="#FFF" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <!-- Magnifier Handle -->
+      <line x1="6" y1="6" x2="-8" y2="18" stroke="#475569" stroke-width="7" stroke-linecap="round"/>
+      <!-- Hand gripping handle -->
+      <circle cx="0" cy="8" r="11" fill="#FEF3C7" stroke="#1E1B4B" stroke-width="3"/>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- CENTER: PICNIC BASKET, SANDWICH, CHICK & BLANKET -->
+  <!-- ========================================== -->
+  <!-- Red & White Gingham Blanket on Grass -->
+  <g transform="translate(320, 480) rotate(-1)" filter="url(#leShadow)">
+    <rect x="0" y="0" width="310" height="95" rx="16" fill="#FFFFFF" stroke="#1E1B4B" stroke-width="3.5"/>
+    <!-- Red Gingham Checkers -->
+    <g fill="#EF4444" opacity="0.8">
+      <rect x="10" y="8" width="34" height="24" rx="3"/>
+      <rect x="60" y="8" width="34" height="24" rx="3"/>
+      <rect x="110" y="8" width="34" height="24" rx="3"/>
+      <rect x="160" y="8" width="34" height="24" rx="3"/>
+      <rect x="210" y="8" width="34" height="24" rx="3"/>
+      <rect x="260" y="8" width="34" height="24" rx="3"/>
+
+      <rect x="35" y="36" width="34" height="24" rx="3"/>
+      <rect x="85" y="36" width="34" height="24" rx="3"/>
+      <rect x="135" y="36" width="34" height="24" rx="3"/>
+      <rect x="185" y="36" width="34" height="24" rx="3"/>
+      <rect x="235" y="36" width="34" height="24" rx="3"/>
+
+      <rect x="10" y="64" width="34" height="24" rx="3"/>
+      <rect x="60" y="64" width="34" height="24" rx="3"/>
+      <rect x="110" y="64" width="34" height="24" rx="3"/>
+      <rect x="160" y="64" width="34" height="24" rx="3"/>
+      <rect x="210" y="64" width="34" height="24" rx="3"/>
+      <rect x="260" y="64" width="34" height="24" rx="3"/>
+    </g>
+  </g>
+
+  <!-- Picnic Basket & Contents -->
+  <g transform="translate(430, 435)" filter="url(#leShadow)">
+    <!-- Wicker Picnic Basket Base -->
+    <rect x="-65" y="0" width="130" height="60" rx="14" fill="url(#leBasketGrad)" stroke="#78350F" stroke-width="3.5"/>
+    <!-- Wicker Weave Pattern Lines -->
+    <line x1="-65" y1="20" x2="65" y2="20" stroke="#78350F" stroke-width="2"/>
+    <line x1="-65" y1="40" x2="65" y2="40" stroke="#78350F" stroke-width="2"/>
+    <line x1="-35" y1="0" x2="-35" y2="60" stroke="#78350F" stroke-width="1.8"/>
+    <line x1="0" y1="0" x2="0" y2="60" stroke="#78350F" stroke-width="1.8"/>
+    <line x1="35" y1="0" x2="35" y2="60" stroke="#78350F" stroke-width="1.8"/>
+
+    <!-- Basket Handle Over Top -->
+    <path d="M-60 5 C-60 -50 60 -50 60 5" fill="none" stroke="#92400E" stroke-width="6" stroke-linecap="round"/>
+
+    <!-- Gingham Napkin Draping Out of Basket -->
+    <path d="M-55 10 L-25 35 L-70 42 Z" fill="#EF4444" stroke="#B91C1C" stroke-width="1.5"/>
+
+    <!-- Crisp Red Apple -->
+    <g transform="translate(-40, -5)">
+      <circle cx="0" cy="0" r="16" fill="#EF4444" stroke="#991B1B" stroke-width="2"/>
+      <path d="M0 -16 Q4 -22 6 -20 Q2 -14 0 -16 Z" fill="#15803D"/>
+      <circle cx="-5" cy="-5" r="3" fill="#F87171"/>
+    </g>
+
+    <!-- Cluster of Purple Grapes -->
+    <g transform="translate(-15, -10)">
+      <circle cx="-6" cy="0" r="8" fill="#9333EA" stroke="#581C87" stroke-width="1.5"/>
+      <circle cx="6" cy="-2" r="8" fill="#A855F7" stroke="#581C87" stroke-width="1.5"/>
+      <circle cx="0" cy="-10" r="8" fill="#7E22CE" stroke="#581C87" stroke-width="1.5"/>
+      <circle cx="0" cy="8" r="7" fill="#6B21A8" stroke="#581C87" stroke-width="1.5"/>
+    </g>
+
+    <!-- Delicious Triangle Sandwich -->
+    <g transform="translate(25, -5)">
+      <polygon points="0,5 38,-20 38,15" fill="#FDE68A" stroke="#D97706" stroke-width="2"/>
+      <line x1="4" y1="4" x2="36" y2="-12" stroke="#22C55E" stroke-width="3"/>
+      <line x1="6" y1="7" x2="36" y2="-8" stroke="#F59E0B" stroke-width="3"/>
+      <line x1="8" y1="10" x2="36" y2="-4" stroke="#EF4444" stroke-width="3"/>
+    </g>
+
+    <!-- Blue Water Bottle -->
+    <g transform="translate(58, -10)">
+      <rect x="0" y="0" width="16" height="32" rx="4" fill="#38BDF8" stroke="#0369A1" stroke-width="2"/>
+      <rect x="3" y="-6" width="10" height="6" rx="2" fill="#0284C7"/>
+    </g>
+
+    <!-- Blueberries on blanket -->
+    <circle cx="-85" cy="55" r="5" fill="#3B82F6" stroke="#1E3A8A" stroke-width="1.5"/>
+    <circle cx="-70" cy="62" r="6" fill="#2563EB" stroke="#1E3A8A" stroke-width="1.5"/>
+  </g>
+
+  <!-- Cute Little Yellow Baby Chick Bird sitting next to basket -->
+  <g transform="translate(345, 505)" filter="url(#leShadow)">
+    <!-- Chick Body -->
+    <circle cx="0" cy="0" r="18" fill="#FACC15" stroke="#CA8A04" stroke-width="2.5"/>
+    <!-- Head -->
+    <circle cx="0" cy="-14" r="14" fill="#FDE047" stroke="#CA8A04" stroke-width="2.5"/>
+    <!-- Cute Eyes -->
+    <circle cx="-5" cy="-16" r="2.5" fill="#000"/>
+    <circle cx="5" cy="-16" r="2.5" fill="#000"/>
+    <!-- Orange Beak -->
+    <polygon points="-3,-12 3,-12 0,-8" fill="#F97316" stroke="#C2410C" stroke-width="1"/>
+    <!-- Rosy Cheeks -->
+    <circle cx="-9" cy="-12" r="3" fill="#FB7185" opacity="0.8"/>
+    <circle cx="9" cy="-12" r="3" fill="#FB7185" opacity="0.8"/>
+    <!-- Wings -->
+    <ellipse cx="-16" cy="0" rx="5" ry="8" fill="#EAB308"/>
+    <ellipse cx="16" cy="0" rx="5" ry="8" fill="#EAB308"/>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- RIGHT: "HELP BAMBLI TO..." LIST CARD -->
+  <!-- ========================================== -->
+  <g transform="translate(680, 275)" filter="url(#leSoftShadow)">
+    <!-- Card Body -->
+    <rect x="0" y="0" width="255" height="245" rx="22" fill="#FFFFFF" stroke="#312E81" stroke-width="3.5"/>
+
+    <!-- Teal Header Tab: HELP BAMBLI TO... -->
+    <g transform="translate(25, -16)" filter="url(#leShadow)">
+      <rect x="0" y="0" width="205" height="34" rx="17" fill="#0D9488" stroke="#042F2E" stroke-width="2.5"/>
+      <text x="102" y="23" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="13" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">
+        HELP BAMBLI TO...
+      </text>
+    </g>
+
+    <!-- 5 Action Rows -->
+    <!-- 1: FIND Hidden items -->
+    <g transform="translate(16, 30)">
+      <circle cx="16" cy="14" r="14" fill="#CCFBF1" stroke="#0D9488" stroke-width="2"/>
+      <text x="16" y="20" font-size="16" text-anchor="middle">🔍</text>
+      <text x="40" y="14" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="13" fill="#0F766E">FIND</text>
+      <text x="40" y="27" font-family="'Nunito', sans-serif" font-weight="800" font-size="10.5" fill="#475569">Hidden items</text>
+      <line x1="8" y1="36" x2="225" y2="36" stroke="#F1F5F9" stroke-width="1.5"/>
+    </g>
+
+    <!-- 2: MATCH Colours -->
+    <g transform="translate(16, 72)">
+      <circle cx="16" cy="14" r="14" fill="#FFE4E6" stroke="#F43F5E" stroke-width="2"/>
+      <text x="16" y="20" font-size="16" text-anchor="middle">🎨</text>
+      <text x="40" y="14" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="13" fill="#BE123C">MATCH</text>
+      <text x="40" y="27" font-family="'Nunito', sans-serif" font-weight="800" font-size="10.5" fill="#475569">Colours</text>
+      <line x1="8" y1="36" x2="225" y2="36" stroke="#F1F5F9" stroke-width="1.5"/>
+    </g>
+
+    <!-- 3: DISCOVER Shapes -->
+    <g transform="translate(16, 114)">
+      <circle cx="16" cy="14" r="14" fill="#EDE9FE" stroke="#8B5CF6" stroke-width="2"/>
+      <text x="16" y="20" font-size="16" text-anchor="middle">🔺</text>
+      <text x="40" y="14" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="13" fill="#6D28D9">DISCOVER</text>
+      <text x="40" y="27" font-family="'Nunito', sans-serif" font-weight="800" font-size="10.5" fill="#475569">Shapes</text>
+      <line x1="8" y1="36" x2="225" y2="36" stroke="#F1F5F9" stroke-width="1.5"/>
+    </g>
+
+    <!-- 4: COUNT Picnic goodies -->
+    <g transform="translate(16, 156)">
+      <circle cx="16" cy="14" r="14" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2"/>
+      <text x="16" y="20" font-size="14" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" fill="#B45309" text-anchor="middle">1 2</text>
+      <text x="40" y="14" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="13" fill="#B45309">COUNT</text>
+      <text x="40" y="27" font-family="'Nunito', sans-serif" font-weight="800" font-size="10.5" fill="#475569">Picnic goodies</text>
+      <line x1="8" y1="36" x2="225" y2="36" stroke="#F1F5F9" stroke-width="1.5"/>
+    </g>
+
+    <!-- 5: REMEMBER And win! -->
+    <g transform="translate(16, 198)">
+      <circle cx="16" cy="14" r="14" fill="#DCFCE7" stroke="#16A34A" stroke-width="2"/>
+      <text x="16" y="20" font-size="16" text-anchor="middle">🧠</text>
+      <text x="40" y="14" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="13" fill="#15803D">REMEMBER</text>
+      <text x="40" y="27" font-family="'Nunito', sans-serif" font-weight="800" font-size="10.5" fill="#475569">And win!</text>
+    </g>
+  </g>
+
+  <!-- Purple Pill: BIG LEARNING for Little Minds -->
+  <g transform="translate(680, 532)" filter="url(#leShadow)">
+    <rect x="0" y="0" width="255" height="46" rx="23" fill="#6D28D9" stroke="#312E81" stroke-width="3"/>
+    <text x="127" y="22" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="14" fill="#FFFFFF" text-anchor="middle">
+      BIG LEARNING
+    </text>
+    <text x="127" y="38" font-family="'Nunito', sans-serif" font-weight="800" font-size="11" fill="#FDE047" text-anchor="middle">
+      for Little Minds 💕
+    </text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- BOTTOM TRUST STRIP: 100% KID SAFE, NO ADS... -->
+  <!-- ========================================== -->
+  <g transform="translate(25, 590)" filter="url(#leShadow)">
+    <rect x="0" y="0" width="620" height="40" rx="20" fill="#FFFFFF" stroke="#312E81" stroke-width="2.5"/>
+
+    <!-- 1: 100% Kid Safe -->
+    <g transform="translate(18, 10)">
+      <text x="12" y="16" font-size="15" text-anchor="middle">🛡️</text>
+      <text x="26" y="12" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="10" fill="#15803D">100%</text>
+      <text x="26" y="22" font-family="'Nunito', sans-serif" font-weight="800" font-size="9" fill="#166534">KID SAFE</text>
+    </g>
+    <line x1="120" y1="8" x2="120" y2="32" stroke="#E2E8F0" stroke-width="2"/>
+
+    <!-- 2: No Ads -->
+    <g transform="translate(145, 10)">
+      <text x="12" y="16" font-size="15" text-anchor="middle">❤️</text>
+      <text x="26" y="17" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="11" fill="#DC2626">NO ADS</text>
+    </g>
+    <line x1="260" y1="8" x2="260" y2="32" stroke="#E2E8F0" stroke-width="2"/>
+
+    <!-- 3: Privacy Focused -->
+    <g transform="translate(285, 10)">
+      <text x="12" y="16" font-size="15" text-anchor="middle">🔒</text>
+      <text x="26" y="12" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="10" fill="#0369A1">PRIVACY</text>
+      <text x="26" y="22" font-family="'Nunito', sans-serif" font-weight="800" font-size="9" fill="#075985">FOCUSED</text>
+    </g>
+    <line x1="410" y1="8" x2="410" y2="32" stroke="#E2E8F0" stroke-width="2"/>
+
+    <!-- 4: Learning Through Play -->
+    <g transform="translate(435, 10)">
+      <text x="12" y="16" font-size="15" text-anchor="middle">🎓</text>
+      <text x="26" y="12" font-family="'Nunito', 'Arial Black', sans-serif" font-weight="900" font-size="9.5" fill="#4338CA">LEARNING</text>
+      <text x="26" y="22" font-family="'Nunito', sans-serif" font-weight="800" font-size="8.5" fill="#3730A3">THROUGH PLAY</text>
+    </g>
+  </g>
+</svg>

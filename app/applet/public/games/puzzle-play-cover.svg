@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="warmBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD93D"/>
+      <stop offset="50%" stop-color="#FFE66D"/>
+      <stop offset="100%" stop-color="#FFFDF0"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="4" dy="4" stdDeviation="0" flood-color="#000"/>
+    </filter>
+    <filter id="boldShadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="6" dy="6" stdDeviation="0" flood-color="#000"/>
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="800" height="480" fill="url(#warmBg)"/>
+
+  <!-- Decorative Word Search Grid Pattern in background -->
+  <g opacity="0.15" font-family="system-ui, sans-serif" font-weight="900" font-size="28" fill="#000">
+    <text x="40" y="80">B A M B L I P U Z Z L E</text>
+    <text x="40" y="140">W O R D S E A R C H Q K</text>
+    <text x="40" y="200">A D V E N T U R E T R M</text>
+    <text x="40" y="260">S T A R P L A Y F U N X</text>
+    <text x="40" y="320">T I G E R M O N K E Y L</text>
+    <text x="40" y="380">S P A C E R O C K E T P</text>
+    <text x="40" y="440">H A I W A N O R E N A B</text>
+  </g>
+
+  <!-- Interactive Puzzle Grid Illustration (Right side) -->
+  <g transform="translate(480, 110)" filter="url(#boldShadow)">
+    <rect x="0" y="0" width="280" height="280" rx="24" fill="#FFF" stroke="#000" stroke-width="5"/>
+    <!-- Grid Cells -->
+    <g transform="translate(18, 18)" font-family="system-ui, sans-serif" font-weight="900" font-size="18" text-anchor="middle">
+      <!-- Row 1 -->
+      <rect x="0" y="0" width="44" height="44" rx="8" fill="#4ECDC4" stroke="#000" stroke-width="2.5"/>
+      <text x="22" y="29" fill="#000">B</text>
+      <rect x="50" y="0" width="44" height="44" rx="8" fill="#4ECDC4" stroke="#000" stroke-width="2.5"/>
+      <text x="72" y="29" fill="#000">A</text>
+      <rect x="100" y="0" width="44" height="44" rx="8" fill="#4ECDC4" stroke="#000" stroke-width="2.5"/>
+      <text x="122" y="29" fill="#000">M</text>
+      <rect x="150" y="0" width="44" height="44" rx="8" fill="#4ECDC4" stroke="#000" stroke-width="2.5"/>
+      <text x="172" y="29" fill="#000">B</text>
+      <rect x="200" y="0" width="44" height="44" rx="8" fill="#4ECDC4" stroke="#000" stroke-width="2.5"/>
+      <text x="222" y="29" fill="#000">L</text>
+
+      <!-- Row 2 -->
+      <rect x="0" y="50" width="44" height="44" rx="8" fill="#FFFDF0" stroke="#000" stroke-width="2.5"/>
+      <text x="22" y="79" fill="#000">O</text>
+      <rect x="50" y="50" width="44" height="44" rx="8" fill="#FF6B6B" stroke="#000" stroke-width="2.5"/>
+      <text x="72" y="79" fill="#FFF">L</text>
+      <rect x="100" y="50" width="44" height="44" rx="8" fill="#FFFDF0" stroke="#000" stroke-width="2.5"/>
+      <text x="122" y="79" fill="#000">I</text>
+      <rect x="150" y="50" width="44" height="44" rx="8" fill="#FFFDF0" stroke="#000" stroke-width="2.5"/>
+      <text x="172" y="79" fill="#000">O</text>
+      <rect x="200" y="50" width="44" height="44" rx="8" fill="#FFFDF0" stroke="#000" stroke-width="2.5"/>
+      <text x="222" y="79" fill="#000">N</text>
+
+      <!-- Row 3 -->
+      <rect x="0" y="100" width="44" height="44" rx="8" fill="#FFFDF0" stroke="#000" stroke-width="2.5"/>
+      <text x="22" y="129" fill="#000">R</text>
+      <rect x="50" y="100" width="44" height="44" rx="8" fill="#FF6B6B" stroke="#000" stroke-width="2.5"/>
+      <text x="72" y="129" fill="#FFF">I</text>
+      <rect x="100" y="100" width="44" height="44" rx="8" fill="#FFFDF0" stroke="#000" stroke-width="2.5"/>
+      <text x="122" y="129" fill="#000">F</text>
+      <rect x="150" y="100" width="44" height="44" rx="8" fill="#FFFDF0" stroke="#000" stroke-width="2.5"/>
+      <text x="172" y="129" fill="#000">O</text>
+      <rect x="200" y="100" width="44" height="44" rx="8" fill="#FFFDF0" stroke="#000" stroke-width="2.5"/>
+      <text x="222" y="129" fill="#000">X</text>
+
+      <!-- Row 4 -->
+      <rect x="0" y="150" width="44" height="44" rx="8" fill="#FFFDF0" stroke="#000" stroke-width="2.5"/>
+      <text x="22" y="179" fill="#000">O</text>
+      <rect x="50" y="150" width="44" height="44" rx="8" fill="#FF6B6B" stroke="#000" stroke-width="2.5"/>
+      <text x="72" y="179" fill="#FFF">O</text>
+      <rect x="100" y="150" width="44" height="44" rx="8" fill="#8AC926" stroke="#000" stroke-width="2.5"/>
+      <text x="122" y="179" fill="#FFF">S</text>
+      <rect x="150" y="150" width="44" height="44" rx="8" fill="#8AC926" stroke="#000" stroke-width="2.5"/>
+      <text x="172" y="179" fill="#FFF">T</text>
+      <rect x="200" y="150" width="44" height="44" rx="8" fill="#8AC926" stroke="#000" stroke-width="2.5"/>
+      <text x="222" y="179" fill="#FFF">A</text>
+
+      <!-- Row 5 -->
+      <rect x="0" y="200" width="44" height="44" rx="8" fill="#FFFDF0" stroke="#000" stroke-width="2.5"/>
+      <text x="22" y="229" fill="#000">C</text>
+      <rect x="50" y="200" width="44" height="44" rx="8" fill="#FF6B6B" stroke="#000" stroke-width="2.5"/>
+      <text x="72" y="229" fill="#FFF">N</text>
+      <rect x="100" y="200" width="44" height="44" rx="8" fill="#FFFDF0" stroke="#000" stroke-width="2.5"/>
+      <text x="122" y="229" fill="#000">K</text>
+      <rect x="150" y="200" width="44" height="44" rx="8" fill="#FFFDF0" stroke="#000" stroke-width="2.5"/>
+      <text x="172" y="229" fill="#000">E</text>
+      <rect x="200" y="200" width="44" height="44" rx="8" fill="#FFFDF0" stroke="#000" stroke-width="2.5"/>
+      <text x="222" y="229" fill="#000">T</text>
+    </g>
+    <!-- Magnifying Glass Highlight -->
+    <circle cx="230" cy="50" r="32" fill="#E0F2FE" stroke="#FFD93D" stroke-width="8" opacity="0.9"/>
+    <circle cx="230" cy="50" r="32" fill="none" stroke="#000" stroke-width="3.5"/>
+    <line x1="252" y1="72" x2="275" y2="95" stroke="#78350F" stroke-width="10" stroke-linecap="round"/>
+    <line x1="252" y1="72" x2="275" y2="95" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Mascot Avatar Bubble -->
+  <g transform="translate(680, 40)" filter="url(#shadow)">
+    <circle cx="35" cy="35" r="35" fill="#8054C2" stroke="#000" stroke-width="3.5"/>
+    <text x="35" y="47" font-size="34" text-anchor="middle">🧠</text>
+  </g>
+
+  <!-- Left Header Badges -->
+  <g transform="translate(40, 30)" filter="url(#shadow)">
+    <rect x="0" y="0" width="240" height="38" rx="19" fill="#FFF" stroke="#000" stroke-width="3.5"/>
+    <text x="120" y="24" font-family="system-ui, sans-serif" font-weight="900" font-size="14" fill="#000" text-anchor="middle" letter-spacing="1">
+      BAMBLI PLAYFUL LEARNING
+    </text>
+  </g>
+
+  <g transform="translate(300, 30)" filter="url(#shadow)">
+    <rect x="0" y="0" width="110" height="38" rx="19" fill="#FF6B6B" stroke="#000" stroke-width="3.5"/>
+    <text x="55" y="24" font-family="system-ui, sans-serif" font-weight="900" font-size="13" fill="#FFF" text-anchor="middle">
+      AGES 5–10
+    </text>
+  </g>
+
+  <g transform="translate(420, 30)" filter="url(#shadow)">
+    <rect x="0" y="0" width="90" height="38" rx="19" fill="#FFF" stroke="#000" stroke-width="3.5"/>
+    <text x="45" y="24" font-family="system-ui, sans-serif" font-weight="900" font-size="11" fill="#000" text-anchor="middle">
+      EN / BM
+    </text>
+  </g>
+
+  <!-- Big Title Card -->
+  <g transform="translate(40, 85)" filter="url(#boldShadow)">
+    <rect x="0" y="0" width="420" height="115" rx="24" fill="#8054C2" stroke="#000" stroke-width="5"/>
+    <text x="24" y="52" font-family="system-ui, sans-serif" font-weight="900" font-size="44" fill="#FFF">
+      Puzzle Play
+    </text>
+    <g transform="translate(24, 68)">
+      <rect x="0" y="0" width="340" height="34" rx="10" fill="#FFD93D" stroke="#000" stroke-width="3"/>
+      <text x="170" y="23" font-family="system-ui, sans-serif" font-weight="900" font-size="16" fill="#000" text-anchor="middle" letter-spacing="0.5">
+        WORD SEARCH ADVENTURES
+      </text>
+    </g>
+  </g>
+
+  <!-- 25 Puzzles Pill -->
+  <g transform="translate(40, 215)" filter="url(#shadow)">
+    <rect x="0" y="0" width="280" height="38" rx="12" fill="#FF8E3C" stroke="#000" stroke-width="3.5"/>
+    <text x="140" y="24" font-family="system-ui, sans-serif" font-weight="900" font-size="14" fill="#FFF" text-anchor="middle">
+      🧩 25 PUZZLES! 5 CATEGORIES
+    </text>
+  </g>
+
+  <!-- Tagline Card -->
+  <g transform="translate(40, 265)" filter="url(#shadow)">
+    <rect x="0" y="0" width="380" height="36" rx="10" fill="#FFF" stroke="#000" stroke-width="3"/>
+    <text x="190" y="23" font-family="system-ui, sans-serif" font-weight="900" font-size="13" fill="#000" text-anchor="middle">
+      Find the words. Train your brain. Have fun!
+    </text>
+  </g>
+
+  <!-- 5 Categories Grid -->
+  <g transform="translate(40, 315)">
+    <g transform="translate(0, 0)" filter="url(#shadow)">
+      <rect x="0" y="0" width="120" height="32" rx="10" fill="#4ECDC4" stroke="#000" stroke-width="2.5"/>
+      <text x="60" y="21" font-family="system-ui, sans-serif" font-weight="900" font-size="11" fill="#000" text-anchor="middle">
+        🦁 Animals
+      </text>
+    </g>
+    <g transform="translate(130, 0)" filter="url(#shadow)">
+      <rect x="0" y="0" width="130" height="32" rx="10" fill="#FFD93D" stroke="#000" stroke-width="2.5"/>
+      <text x="65" y="21" font-family="system-ui, sans-serif" font-weight="900" font-size="11" fill="#000" text-anchor="middle">
+        🍎 Fruits &amp; Food
+      </text>
+    </g>
+    <g transform="translate(270, 0)" filter="url(#shadow)">
+      <rect x="0" y="0" width="130" height="32" rx="10" fill="#8AC926" stroke="#000" stroke-width="2.5"/>
+      <text x="65" y="21" font-family="system-ui, sans-serif" font-weight="900" font-size="11" fill="#FFF" text-anchor="middle">
+        🚀 Space &amp; Sky
+      </text>
+    </g>
+
+    <g transform="translate(0, 42)" filter="url(#shadow)">
+      <rect x="0" y="0" width="160" height="32" rx="10" fill="#70D6FF" stroke="#000" stroke-width="2.5"/>
+      <text x="80" y="21" font-family="system-ui, sans-serif" font-weight="900" font-size="11" fill="#000" text-anchor="middle">
+        🌊 Nature &amp; Ocean
+      </text>
+    </g>
+    <g transform="translate(170, 42)" filter="url(#shadow)">
+      <rect x="0" y="0" width="180" height="32" rx="10" fill="#FF7096" stroke="#000" stroke-width="2.5"/>
+      <text x="90" y="21" font-family="system-ui, sans-serif" font-weight="900" font-size="11" fill="#FFF" text-anchor="middle">
+        🚗 Vehicles &amp; Adventure
+      </text>
+    </g>
+  </g>
+
+  <!-- Bottom Strip -->
+  <g transform="translate(40, 420)" filter="url(#shadow)">
+    <rect x="0" y="0" width="400" height="34" rx="10" fill="#191A23" stroke="#000" stroke-width="3"/>
+    <text x="200" y="22" font-family="system-ui, sans-serif" font-weight="800" font-size="12" fill="#FFF" text-anchor="middle">
+      EASY TO ADVANCED • 100% KID SAFE • OFFLINE PLAY
+    </text>
+  </g>
+</svg>

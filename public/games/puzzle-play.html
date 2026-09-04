@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Bambli Puzzle Play — Standalone Offline Game</title>
+<style>
+  :root {
+    --bambli-purple: #7C4DB3;
+    --bambli-pink: #F06B98;
+    --bambli-teal: #43B9B0;
+    --bambli-yellow: #F8B92E;
+    --bambli-green: #76C943;
+    --bambli-lavender: #B9A8DA;
+    --bambli-sky: #9CCBEA;
+    --bambli-cream: #FFF9E9;
+    --bambli-navy: #18345D;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-user-select: none; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+  body { background: var(--bambli-cream); color: var(--bambli-navy); min-height: 100vh; display: flex; flex-direction: column; align-items: center; touch-action: manipulation; }
+  .header { width: 100%; max-width: 600px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; }
+  .logo-title { font-size: 20px; font-weight: 900; color: var(--bambli-purple); display: flex; align-items: center; gap: 8px; }
+  .star-badge { background: #FFF; border: 2px solid var(--bambli-yellow); padding: 4px 10px; border-radius: 20px; font-weight: 800; font-size: 13px; color: var(--bambli-navy); }
+  .container { width: 100%; max-width: 500px; padding: 12px; flex: 1; display: flex; flex-direction: column; align-items: center; }
+  .card { background: #FFF; border-radius: 24px; border: 3px solid var(--bambli-lavender); box-shadow: 0 8px 24px rgba(124,77,179,0.12); width: 100%; padding: 16px; margin-bottom: 12px; }
+  .btn { background: var(--bambli-purple); color: #FFF; border: none; border-radius: 16px; font-weight: 800; font-size: 15px; padding: 12px 20px; cursor: pointer; transition: transform 0.1s; }
+  .btn:active { transform: scale(0.96); }
+  .btn-green { background: var(--bambli-green); }
+  .btn-pink { background: var(--bambli-pink); }
+  .grid-board { display: grid; gap: 6px; background: #FFF; border: 4px solid var(--bambli-lavender); border-radius: 24px; padding: 12px; width: 100%; aspect-ratio: 1/1; touch-action: none; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
+  .grid-cell { background: #FAF7F0; border: 2px solid #E9E3D3; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; color: var(--bambli-navy); }
+  .grid-cell.selected { background: var(--bambli-yellow); border-color: #E5A315; transform: scale(1.05); }
+  .grid-cell.found-0 { background: var(--bambli-pink); color: #FFF; border-color: var(--bambli-pink); }
+  .grid-cell.found-1 { background: var(--bambli-teal); color: #FFF; border-color: var(--bambli-teal); }
+  .grid-cell.found-2 { background: var(--bambli-purple); color: #FFF; border-color: var(--bambli-purple); }
+  .grid-cell.found-3 { background: var(--bambli-yellow); color: var(--bambli-navy); border-color: #E5A315; }
+  .grid-cell.found-4 { background: var(--bambli-green); color: #FFF; border-color: var(--bambli-green); }
+  .grid-cell.found-5 { background: var(--bambli-sky); color: var(--bambli-navy); border-color: var(--bambli-sky); }
+  .chips-container { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 12px; }
+  .word-chip { background: #FFF; border: 2px solid var(--bambli-lavender); padding: 6px 12px; border-radius: 14px; font-weight: 800; font-size: 14px; display: flex; align-items: center; gap: 6px; cursor: pointer; }
+  .word-chip.found { text-decoration: line-through; border-color: var(--bambli-green); color: var(--bambli-green); }
+  .category-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-top: 10px; }
+  .cat-card { background: #FFF; border-radius: 20px; padding: 14px; border: 3px solid; cursor: pointer; text-align: center; }
+  .cat-card:active { transform: scale(0.97); }
+  .modal-overlay { position: fixed; inset: 0; background: rgba(24,52,93,0.6); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 100; }
+  .modal { background: #FFF; border-radius: 28px; border: 4px solid var(--bambli-yellow); padding: 24px; max-width: 400px; width: 100%; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo-title">
+    <svg width="32" height="32" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="80" fill="#43B9B0"/>
+      <ellipse cx="100" cy="108" rx="55" ry="50" fill="#FFF2DC"/>
+      <ellipse cx="75" cy="100" rx="9" ry="12" fill="#18345D"/>
+      <ellipse cx="125" cy="100" rx="9" ry="12" fill="#18345D"/>
+      <ellipse cx="65" cy="115" rx="10" ry="7" fill="#F06B98" opacity="0.8"/>
+      <ellipse cx="135" cy="115" rx="10" ry="7" fill="#F06B98" opacity="0.8"/>
+      <path d="M88 116 Q100 134 112 116 Z" fill="#D9384E"/>
+    </svg>
+    <span>Bambli</span>
+  </div>
+  <div id="starCount" class="star-badge">⭐ 0 Stars</div>
+</div>
+
+<div id="app" class="container">
+  <!-- Dynamic Screens populated by script -->
+</div>
+
+<script>
+// Embedded Database of 25 Puzzles
+const CATEGORIES = [{"id":"animals","name":"Animals","nameBM":"Haiwan Comel","icon":"🐾","color":"#EF476F","bgLight":"#FFF0F5","borderColor":"#F9B7CE","shadowColor":"#BE123C","accentColor":"#EF476F","description":"Explore friendly animals from farm to wild jungle!","puzzles":[{"id":"animals-01","category":"animals","title":"Baby Animals","titleBM":"Anak Haiwan","difficulty":"easy","gridSize":6,"words":["CAT","CUB","KID","CALF","PUP"],"wordsBM":["KUCING","ANAK","KAMBING","ANAKLEMBBU","ANJING"],"clues":[{"word":"CAT","icon":"🐱","hintMeaning":"A cute purring kitten"},{"word":"CUB","icon":"🐻","hintMeaning":"A baby bear or lion"},{"word":"KID","icon":"🐐","hintMeaning":"A baby goat"},{"word":"CALF","icon":"🐮","hintMeaning":"A sweet baby cow"},{"word":"PUP","icon":"🐶","hintMeaning":"A playful puppy"}],"cluesBM":[{"word":"KUCING","icon":"🐱","hintMeaning":"Haiwan manja berbulu"},{"word":"ANAK","icon":"🐻","hintMeaning":"Anak beruang comel"},{"word":"KAMBING","icon":"🐐","hintMeaning":"Anak kambing suka melompat"},{"word":"LEMBU","icon":"🐮","hintMeaning":"Anak lembu comel"},{"word":"ANJING","icon":"🐶","hintMeaning":"Anak anjing setia"}]},{"id":"animals-02","category":"animals","title":"Farm Friends","titleBM":"Kawan Ladang","difficulty":"easy","gridSize":6,"words":["COW","PIG","DUCK","HEN","GOAT"],"clues":[{"word":"COW","icon":"🐮","hintMeaning":"Gives us fresh milk"},{"word":"PIG","icon":"🐷","hintMeaning":"Loves mud and goes oink"},{"word":"DUCK","icon":"🦆","hintMeaning":"Swims in pond and quacks"},{"word":"HEN","icon":"🐔","hintMeaning":"Lays tasty eggs"},{"word":"GOAT","icon":"🐐","hintMeaning":"Has horns and says baa"}]},{"id":"animals-03","category":"animals","title":"Jungle Friends","titleBM":"Rakan Rimba","difficulty":"intermediate","gridSize":8,"words":["TIGER","LION","MONKEY","ZEBRA","PANDA"],"clues":[{"word":"TIGER","icon":"🐯","hintMeaning":"Striped jungle cat"},{"word":"LION","icon":"🦁","hintMeaning":"King of the jungle"},{"word":"MONKEY","icon":"🐵","hintMeaning":"Swings from trees"},{"word":"ZEBRA","icon":"🦓","hintMeaning":"Black and white stripes"},{"word":"PANDA","icon":"🐼","hintMeaning":"Loves eating green bamboo"}]},{"id":"animals-04","category":"animals","title":"Animal Homes","titleBM":"Rumah Haiwan","difficulty":"intermediate","gridSize":8,"words":["NEST","CAVE","DEN","BARN","HIVE","POND"],"clues":[{"word":"NEST","icon":"🪺","hintMeaning":"Cozy home for baby birds"},{"word":"CAVE","icon":"🪨","hintMeaning":"Bear sleeping cavern"},{"word":"DEN","icon":"🦊","hintMeaning":"Safe home for foxes"},{"word":"BARN","icon":"🚜","hintMeaning":"Warm farm animal shelter"},{"word":"HIVE","icon":"🐝","hintMeaning":"Where sweet bees make honey"},{"word":"POND","icon":"🐸","hintMeaning":"Water home for frogs and ducks"}]},{"id":"animals-05","category":"animals","title":"Wild Animal Adventure","titleBM":"Pengembaraan Rimba","difficulty":"advanced","gridSize":10,"words":["ELEPHANT","GIRAFFE","DOLPHIN","PENGUIN","KANGAROO","CHEETAH"],"clues":[{"word":"ELEPHANT","icon":"🐘","hintMeaning":"Big gentle giant with long trunk"},{"word":"GIRAFFE","icon":"🦒","hintMeaning":"Tallest animal reaching tall trees"},{"word":"DOLPHIN","icon":"🐬","hintMeaning":"Smart jumping ocean swimmer"},{"word":"PENGUIN","icon":"🐧","hintMeaning":"Waddles on snow and ice"},{"word":"KANGAROO","icon":"🦘","hintMeaning":"Hops high with a pouch"},{"word":"CHEETAH","icon":"🐆","hintMeaning":"Fastest runner on land"}]}]},{"id":"fruits-food","name":"Fruits & Food","nameBM":"Buah & Makanan","icon":"🍎","color":"#FFD166","bgLight":"#FFFBEA","borderColor":"#FCE089","shadowColor":"#F59E0B","accentColor":"#D97706","description":"Yummy fruits, healthy veggies, and delicious picnic snacks!","puzzles":[{"id":"food-01","category":"fruits-food","title":"Yummy Fruits","titleBM":"Buah Sedap","difficulty":"easy","gridSize":6,"words":["APPLE","PEAR","KIWI","PLUM","LIME"],"clues":[{"word":"APPLE","icon":"🍎","hintMeaning":"Crunchy red sweet fruit"},{"word":"PEAR","icon":"🍐","hintMeaning":"Juicy green pear shape"},{"word":"KIWI","icon":"🥝","hintMeaning":"Fuzzy outside, green inside"},{"word":"PLUM","icon":"🫐","hintMeaning":"Sweet purple fruit"},{"word":"LIME","icon":"🍋‍🟩","hintMeaning":"Zesty bright green citrus"}]},{"id":"food-02","category":"fruits-food","title":"Fruit Basket","titleBM":"Bakul Buah","difficulty":"easy","gridSize":6,"words":["MELON","BERRY","FIG","PEACH","GRAPE"],"clues":[{"word":"MELON","icon":"🍈","hintMeaning":"Sweet round juicy melon"},{"word":"BERRY","icon":"🍓","hintMeaning":"Small sweet red berry"},{"word":"FIG","icon":"🍇","hintMeaning":"Soft sweet tree fruit"},{"word":"PEACH","icon":"🍑","hintMeaning":"Soft fuzzy pink-orange fruit"},{"word":"GRAPE","icon":"🍇","hintMeaning":"Bunch of sweet round treats"}]},{"id":"food-03","category":"fruits-food","title":"Healthy Foods","titleBM":"Makanan Sihat","difficulty":"intermediate","gridSize":8,"words":["BANANA","ORANGE","MANGO","CARROT","TOMATO"],"clues":[{"word":"BANANA","icon":"🍌","hintMeaning":"Peel the bright yellow skin"},{"word":"ORANGE","icon":"🍊","hintMeaning":"Full of Vitamin C goodness"},{"word":"MANGO","icon":"🥭","hintMeaning":"Tropical golden sweetness"},{"word":"CARROT","icon":"🥕","hintMeaning":"Crunchy orange bunny favorite"},{"word":"TOMATO","icon":"🍅","hintMeaning":"Juicy red garden vegetable"}]},{"id":"food-04","category":"fruits-food","title":"Picnic Time","titleBM":"Masa Berkelah","difficulty":"intermediate","gridSize":8,"words":["CHEESE","JUICE","BREAD","SALAD","HONEY","MUFFIN"],"clues":[{"word":"CHEESE","icon":"🧀","hintMeaning":"Tasty yellow dairy snack"},{"word":"JUICE","icon":"🧃","hintMeaning":"Refreshing fruit drink"},{"word":"BREAD","icon":"🍞","hintMeaning":"Freshly baked loaf"},{"word":"SALAD","icon":"🥗","hintMeaning":"Crispy green leafy bowl"},{"word":"HONEY","icon":"🍯","hintMeaning":"Sweet golden nectar from bees"},{"word":"MUFFIN","icon":"🧁","hintMeaning":"Yummy bakery cup cake"}]},{"id":"food-05","category":"fruits-food","title":"Food Explorer","titleBM":"Peneroka Makanan","difficulty":"advanced","gridSize":10,"words":["PINEAPPLE","STRAWBERRY","WATERMELON","BLUEBERRY","BROCCOLI","PANCAKE"],"clues":[{"word":"PINEAPPLE","icon":"🍍","hintMeaning":"Crown of leaves on tropical fruit"},{"word":"STRAWBERRY","icon":"🍓","hintMeaning":"Heart-shaped red sweet berry"},{"word":"WATERMELON","icon":"🍉","hintMeaning":"Big green shell with sweet red slice"},{"word":"BLUEBERRY","icon":"🫐","hintMeaning":"Tiny round sweet blue berries"},{"word":"BROCCOLI","icon":"🥦","hintMeaning":"Little green trees packed with vitamins"},{"word":"PANCAKE","icon":"🥞","hintMeaning":"Warm breakfast stack with syrup"}]}]},{"id":"space-sky","name":"Space & Sky","nameBM":"Angkasa & Langit","icon":"🚀","color":"#118AB2","bgLight":"#EBF6FA","borderColor":"#A8DCEB","shadowColor":"#0E7490","accentColor":"#118AB2","description":"Fly among twinkling stars, bright sun, and mysterious planets!","puzzles":[{"id":"space-01","category":"space-sky","title":"Sunny Sky","titleBM":"Langit Cerah","difficulty":"easy","gridSize":6,"words":["SUN","MOON","STAR","SKY","CLOUD"],"clues":[{"word":"SUN","icon":"☀️","hintMeaning":"Bright star warming our day"},{"word":"MOON","icon":"🌙","hintMeaning":"Glowing softly in the night"},{"word":"STAR","icon":"⭐","hintMeaning":"Twinkling far away in the sky"},{"word":"SKY","icon":"🌤️","hintMeaning":"Big blue dome above us"},{"word":"CLOUD","icon":"☁️","hintMeaning":"Fluffy white cotton in the air"}]},{"id":"space-02","category":"space-sky","title":"Little Space Trip","titleBM":"Jelajah Angkasa","difficulty":"easy","gridSize":6,"words":["BEAM","GLOW","DUST","RAY","ORBIT"],"clues":[{"word":"BEAM","icon":"🔦","hintMeaning":"Ray of bright starlight"},{"word":"GLOW","icon":"✨","hintMeaning":"Shining gentle luminescence"},{"word":"DUST","icon":"🪐","hintMeaning":"Cosmic glittering space dust"},{"word":"RAY","icon":"🌞","hintMeaning":"Warm beam from sunlight"},{"word":"ORBIT","icon":"🛰️","hintMeaning":"Circling around a star or planet"}]},{"id":"space-03","category":"space-sky","title":"Planets","titleBM":"Planet-Planet","difficulty":"intermediate","gridSize":8,"words":["EARTH","MARS","COMET","ROCKET","PLANET"],"clues":[{"word":"EARTH","icon":"🌍","hintMeaning":"Our beautiful blue home world"},{"word":"MARS","icon":"🔴","hintMeaning":"The famous dusty red planet"},{"word":"COMET","icon":"☄️","hintMeaning":"Icy traveler with a glowing tail"},{"word":"ROCKET","icon":"🚀","hintMeaning":"Blasts off with a fiery roar"},{"word":"PLANET","icon":"🪐","hintMeaning":"Large round celestial body"}]},{"id":"space-04","category":"space-sky","title":"Space Adventure","titleBM":"Kembara Angkasa","difficulty":"intermediate","gridSize":8,"words":["METEOR","SHUTTLE","ALIEN","CRATER","ASTEROID"],"clues":[{"word":"METEOR","icon":"🌠","hintMeaning":"Shooting star streaking across night"},{"word":"SHUTTLE","icon":"🛸","hintMeaning":"Cosmic spacecraft carrying crew"},{"word":"ALIEN","icon":"👾","hintMeaning":"Friendly curious space friend"},{"word":"CRATER","icon":"🌑","hintMeaning":"Round bowl-shaped ring on the moon"},{"word":"ASTEROID","icon":"🪨","hintMeaning":"Floating rocky space traveler"}]},{"id":"space-05","category":"space-sky","title":"Cosmic Explorer","titleBM":"Peneroka Kosmik","difficulty":"advanced","gridSize":10,"words":["MERCURY","VENUS","SATURN","NEPTUNE","ASTRONAUT","GALAXY"],"clues":[{"word":"MERCURY","icon":"🪐","hintMeaning":"Small planet closest to the Sun"},{"word":"VENUS","icon":"🌟","hintMeaning":"Brightest morning and evening star"},{"word":"SATURN","icon":"🪐","hintMeaning":"Famous giant with majestic icy rings"},{"word":"NEPTUNE","icon":"🔵","hintMeaning":"Deep blue windy outer planet"},{"word":"ASTRONAUT","icon":"👨‍🚀","hintMeaning":"Brave person wearing space suit"},{"word":"GALAXY","icon":"🌌","hintMeaning":"Spiral swirl of billions of stars"}]}]},{"id":"nature-ocean","name":"Nature & Ocean","nameBM":"Alam & Lautan","icon":"🌊","color":"#06D6A0","bgLight":"#E8FAF5","borderColor":"#98EED6","shadowColor":"#059669","accentColor":"#06D6A0","description":"Splash into deep blue oceans and walk through lush green forests!","puzzles":[{"id":"nature-01","category":"nature-ocean","title":"Garden Friends","titleBM":"Rakan Taman","difficulty":"easy","gridSize":6,"words":["TREE","LEAF","RAIN","SEED","SOIL"],"clues":[{"word":"TREE","icon":"🌳","hintMeaning":"Tall plant with trunk and green crown"},{"word":"LEAF","icon":"🍃","hintMeaning":"Green flutter dancing in the breeze"},{"word":"RAIN","icon":"🌧️","hintMeaning":"Water droplets helping plants grow"},{"word":"SEED","icon":"🌰","hintMeaning":"Tiny plant baby waiting to sprout"},{"word":"SOIL","icon":"🪴","hintMeaning":"Rich earth where roots stay safe"}]},{"id":"nature-02","category":"nature-ocean","title":"Ocean Friends","titleBM":"Kawan Lautan","difficulty":"easy","gridSize":6,"words":["FISH","WAVE","CRAB","SEAL","CLAM"],"clues":[{"word":"FISH","icon":"🐠","hintMeaning":"Swims and breathes underwater with gills"},{"word":"WAVE","icon":"🌊","hintMeaning":"Rolling water crashing on the shore"},{"word":"CRAB","icon":"🦀","hintMeaning":"Walks sideways with friendly claws"},{"word":"SEAL","icon":"🦭","hintMeaning":"Playful pup swimming in cool waves"},{"word":"CLAM","icon":"🦪","hintMeaning":"Hides inside two matching seashells"}]},{"id":"nature-03","category":"nature-ocean","title":"Rainforest","titleBM":"Hutan Tropika","difficulty":"intermediate","gridSize":8,"words":["FLOWER","FOREST","RIVER","TURTLE","JUNGLE"],"clues":[{"word":"FLOWER","icon":"🌸","hintMeaning":"Colorful sweet blossom"},{"word":"FOREST","icon":"🌲","hintMeaning":"Huge area covered with trees"},{"word":"RIVER","icon":"🏞️","hintMeaning":"Flowing freshwater stream"},{"word":"TURTLE","icon":"🐢","hintMeaning":"Carries its strong shield shell"},{"word":"JUNGLE","icon":"🌴","hintMeaning":"Thick tropical wilderness"}]},{"id":"nature-04","category":"nature-ocean","title":"Under the Sea","titleBM":"Dasar Laut","difficulty":"intermediate","gridSize":8,"words":["WHALE","CORAL","SHARK","SQUID","SHELL","OTTER"],"clues":[{"word":"WHALE","icon":"🐋","hintMeaning":"Biggest singer in the entire ocean"},{"word":"CORAL","icon":"🪸","hintMeaning":"Colorful undersea underwater gardens"},{"word":"SHARK","icon":"🦈","hintMeaning":"Swift fish with a dorsal fin"},{"word":"SQUID","icon":"🦑","hintMeaning":"Tentacled ocean creature"},{"word":"SHELL","icon":"🐚","hintMeaning":"Pretty beach treasure"},{"word":"OTTER","icon":"🦦","hintMeaning":"Holds hands while floating on back"}]},{"id":"nature-05","category":"nature-ocean","title":"Planet Earth","titleBM":"Bumi Kita","difficulty":"advanced","gridSize":10,"words":["RAINFOREST","WATERFALL","STARFISH","SEAHORSE","OCEAN","VOLCANO"],"clues":[{"word":"RAINFOREST","icon":"🌴","hintMeaning":"Lush green home to parrots and monkeys"},{"word":"WATERFALL","icon":"💧","hintMeaning":"Cascading curtain of sparkling water"},{"word":"STARFISH","icon":"⭐","hintMeaning":"Five-armed sea creature on the reef"},{"word":"SEAHORSE","icon":"🌊","hintMeaning":"Tiny upright fish with curled tail"},{"word":"OCEAN","icon":"🌊","hintMeaning":"Vast blue sea covering most of Earth"},{"word":"VOLCANO","icon":"🌋","hintMeaning":"Mountain that glows with warm lava"}]}]},{"id":"vehicles-adventure","name":"Vehicles & Adventure","nameBM":"Kenderaan & Kembara","icon":"🚗","color":"#F78C6B","bgLight":"#FFF3EE","borderColor":"#FDC7B6","shadowColor":"#C2410C","accentColor":"#F78C6B","description":"Vroom, honk, and fly on land, across rails, and up in the clouds!","puzzles":[{"id":"vehicles-01","category":"vehicles-adventure","title":"Things That Go","titleBM":"Benda Bergerak","difficulty":"easy","gridSize":6,"words":["CAR","BUS","BIKE","BOAT","TRAIN"],"clues":[{"word":"CAR","icon":"🚗","hintMeaning":"Four wheels on the road with a beep beep"},{"word":"BUS","icon":"🚌","hintMeaning":"Carries friendly passengers to school"},{"word":"BIKE","icon":"🚲","hintMeaning":"Pedal with two wheels and a helmet"},{"word":"BOAT","icon":"⛵","hintMeaning":"Floats on water with white sails"},{"word":"TRAIN","icon":"🚂","hintMeaning":"Choo-choo on shiny iron tracks"}]},{"id":"vehicles-02","category":"vehicles-adventure","title":"Around Town","titleBM":"Sekitar Bandar","difficulty":"easy","gridSize":6,"words":["VAN","CART","SHIP","TRAM","TAXI"],"clues":[{"word":"VAN","icon":"🚐","hintMeaning":"Delivers packages and holds lots of bags"},{"word":"CART","icon":"🛒","hintMeaning":"Rolls in the store carrying groceries"},{"word":"SHIP","icon":"🚢","hintMeaning":"Big boat crossing the deep seas"},{"word":"TRAM","icon":"🚊","hintMeaning":"City train rolling on street rails"},{"word":"TAXI","icon":"🚕","hintMeaning":"Bright yellow car taking you anywhere"}]},{"id":"vehicles-03","category":"vehicles-adventure","title":"Travel Time","titleBM":"Masa Mengembara","difficulty":"intermediate","gridSize":8,"words":["PLANE","TRUCK","ROCKET","SCOOTER","FERRY"],"clues":[{"word":"PLANE","icon":"✈️","hintMeaning":"Soars high in the clouds with wings"},{"word":"TRUCK","icon":"🚚","hintMeaning":"Heavy hauler carrying cargo"},{"word":"ROCKET","icon":"🚀","hintMeaning":"Flies all the way to the moon"},{"word":"SCOOTER","icon":"🛴","hintMeaning":"Kick with foot and zoom ahead"},{"word":"FERRY","icon":"⛴️","hintMeaning":"Carries cars and people across rivers"}]},{"id":"vehicles-04","category":"vehicles-adventure","title":"Rescue Team","titleBM":"Pasukan Penyelamat","difficulty":"intermediate","gridSize":8,"words":["POLICE","SIREN","HELMET","ENGINE","PATROL","HERO"],"clues":[{"word":"POLICE","icon":"🚓","hintMeaning":"Keeps our community safe and peaceful"},{"word":"SIREN","icon":"🚨","hintMeaning":"Flashing light warning wee-woo"},{"word":"HELMET","icon":"🪖","hintMeaning":"Protects our head when riding or rescuing"},{"word":"ENGINE","icon":"🚒","hintMeaning":"Big red fire engine with hoses"},{"word":"PATROL","icon":"🛡️","hintMeaning":"Watching over everyone carefully"},{"word":"HERO","icon":"🦸","hintMeaning":"Brave helper who saves the day"}]},{"id":"vehicles-05","category":"vehicles-adventure","title":"Big Adventure","titleBM":"Pengembaraan Hebat","difficulty":"advanced","gridSize":10,"words":["AMBULANCE","FIRETRUCK","HELICOPTER","SUBMARINE","AIRPLANE","MOTORCYCLE"],"clues":[{"word":"AMBULANCE","icon":"🚑","hintMeaning":"Rushes quickly to the hospital"},{"word":"FIRETRUCK","icon":"🚒","hintMeaning":"Puts out fires with huge water spray"},{"word":"HELICOPTER","icon":"🚁","hintMeaning":"Whirly bird blades spinning above"},{"word":"SUBMARINE","icon":"🤿","hintMeaning":"Dives deep beneath the ocean waves"},{"word":"AIRPLANE","icon":"✈️","hintMeaning":"Jet soaring across countries"},{"word":"MOTORCYCLE","icon":"🏍️","hintMeaning":"Two wheels with a motor rumble"}]}]}];
+
+// Audio Synthesizer
+class Sound {
+  constructor() { this.ctx = null; }
+  init() {
+    if (!this.ctx) {
+      this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+  }
+  pop(freq = 440) {
+    this.init();
+    if (!this.ctx) return;
+    const osc = this.ctx.createOscillator();
+    const g = this.ctx.createGain();
+    osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+    g.gain.setValueAtTime(0.2, this.ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
+    osc.connect(g); g.connect(this.ctx.destination);
+    osc.start(); osc.stop(this.ctx.currentTime + 0.08);
+  }
+  chime(step = 0) {
+    this.init();
+    if (!this.ctx) return;
+    const notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25];
+    const osc = this.ctx.createOscillator();
+    const g = this.ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(notes[Math.min(step, notes.length - 1)] || 440, this.ctx.currentTime);
+    g.gain.setValueAtTime(0.2, this.ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.12);
+    osc.connect(g); g.connect(this.ctx.destination);
+    osc.start(); osc.stop(this.ctx.currentTime + 0.12);
+  }
+  success() {
+    this.init();
+    if (!this.ctx) return;
+    [523.25, 659.25, 783.99, 1046.50].forEach((f, i) => {
+      const osc = this.ctx.createOscillator();
+      const g = this.ctx.createGain();
+      osc.frequency.setValueAtTime(f, this.ctx.currentTime + i * 0.06);
+      g.gain.setValueAtTime(0.2, this.ctx.currentTime + i * 0.06);
+      g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + i * 0.06 + 0.2);
+      osc.connect(g); g.connect(this.ctx.destination);
+      osc.start(this.ctx.currentTime + i * 0.06);
+      osc.stop(this.ctx.currentTime + i * 0.06 + 0.2);
+    });
+  }
+  victory() {
+    this.init();
+    if (!this.ctx) return;
+    [523.25, 659.25, 783.99, 1046.50, 1318.51].forEach((f, i) => {
+      const osc = this.ctx.createOscillator();
+      const g = this.ctx.createGain();
+      osc.frequency.setValueAtTime(f, this.ctx.currentTime + i * 0.1);
+      g.gain.setValueAtTime(0.25, this.ctx.currentTime + i * 0.1);
+      g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + i * 0.1 + 0.35);
+      osc.connect(g); g.connect(this.ctx.destination);
+      osc.start(this.ctx.currentTime + i * 0.1);
+      osc.stop(this.ctx.currentTime + i * 0.1 + 0.35);
+    });
+  }
+  speak(text) {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text.toLowerCase());
+      u.rate = 0.85; u.pitch = 1.25;
+      window.speechSynthesis.speak(u);
+    }
+  }
+}
+const sfx = new Sound();
+
+// Local Storage Progress
+let progress = JSON.parse(localStorage.getItem('bambli_progress') || '{"stars":0,"completed":{}}');
+function saveProgress() {
+  localStorage.setItem('bambli_progress', JSON.stringify(progress));
+  const el = document.getElementById('starCount');
+  if (el) el.innerText = '⭐ ' + progress.stars + ' Stars';
+}
+saveProgress();
+
+let state = {
+  screen: 'categories', // 'categories' | 'puzzles' | 'game'
+  currentCategory: null,
+  currentPuzzle: null,
+  generated: null,
+  foundWords: [],
+  hintsUsed: 0
+};
+
+function render() {
+  const app = document.getElementById('app');
+  if (!app) return;
+  if (state.screen === 'categories') {
+    app.innerHTML = `
+      <div style="text-align:center; margin-bottom: 12px;">
+        <h1 style="font-size: 24px; color: var(--bambli-purple); font-weight: 900;">Bambli Puzzle Play</h1>
+        <p style="font-size: 13px; color: #666; font-weight: 700;">Big Learning for Little Minds (Ages 3–7)</p>
+      </div>
+      <div class="category-grid">
+        ${CATEGORIES.map(c => `
+          <div class="cat-card" style="border-color: ${c.color}; background: ${c.bgLight};" onclick="selectCategory('${c.id}')">
+            <div style="font-size: 32px; margin-bottom: 4px;">${c.icon}</div>
+            <div style="font-size: 16px; font-weight: 900; color: ${c.color};">${c.name}</div>
+            <div style="font-size: 11px; font-weight: 700; color: #666; margin-top: 4px;">5 Puzzles</div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  } else if (state.screen === 'puzzles') {
+    const cat = state.currentCategory;
+    app.innerHTML = `
+      <div style="width: 100%; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+        <button class="btn" style="padding: 6px 12px; font-size: 13px;" onclick="goHome()">⬅ Back</button>
+        <h2 style="font-size: 18px; font-weight: 900; color: ${cat.color};">${cat.icon} ${cat.name}</h2>
+        <div style="width: 50px;"></div>
+      </div>
+      <div style="width: 100%; display: flex; flex-direction: column; gap: 8px;">
+        ${cat.puzzles.map((p, idx) => {
+          const isDone = !!progress.completed[p.id];
+          return `
+            <div class="card" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; cursor: pointer;" onclick="startPuzzle('${p.id}')">
+              <div>
+                <div style="font-size: 16px; font-weight: 900;">${p.title}</div>
+                <div style="font-size: 12px; font-weight: 700; color: #888;">${p.difficulty.toUpperCase()} • ${p.words.length} Words</div>
+              </div>
+              <div style="font-size: 18px;">${isDone ? '⭐ Done' : '▶ Play'}</div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+  } else if (state.screen === 'game') {
+    const p = state.currentPuzzle;
+    const g = state.generated;
+    app.innerHTML = `
+      <div style="width: 100%; display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+        <button class="btn" style="padding: 6px 12px; font-size: 13px;" onclick="goCategory()">⬅ Puzzles</button>
+        <h3 style="font-size: 16px; font-weight: 900;">${p.title}</h3>
+        <button class="btn btn-pink" style="padding: 6px 12px; font-size: 13px;" onclick="useHint()">💡 Hint</button>
+      </div>
+
+      <div id="board" class="grid-board" style="grid-template-columns: repeat(${g.size}, 1fr);">
+        ${g.grid.map((row, r) => row.map((letter, c) => `
+          <div class="grid-cell" id="cell-${r}-${c}" data-r="${r}" data-c="${c}">${letter}</div>
+        `).join('')).join('')}
+      </div>
+
+      <div class="chips-container">
+        ${g.words.map((w, idx) => {
+          const isFound = state.foundWords.some(fw => fw.word === w);
+          const clue = p.clues.find(c => c.word === w) || { icon: '⭐' };
+          return `
+            <div class="word-chip ${isFound ? 'found' : ''}" onclick="sfx.speak('${w}')">
+              <span>${clue.icon}</span>
+              <span>${w}</span>
+              ${isFound ? '<span>✓</span>' : ''}
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+    setupBoardEvents();
+  }
+}
+
+window.selectCategory = function(catId) {
+  sfx.pop();
+  state.currentCategory = CATEGORIES.find(c => c.id === catId);
+  state.screen = 'puzzles';
+  render();
+};
+
+window.goHome = function() { sfx.pop(); state.screen = 'categories'; render(); };
+window.goCategory = function() { sfx.pop(); state.screen = 'puzzles'; render(); };
+
+window.startPuzzle = function(puzzleId) {
+  sfx.pop();
+  const p = state.currentCategory.puzzles.find(x => x.id === puzzleId);
+  state.currentPuzzle = p;
+  state.foundWords = [];
+  state.hintsUsed = 0;
+  state.generated = generateGrid(p);
+  state.screen = 'game';
+  render();
+};
+
+function generateGrid(p) {
+  const size = p.gridSize;
+  const grid = Array(size).fill(0).map(() => Array(size).fill(''));
+  const placedWords = [];
+  const words = [...p.words].sort((a,b) => b.length - a.length);
+
+  words.forEach((word, idx) => {
+    let placed = false;
+    for (let tries = 0; tries < 40 && !placed; tries++) {
+      const isHoriz = Math.random() > 0.5;
+      const maxR = isHoriz ? size - 1 : size - word.length;
+      const maxC = isHoriz ? size - word.length : size - 1;
+      const r = Math.floor(Math.random() * (maxR + 1));
+      const c = Math.floor(Math.random() * (maxC + 1));
+
+      let canPlace = true;
+      for (let i = 0; i < word.length; i++) {
+        const cr = isHoriz ? r : r + i;
+        const cc = isHoriz ? c + i : c;
+        if (grid[cr][cc] !== '' && grid[cr][cc] !== word[i]) {
+          canPlace = false; break;
+        }
+      }
+      if (canPlace) {
+        const cells = [];
+        for (let i = 0; i < word.length; i++) {
+          const cr = isHoriz ? r : r + i;
+          const cc = isHoriz ? c + i : c;
+          grid[cr][cc] = word[i];
+          cells.push({ row: cr, col: cc });
+        }
+        placedWords.push({ word, cells, colorIdx: idx % 6 });
+        placed = true;
+      }
+    }
+  });
+
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      if (!grid[r][c]) grid[r][c] = letters[Math.floor(Math.random() * letters.length)];
+    }
+  }
+  return { grid, size, words, placedWords };
+}
+
+function setupBoardEvents() {
+  const board = document.getElementById('board');
+  if (!board) return;
+  let isDown = false;
+  let start = null;
+  let selected = [];
+
+  function getCell(x, y) {
+    const el = document.elementFromPoint(x, y);
+    if (el && el.dataset && el.dataset.r !== undefined) {
+      return { r: parseInt(el.dataset.r), c: parseInt(el.dataset.c) };
+    }
+    return null;
+  }
+
+  function getLine(p1, p2) {
+    const dr = p2.r - p1.r;
+    const dc = p2.c - p1.c;
+    const steps = Math.max(Math.abs(dr), Math.abs(dc));
+    if (steps === 0) return [p1];
+    const sr = dr / steps;
+    const sc = dc / steps;
+    const pts = [];
+    for (let i = 0; i <= steps; i++) {
+      pts.push({ r: Math.round(p1.r + i * sr), c: Math.round(p1.c + i * sc) });
+    }
+    return pts;
+  }
+
+  function updateVisuals() {
+    document.querySelectorAll('.grid-cell').forEach(el => {
+      const r = parseInt(el.dataset.r);
+      const c = parseInt(el.dataset.c);
+      el.className = 'grid-cell';
+      state.foundWords.forEach(fw => {
+        if (fw.cells.some(cell => cell.row === r && cell.col === c)) {
+          el.classList.add('found-' + fw.colorIdx);
+        }
+      });
+      if (selected.some(cell => cell.r === r && cell.c === c)) {
+        el.classList.add('selected');
+      }
+    });
+  }
+
+  board.onpointerdown = (e) => {
+    e.preventDefault();
+    const cell = getCell(e.clientX, e.clientY);
+    if (cell) {
+      isDown = true;
+      start = cell;
+      selected = [cell];
+      sfx.pop(400);
+      updateVisuals();
+    }
+  };
+
+  window.onpointermove = (e) => {
+    if (!isDown || !start) return;
+    const cell = getCell(e.clientX, e.clientY);
+    if (cell) {
+      const prevLen = selected.length;
+      selected = getLine(start, cell);
+      if (selected.length !== prevLen) sfx.chime(selected.length);
+      updateVisuals();
+    }
+  };
+
+  window.onpointerup = () => {
+    if (!isDown) return;
+    isDown = false;
+    if (selected.length >= 2) {
+      const fwd = selected.map(p => state.generated.grid[p.r][p.c]).join('');
+      const rev = [...selected].reverse().map(p => state.generated.grid[p.r][p.c]).join('');
+      const match = state.generated.placedWords.find(pw => pw.word === fwd || pw.word === rev);
+      if (match && !state.foundWords.some(fw => fw.word === match.word)) {
+        state.foundWords.push(match);
+        sfx.success();
+        sfx.speak(match.word);
+        if (state.foundWords.length === state.generated.words.length) {
+          setTimeout(completePuzzle, 500);
+        }
+      }
+    }
+    selected = [];
+    updateVisuals();
+  };
+
+  updateVisuals();
+}
+
+function completePuzzle() {
+  sfx.victory();
+  const earned = state.hintsUsed === 0 ? 3 : 2;
+  progress.stars += earned;
+  progress.completed[state.currentPuzzle.id] = true;
+  saveProgress();
+
+  const app = document.getElementById('app');
+  if (!app) return;
+  app.innerHTML += `
+    <div class="modal-overlay">
+      <div class="modal">
+        <div style="font-size: 40px; margin-bottom: 8px;">🎉 ⭐ ⭐ ⭐</div>
+        <h2 style="color: var(--bambli-purple); font-size: 24px; font-weight: 900; margin-bottom: 4px;">You Did It!</h2>
+        <p style="font-size: 14px; font-weight: 700; color: #555; margin-bottom: 16px;">Bambli believes in you!</p>
+        <button class="btn btn-green" style="width: 100%;" onclick="goCategory()">Next Puzzle ➔</button>
+      </div>
+    </div>
+  `;
+}
+
+window.useHint = function() {
+  const remaining = state.generated.placedWords.filter(pw => !state.foundWords.some(fw => fw.word === pw.word));
+  if (remaining.length > 0) {
+    state.hintsUsed++;
+    sfx.chime(5);
+    const target = remaining[0];
+    const firstCell = target.cells[0];
+    const el = document.getElementById('cell-' + firstCell.row + '-' + firstCell.col);
+    if (el) {
+      el.style.outline = '4px solid var(--bambli-pink)';
+      setTimeout(() => el.style.outline = '', 2000);
+    }
+  }
+};
+
+render();
+</script>
+</body>
+</html>

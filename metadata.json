@@ -1,0 +1,6 @@
+{
+  "name": "Bambli | Kids Interactive Learning Games",
+  "description": "Playful interactive learning games for curious kids aged 3–12. Big Learning. Little Adventures. Featuring English & Bahasa Malaysia, STEM, Maths, and Logic.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

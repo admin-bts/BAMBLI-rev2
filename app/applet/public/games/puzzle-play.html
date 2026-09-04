@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Bambli Puzzle Play — Word Search Adventures</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    body {
+      background: #FFFDF0;
+      color: #191A23;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px;
+      touch-action: manipulation;
+    }
+    .game-container {
+      width: 100%;
+      max-width: 780px;
+      background: #FFFDF0;
+      border: 5px solid #000;
+      border-radius: 28px;
+      box-shadow: 8px 8px 0px #000;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+    }
+    .game-header {
+      background: #FFD93D;
+      border-bottom: 4px solid #000;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .game-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .mascot-avatar {
+      width: 44px;
+      height: 44px;
+      background: #8054C2;
+      color: #FFF;
+      border: 3px solid #000;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 2px 2px 0px #000;
+      animation: bounce 2.2s infinite ease-in-out;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .game-title {
+      font-weight: 900;
+      font-size: 1.2rem;
+      line-height: 1.2;
+      color: #000;
+    }
+    .game-sub {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #000;
+      opacity: 0.85;
+    }
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .star-pill {
+      background: #FFF;
+      border: 3px solid #000;
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-weight: 900;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 2px 2px 0px #000;
+    }
+    .btn-action {
+      background: #FFF;
+      border: 3px solid #000;
+      border-radius: 12px;
+      padding: 4px 10px;
+      font-weight: 900;
+      font-size: 0.8rem;
+      cursor: pointer;
+      box-shadow: 2px 2px 0px #000;
+      transition: all 0.1s;
+    }
+    .btn-action:active {
+      transform: translate(2px, 2px);
+      box-shadow: 0 0 0 #000;
+    }
+    /* Categories Bar */
+    .category-bar {
+      background: #FFF;
+      border-bottom: 4px solid #000;
+      display: flex;
+      overflow-x: auto;
+      padding: 8px 12px;
+      gap: 8px;
+      scrollbar-width: none;
+    }
+    .cat-btn {
+      background: #FFFDF0;
+      border: 3px solid #000;
+      border-radius: 14px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      font-weight: 900;
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 2px 2px 0px #000;
+      transition: all 0.15s;
+    }
+    .cat-btn.active {
+      background: #4ECDC4;
+      color: #000;
+      transform: translateY(-2px);
+      box-shadow: 3px 3px 0px #000;
+    }
+    /* Sub Level Selector (5 per category = 25 puzzles total) */
+    .level-bar {
+      background: #EBFBFA;
+      border-bottom: 3px solid #000;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .level-pills {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .level-pill {
+      background: #FFF;
+      border: 2.5px solid #000;
+      border-radius: 10px;
+      padding: 2px 8px;
+      font-size: 0.75rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 1.5px 1.5px 0px #000;
+    }
+    .level-pill.active {
+      background: #FF6B6B;
+      color: #FFF;
+    }
+    .hint-btn {
+      background: #FFE66D;
+      border: 2.5px solid #000;
+      border-radius: 10px;
+      padding: 2px 10px;
+      font-size: 0.75rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 1.5px 1.5px 0px #000;
+    }
+    /* Puzzle Playground */
+    .puzzle-main {
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 620px) {
+      .puzzle-main {
+        grid-template-columns: 1.4fr 1fr;
+      }
+    }
+    /* Grid Canvas / Board */
+    .grid-board {
+      background: #FFF;
+      border: 4px solid #000;
+      border-radius: 20px;
+      padding: 10px;
+      box-shadow: 4px 4px 0px #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .word-grid {
+      display: grid;
+      gap: 4px;
+      touch-action: none;
+    }
+    .grid-cell {
+      aspect-ratio: 1;
+      width: 38px;
+      height: 38px;
+      background: #FFFDF0;
+      border: 2.5px solid #000;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.15rem;
+      cursor: pointer;
+      box-shadow: 1.5px 1.5px 0px #000;
+      transition: background-color 0.15s, transform 0.1s;
+    }
+    @media (max-width: 480px) {
+      .grid-cell {
+        width: 32px;
+        height: 32px;
+        font-size: 0.95rem;
+        border-width: 2px;
+      }
+    }
+    .grid-cell.selected {
+      background: #FFD93D;
+      transform: scale(1.08);
+    }
+    .grid-cell.found {
+      background: #A7F3D0;
+      border-color: #059669;
+      color: #065F46;
+      font-weight: 900;
+    }
+    /* Words List Box */
+    .word-bank {
+      background: #FFF;
+      border: 4px solid #000;
+      border-radius: 20px;
+      padding: 14px;
+      box-shadow: 4px 4px 0px #000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .bank-header {
+      font-weight: 900;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #000;
+      padding-bottom: 6px;
+    }
+    .bank-words {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .bank-word-tag {
+      background: #FFFDF0;
+      border: 2px solid #000;
+      border-radius: 10px;
+      padding: 5px 10px;
+      font-size: 0.82rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 2px 2px 0px #000;
+    }
+    .bank-word-tag.found {
+      background: #8AC926;
+      color: #FFF;
+      text-decoration: line-through;
+      border-color: #000;
+    }
+    /* Victory Banner */
+    .victory-modal {
+      background: #4ECDC4;
+      border: 4px solid #000;
+      border-radius: 20px;
+      padding: 14px;
+      text-align: center;
+      box-shadow: 4px 4px 0px #000;
+      animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes popIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .btn-next-puzzle {
+      background: #FF6B6B;
+      color: #FFF;
+      border: 3px solid #000;
+      border-radius: 12px;
+      padding: 8px 16px;
+      font-weight: 900;
+      font-size: 0.9rem;
+      cursor: pointer;
+      margin-top: 8px;
+      box-shadow: 2px 2px 0px #000;
+    }
+    .footer-note {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 8px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <!-- Header -->
+    <header class="game-header">
+      <div class="game-brand">
+        <div class="mascot-avatar">🧩</div>
+        <div>
+          <h1 class="game-title" id="gameTitle">Puzzle Play</h1>
+          <p class="game-sub" id="gameSub">Word Search Adventures • 25 Puzzles</p>
+        </div>
+      </div>
+      <div class="header-controls">
+        <div class="star-pill">
+          <span>⭐</span>
+          <span id="starScore">0</span>
+        </div>
+        <button class="btn-action" id="langToggle" onclick="toggleLanguage()">Bahasa Melayu</button>
+      </div>
+    </header>
+
+    <!-- 5 Categories -->
+    <nav class="category-bar" id="categoryBar">
+      <!-- Injected via JS -->
+    </nav>
+
+    <!-- Level Bar & Hints -->
+    <div class="level-bar">
+      <div class="level-pills" id="levelPills">
+        <!-- 5 Levels per category -->
+      </div>
+      <button class="hint-btn" onclick="giveHint()">
+        <span>💡</span> <span id="hintBtnText">Hint</span>
+      </button>
+    </div>
+
+    <!-- Main Game Play Area -->
+    <main class="puzzle-main">
+      <!-- Grid -->
+      <div class="grid-board">
+        <div class="word-grid" id="gridContainer">
+          <!-- Grid cells -->
+        </div>
+      </div>
+
+      <!-- Word Bank & Instructions -->
+      <div class="word-bank">
+        <div class="bank-header">
+          <span id="bankTitle">Find Words</span>
+          <span id="bankCount">0 / 4</span>
+        </div>
+        <div class="bank-words" id="bankWords">
+          <!-- Injected via JS -->
+        </div>
+        <div id="statusNotice" style="font-size: 0.75rem; font-weight: 800; color: #666;">
+          Tap start letter, then tap end letter to select a word!
+        </div>
+
+        <div id="victoryBox" style="display: none;">
+          <!-- Injected on complete -->
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer-note" id="footerNote">
+      100% Kid Safe • No Ads • Offline Standalone Edition • Bambli Playful Learning
+    </footer>
+  </div>
+
+  <script>
+    // Audio synthesis using Web Audio API
+    let audioCtx = null;
+    function getAudioCtx() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playTone(freq, type = 'sine', duration = 0.15) {
+      try {
+        const ctx = getAudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(0.18, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function playFanfare() {
+      playTone(440, 'triangle', 0.1);
+      setTimeout(() => playTone(554.37, 'triangle', 0.1), 100);
+      setTimeout(() => playTone(659.25, 'triangle', 0.2), 200);
+      setTimeout(() => playTone(880, 'triangle', 0.35), 300);
+    }
+
+    function playChime() {
+      playTone(523.25, 'sine', 0.15);
+      setTimeout(() => playTone(659.25, 'sine', 0.25), 100);
+    }
+
+    function playBloop() {
+      playTone(260, 'sine', 0.12);
+    }
+
+    // 25 Curated Puzzles (5 categories x 5 levels each)
+    const PUZZLE_DATA = {
+      en: [
+        {
+          id: 'animals',
+          name: 'Animals 🦁',
+          levels: [
+            { words: ['CAT', 'DOG', 'FOX', 'OWL'], size: 6 },
+            { words: ['LION', 'BEAR', 'DEER', 'FROG'], size: 6 },
+            { words: ['TIGER', 'ZEBRA', 'PANDA', 'KOALA'], size: 7 },
+            { words: ['MONKEY', 'RABBIT', 'EAGLE', 'DOLPHIN'], size: 8 },
+            { words: ['ELEPHANT', 'GIRAFFE', 'CHEETAH', 'KANGAROO'], size: 9 },
+          ]
+        },
+        {
+          id: 'food',
+          name: 'Fruits & Food 🍎',
+          levels: [
+            { words: ['FIG', 'PIE', 'TEA', 'JAM'], size: 6 },
+            { words: ['APPLE', 'PEAR', 'BREAD', 'HONEY'], size: 6 },
+            { words: ['BANANA', 'ORANGE', 'GRAPES', 'MANGO'], size: 7 },
+            { words: ['CHEESE', 'CARROT', 'COOKIE', 'PAPAYA'], size: 8 },
+            { words: ['WATERMELON', 'PINEAPPLE', 'STRAWBERRY', 'PANCAKE'], size: 10 },
+          ]
+        },
+        {
+          id: 'space',
+          name: 'Space & Sky 🚀',
+          levels: [
+            { words: ['SUN', 'SKY', 'MOON', 'STAR'], size: 6 },
+            { words: ['MARS', 'AURA', 'COMET', 'ORBIT'], size: 6 },
+            { words: ['ROCKET', 'PLANET', 'SATURN', 'METEOR'], size: 7 },
+            { words: ['GALAXY', 'NEBULA', 'COSMIC', 'JUPITER'], size: 8 },
+            { words: ['ASTRONAUT', 'TELESCOPE', 'SPACESHIP', 'UNIVERSE'], size: 10 },
+          ]
+        },
+        {
+          id: 'nature',
+          name: 'Nature & Ocean 🌊',
+          levels: [
+            { words: ['SEA', 'TREE', 'RAIN', 'LEAF'], size: 6 },
+            { words: ['RIVER', 'CORAL', 'WAVE', 'PLANT'], size: 6 },
+            { words: ['FOREST', 'ISLAND', 'BREEZE', 'FLOWER'], size: 7 },
+            { words: ['MOUNTAIN', 'VALLEY', 'SUNSHINE', 'DOLPHIN'], size: 8 },
+            { words: ['RAINFOREST', 'WATERFALL', 'VOLCANO', 'BUTTERFLY'], size: 10 },
+          ]
+        },
+        {
+          id: 'vehicles',
+          name: 'Vehicles & Adventure 🚗',
+          levels: [
+            { words: ['BUS', 'CAR', 'VAN', 'JET'], size: 6 },
+            { words: ['BOAT', 'SHIP', 'TRAIN', 'BIKE'], size: 6 },
+            { words: ['TRUCK', 'SCOOTER', 'CANOE', 'SUBWAY'], size: 7 },
+            { words: ['AIRPLANE', 'TRACTOR', 'FERRY', 'SAILBOAT'], size: 8 },
+            { words: ['HELICOPTER', 'SUBMARINE', 'MOTORCYCLE', 'SPACECRAFT'], size: 10 },
+          ]
+        }
+      ],
+      ms: [
+        {
+          id: 'animals',
+          name: 'Haiwan 🦁',
+          levels: [
+            { words: ['KUCING', 'ANJING', 'BURUNG', 'KATAK'], size: 7 },
+            { words: ['SINGA', 'RUSA', 'BERUANG', 'IKAN'], size: 7 },
+            { words: ['HARIMAU', 'ZIRAFAH', 'GAJAH', 'MONYET'], size: 8 },
+            { words: ['ARNAB', 'LUMBA', 'PENYU', 'HELANG'], size: 8 },
+            { words: ['TENGGILING', 'ORANGUTAN', 'BADAK', 'PELANDUK'], size: 10 },
+          ]
+        },
+        {
+          id: 'food',
+          name: 'Buah & Makanan 🍎',
+          levels: [
+            { words: ['ROTI', 'NASI', 'SUSU', 'TEH'], size: 6 },
+            { words: ['EPAL', 'PISANG', 'OREN', 'MADU'], size: 6 },
+            { words: ['MANGGA', 'BETIK', 'ANGGUR', 'KEJU'], size: 7 },
+            { words: ['TEMBIKAI', 'NANAS', 'DURIAN', 'RAMBUTAN'], size: 8 },
+            { words: ['STRAWBERI', 'CENDERAWASIH', 'KEREPEK', 'KUIH'], size: 9 },
+          ]
+        },
+        {
+          id: 'space',
+          name: 'Angkasa & Langit 🚀',
+          levels: [
+            { words: ['BULAN', 'SURIA', 'LANGIT', 'AWAN'], size: 6 },
+            { words: ['BINTANG', 'ROKET', 'ORBIT', 'KOMET'], size: 7 },
+            { words: ['PLANET', 'MARIKH', 'ZUHAL', 'METEOR'], size: 7 },
+            { words: ['GALAKSI', 'KOSMIK', 'BUMI', 'SURIA'], size: 8 },
+            { words: ['ANGKASAWAN', 'TELESKOP', 'KAPALANGKASA', 'CAKERAWALA'], size: 10 },
+          ]
+        },
+        {
+          id: 'nature',
+          name: 'Alam & Lautan 🌊',
+          levels: [
+            { words: ['LAUT', 'POKOK', 'HUJAN', 'DAUN'], size: 6 },
+            { words: ['SUNGAI', 'BATU', 'PULAU', 'PANTAI'], size: 7 },
+            { words: ['HUTAN', 'BUKIT', 'BUNGA', 'ANGIN'], size: 7 },
+            { words: ['GUNUNG', 'LEMBAH', 'TERUMBU', 'OMBAK'], size: 8 },
+            { words: ['AIRTERJUN', 'HUTANHUJAN', 'KUPUKUPU', 'PELANGI'], size: 10 },
+          ]
+        },
+        {
+          id: 'vehicles',
+          name: 'Kenderaan 🚗',
+          levels: [
+            { words: ['BAS', 'BOT', 'VAN', 'LORI'], size: 6 },
+            { words: ['KERETA', 'KAPAL', 'KAYUH', 'BECA'], size: 7 },
+            { words: ['KERETAPI', 'BASIKAL', 'PESAWAT', 'SKUTER'], size: 8 },
+            { words: ['HELIKOPTER', 'MOTOSIKAL', 'TRAKTOR', 'PERAHU'], size: 10 },
+            { words: ['KAPALSELAM', 'KAPALTERBANG', 'KENDERAAN', 'ROKET'], size: 10 },
+          ]
+        }
+      ]
+    };
+
+    let currentLang = 'en';
+    let currentCategoryIdx = 0;
+    let currentLevelIdx = 0;
+    let stars = 0;
+
+    let grid = [];
+    let placedWords = []; // { word, path: [{r, c}] }
+    let foundWords = new Set();
+    let selectedCells = []; // [{r, c}]
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'ms' : 'en';
+      playChime();
+      document.getElementById('langToggle').innerText = currentLang === 'en' ? 'Bahasa Melayu' : 'English';
+      initCategoryBar();
+      loadPuzzle();
+    }
+
+    function initCategoryBar() {
+      const cats = PUZZLE_DATA[currentLang];
+      const bar = document.getElementById('categoryBar');
+      bar.innerHTML = '';
+      cats.forEach((cat, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `cat-btn ${idx === currentCategoryIdx ? 'active' : ''}`;
+        btn.innerText = cat.name;
+        btn.onclick = () => {
+          currentCategoryIdx = idx;
+          currentLevelIdx = 0;
+          playChime();
+          initCategoryBar();
+          loadPuzzle();
+        };
+        bar.appendChild(btn);
+      });
+    }
+
+    function initLevelPills() {
+      const pillsContainer = document.getElementById('levelPills');
+      pillsContainer.innerHTML = '';
+      for (let i = 0; i < 5; i++) {
+        const p = document.createElement('button');
+        p.className = `level-pill ${i === currentLevelIdx ? 'active' : ''}`;
+        p.innerText = `P${i + 1}`;
+        p.onclick = () => {
+          currentLevelIdx = i;
+          playTone(480, 'sine', 0.1);
+          initLevelPills();
+          loadPuzzle();
+        };
+        pillsContainer.appendChild(p);
+      }
+    }
+
+    // Grid Builder
+    function buildGrid(words, size) {
+      const gridArr = Array(size).fill(null).map(() => Array(size).fill(''));
+      const placed = [];
+      const directions = [
+        [0, 1],   // horizontal
+        [1, 0],   // vertical
+        [1, 1],   // diagonal down-right
+      ];
+
+      words.forEach(word => {
+        let placedWord = false;
+        let attempts = 0;
+        while (!placedWord && attempts < 100) {
+          attempts++;
+          const dir = directions[Math.floor(Math.random() * directions.length)];
+          const dr = dir[0];
+          const dc = dir[1];
+          const maxR = size - (word.length - 1) * dr;
+          const maxC = size - (word.length - 1) * dc;
+
+          if (maxR <= 0 || maxC <= 0) continue;
+
+          const startR = Math.floor(Math.random() * maxR);
+          const startC = Math.floor(Math.random() * maxC);
+
+          let canPlace = true;
+          for (let i = 0; i < word.length; i++) {
+            const r = startR + i * dr;
+            const c = startC + i * dc;
+            if (gridArr[r][c] !== '' && gridArr[r][c] !== word[i]) {
+              canPlace = false;
+              break;
+            }
+          }
+
+          if (canPlace) {
+            const path = [];
+            for (let i = 0; i < word.length; i++) {
+              const r = startR + i * dr;
+              const c = startC + i * dc;
+              gridArr[r][c] = word[i];
+              path.push({ r, c });
+            }
+            placed.push({ word, path });
+            placedWord = true;
+          }
+        }
+      });
+
+      // Fill remaining empty cells with random letters
+      const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+          if (gridArr[r][c] === '') {
+            gridArr[r][c] = letters[Math.floor(Math.random() * letters.length)];
+          }
+        }
+      }
+
+      return { gridArr, placed };
+    }
+
+    function loadPuzzle() {
+      const curCat = PUZZLE_DATA[currentLang][currentCategoryIdx];
+      const curLvl = curCat.levels[currentLevelIdx];
+      foundWords = new Set();
+      selectedCells = [];
+
+      const { gridArr, placed } = buildGrid(curLvl.words, curLvl.size);
+      grid = gridArr;
+      placedWords = placed;
+
+      renderGrid(curLvl.size);
+      renderWordBank(curLvl.words);
+      initLevelPills();
+
+      document.getElementById('victoryBox').style.display = 'none';
+      document.getElementById('statusNotice').style.display = 'block';
+    }
+
+    function renderGrid(size) {
+      const container = document.getElementById('gridContainer');
+      container.innerHTML = '';
+      container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+
+      for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+          const cell = document.createElement('div');
+          cell.className = 'grid-cell';
+          cell.id = `cell_${r}_${c}`;
+          cell.innerText = grid[r][c];
+          cell.onclick = () => handleCellClick(r, c);
+          container.appendChild(cell);
+        }
+      }
+    }
+
+    function renderWordBank(words) {
+      const container = document.getElementById('bankWords');
+      container.innerHTML = '';
+      words.forEach(w => {
+        const tag = document.createElement('div');
+        tag.className = `bank-word-tag ${foundWords.has(w) ? 'found' : ''}`;
+        tag.id = `tag_${w}`;
+        tag.innerHTML = `<span>${foundWords.has(w) ? '✓' : '○'}</span><span>${w}</span>`;
+        container.appendChild(tag);
+      });
+      document.getElementById('bankCount').innerText = `${foundWords.size} / ${words.length}`;
+    }
+
+    function handleCellClick(r, c) {
+      playTone(380, 'sine', 0.08);
+
+      if (selectedCells.length === 0) {
+        selectedCells = [{ r, c }];
+        highlightSelection();
+        return;
+      }
+
+      if (selectedCells.length === 1) {
+        const start = selectedCells[0];
+        if (start.r === r && start.c === c) {
+          // Deselect
+          selectedCells = [];
+          highlightSelection();
+          return;
+        }
+
+        // Check if inline (horiz, vert, or diag)
+        const dr = r - start.r;
+        const dc = c - start.c;
+        const stepR = dr === 0 ? 0 : dr / Math.abs(dr);
+        const stepC = dc === 0 ? 0 : dc / Math.abs(dc);
+
+        if (dr === 0 || dc === 0 || Math.abs(dr) === Math.abs(dc)) {
+          const path = [];
+          let curR = start.r;
+          let curC = start.c;
+          while (curR !== r + stepR || curC !== c + stepC) {
+            path.push({ r: curR, c: curC });
+            curR += stepR;
+            curC += stepC;
+          }
+
+          checkWord(path);
+          selectedCells = [];
+          highlightSelection();
+        } else {
+          selectedCells = [{ r, c }];
+          highlightSelection();
+        }
+      }
+    }
+
+    function highlightSelection() {
+      document.querySelectorAll('.grid-cell').forEach(el => {
+        el.classList.remove('selected');
+      });
+      selectedCells.forEach(cell => {
+        const el = document.getElementById(`cell_${cell.r}_${cell.c}`);
+        if (el) el.classList.add('selected');
+      });
+    }
+
+    function checkWord(path) {
+      let forward = '';
+      let backward = '';
+      path.forEach(cell => {
+        forward += grid[cell.r][cell.c];
+      });
+      backward = forward.split('').reverse().join('');
+
+      const match = placedWords.find(pw => (pw.word === forward || pw.word === backward) && !foundWords.has(pw.word));
+
+      if (match) {
+        foundWords.add(match.word);
+        playFanfare();
+        path.forEach(cell => {
+          const el = document.getElementById(`cell_${cell.r}_${cell.c}`);
+          if (el) el.classList.add('found');
+        });
+
+        const curCat = PUZZLE_DATA[currentLang][currentCategoryIdx];
+        const curLvl = curCat.levels[currentLevelIdx];
+        renderWordBank(curLvl.words);
+
+        if (foundWords.size === curLvl.words.length) {
+          handlePuzzleComplete();
+        }
+      } else {
+        playBloop();
+      }
+    }
+
+    function handlePuzzleComplete() {
+      stars++;
+      document.getElementById('starScore').innerText = stars;
+      playFanfare();
+
+      document.getElementById('statusNotice').style.display = 'none';
+      const victoryBox = document.getElementById('victoryBox');
+      victoryBox.style.display = 'block';
+      victoryBox.innerHTML = `
+        <div class="victory-modal">
+          <div style="font-size: 36px;">🎉</div>
+          <div style="font-weight: 900; font-size: 1.15rem; color: #000; margin-top: 4px;">
+            ${currentLang === 'ms' ? 'Tahniah! Semua Perkataan Dijumpai!' : 'Awesome! All Words Discovered!'}
+          </div>
+          <button class="btn-next-puzzle" onclick="nextPuzzle()">
+            ${currentLang === 'ms' ? 'Teka-Teki Seterusnya ➔' : 'Next Puzzle ➔'}
+          </button>
+        </div>
+      `;
+    }
+
+    function nextPuzzle() {
+      if (currentLevelIdx < 4) {
+        currentLevelIdx++;
+      } else {
+        currentLevelIdx = 0;
+        currentCategoryIdx = (currentCategoryIdx + 1) % 5;
+      }
+      playChime();
+      initCategoryBar();
+      loadPuzzle();
+    }
+
+    function giveHint() {
+      const curCat = PUZZLE_DATA[currentLang][currentCategoryIdx];
+      const curLvl = curCat.levels[currentLevelIdx];
+      const unplaced = placedWords.find(pw => !foundWords.has(pw.word));
+      if (unplaced) {
+        playTone(600, 'sine', 0.2);
+        const firstCell = unplaced.path[0];
+        const el = document.getElementById(`cell_${firstCell.r}_${firstCell.c}`);
+        if (el) {
+          el.style.backgroundColor = '#FF6B6B';
+          el.style.color = '#FFF';
+          setTimeout(() => {
+            el.style.backgroundColor = '';
+            el.style.color = '';
+          }, 1200);
+        }
+      }
+    }
+
+    // Initialize
+    initCategoryBar();
+    loadPuzzle();
+  </script>
+</body>
+</html>

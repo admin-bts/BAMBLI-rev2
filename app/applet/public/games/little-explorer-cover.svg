@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#70D6FF"/>
+      <stop offset="60%" stop-color="#E8F8FF"/>
+      <stop offset="100%" stop-color="#FFFDF0"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="4" dy="4" stdDeviation="0" flood-color="#000"/>
+    </filter>
+    <filter id="boldShadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="6" dy="6" stdDeviation="0" flood-color="#000"/>
+    </filter>
+  </defs>
+
+  <!-- Sky & Canvas -->
+  <rect width="800" height="480" fill="url(#sky)"/>
+
+  <!-- Sun & Rays -->
+  <circle cx="720" cy="80" r="55" fill="#FFD93D" stroke="#000" stroke-width="4"/>
+  <circle cx="720" cy="80" r="42" fill="#FFE66D"/>
+
+  <!-- Distant Hills -->
+  <path d="M-50,380 Q150,280 400,340 T850,320 L850,480 L-50,480 Z" fill="#8AC926" stroke="#000" stroke-width="4"/>
+  <path d="M-50,410 Q200,350 480,400 T850,380 L850,480 L-50,480 Z" fill="#4ECDC4" stroke="#000" stroke-width="4"/>
+
+  <!-- Wonder Woods Trees -->
+  <g transform="translate(620, 240)">
+    <rect x="25" y="60" width="20" height="60" fill="#78350F" stroke="#000" stroke-width="4"/>
+    <polygon points="35,0 -15,70 85,70" fill="#059669" stroke="#000" stroke-width="4"/>
+    <polygon points="35,-30 -5,35 75,35" fill="#10B981" stroke="#000" stroke-width="4"/>
+  </g>
+  <g transform="translate(80, 270)">
+    <rect x="20" y="50" width="16" height="50" fill="#78350F" stroke="#000" stroke-width="4"/>
+    <circle cx="28" cy="30" r="40" fill="#10B981" stroke="#000" stroke-width="4"/>
+  </g>
+
+  <!-- Picnic Blanket (Red & White Gingham) -->
+  <g transform="translate(180, 370) rotate(-4)">
+    <rect x="0" y="0" width="460" height="90" rx="14" fill="#FFF" stroke="#000" stroke-width="4" filter="url(#shadow)"/>
+    <rect x="10" y="8" width="50" height="74" fill="#FF6B6B" opacity="0.6"/>
+    <rect x="70" y="8" width="50" height="74" fill="#FF6B6B" opacity="0.6"/>
+    <rect x="130" y="8" width="50" height="74" fill="#FF6B6B" opacity="0.6"/>
+    <rect x="190" y="8" width="50" height="74" fill="#FF6B6B" opacity="0.6"/>
+    <rect x="250" y="8" width="50" height="74" fill="#FF6B6B" opacity="0.6"/>
+    <rect x="310" y="8" width="50" height="74" fill="#FF6B6B" opacity="0.6"/>
+    <rect x="370" y="8" width="50" height="74" fill="#FF6B6B" opacity="0.6"/>
+  </g>
+
+  <!-- Woven Picnic Basket -->
+  <g transform="translate(480, 310)" filter="url(#shadow)">
+    <rect x="0" y="30" width="120" height="80" rx="16" fill="#D97706" stroke="#000" stroke-width="4"/>
+    <line x1="20" y1="30" x2="20" y2="110" stroke="#000" stroke-width="3"/>
+    <line x1="50" y1="30" x2="50" y2="110" stroke="#000" stroke-width="3"/>
+    <line x1="80" y1="30" x2="80" y2="110" stroke="#000" stroke-width="3"/>
+    <line x1="100" y1="30" x2="100" y2="110" stroke="#000" stroke-width="3"/>
+    <path d="M20,30 Q60,-20 100,30" fill="none" stroke="#B45309" stroke-width="12"/>
+    <path d="M20,30 Q60,-20 100,30" fill="none" stroke="#000" stroke-width="4"/>
+    <!-- Apples & Grapes in Basket -->
+    <circle cx="45" cy="25" r="16" fill="#EF4444" stroke="#000" stroke-width="3"/>
+    <circle cx="75" cy="22" r="14" fill="#8B5CF6" stroke="#000" stroke-width="3"/>
+    <circle cx="88" cy="28" r="12" fill="#8B5CF6" stroke="#000" stroke-width="3"/>
+  </g>
+
+  <!-- Bambli Mascot (Teal Cute Explorer) -->
+  <g transform="translate(240, 220)" filter="url(#boldShadow)">
+    <!-- Mascot Body -->
+    <ellipse cx="100" cy="110" rx="75" ry="65" fill="#4ECDC4" stroke="#000" stroke-width="5"/>
+    <ellipse cx="100" cy="120" rx="48" ry="38" fill="#A7F3D0"/>
+    <!-- Head Sprout -->
+    <path d="M100,45 Q115,20 135,28 Q125,48 100,45 Z" fill="#8AC926" stroke="#000" stroke-width="3.5"/>
+    <!-- Ear Puffs -->
+    <circle cx="30" cy="80" r="18" fill="#8054C2" stroke="#000" stroke-width="4"/>
+    <circle cx="170" cy="80" r="18" fill="#8054C2" stroke="#000" stroke-width="4"/>
+    <!-- Eyes -->
+    <ellipse cx="78" cy="95" rx="10" ry="14" fill="#000"/>
+    <ellipse cx="122" cy="95" rx="10" ry="14" fill="#000"/>
+    <circle cx="82" cy="90" r="4" fill="#FFF"/>
+    <circle cx="126" cy="90" r="4" fill="#FFF"/>
+    <!-- Cheerful Smile -->
+    <path d="M85,120 Q100,138 115,120" fill="#FF6B6B" stroke="#000" stroke-width="4"/>
+    <!-- Blushing Cheeks -->
+    <ellipse cx="62" cy="115" rx="9" ry="6" fill="#FF8E3C" opacity="0.7"/>
+    <ellipse cx="138" cy="115" rx="9" ry="6" fill="#FF8E3C" opacity="0.7"/>
+    <!-- Magnifying Glass held in hand -->
+    <g transform="translate(145, 110) rotate(-25)">
+      <line x1="0" y1="20" x2="0" y2="70" stroke="#78350F" stroke-width="12" stroke-linecap="round"/>
+      <line x1="0" y1="20" x2="0" y2="70" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="0" cy="0" r="32" fill="#E0F2FE" stroke="#FFD93D" stroke-width="10"/>
+      <circle cx="0" cy="0" r="32" fill="none" stroke="#000" stroke-width="4"/>
+      <ellipse cx="-8" cy="-8" rx="16" ry="8" fill="#FFF" opacity="0.6"/>
+    </g>
+    <!-- Little Chick Friend -->
+    <g transform="translate(-40, 90)">
+      <ellipse cx="20" cy="30" rx="18" ry="16" fill="#FFD93D" stroke="#000" stroke-width="3"/>
+      <circle cx="14" cy="24" r="3" fill="#000"/>
+      <polygon points="6,28 0,31 6,34" fill="#FF8E3C" stroke="#000" stroke-width="2"/>
+    </g>
+  </g>
+
+  <!-- Title & Badges Overlay -->
+  <!-- Top Brand Tag -->
+  <g transform="translate(40, 30)" filter="url(#shadow)">
+    <rect x="0" y="0" width="240" height="38" rx="19" fill="#FFF" stroke="#000" stroke-width="3.5"/>
+    <text x="120" y="24" font-family="system-ui, sans-serif" font-weight="900" font-size="14" fill="#000" text-anchor="middle" letter-spacing="1">
+      BAMBLI PLAYFUL LEARNING
+    </text>
+  </g>
+
+  <!-- Age & Language Badges -->
+  <g transform="translate(560, 30)" filter="url(#shadow)">
+    <rect x="0" y="0" width="100" height="38" rx="19" fill="#FFD93D" stroke="#000" stroke-width="3.5"/>
+    <text x="50" y="24" font-family="system-ui, sans-serif" font-weight="900" font-size="13" fill="#000" text-anchor="middle">
+      AGES 3–7
+    </text>
+  </g>
+  <g transform="translate(670, 30)" filter="url(#shadow)">
+    <rect x="0" y="0" width="90" height="38" rx="19" fill="#FFF" stroke="#000" stroke-width="3.5"/>
+    <text x="45" y="24" font-family="system-ui, sans-serif" font-weight="900" font-size="11" fill="#000" text-anchor="middle">
+      EN / BM
+    </text>
+  </g>
+
+  <!-- Big Hero Typography Card -->
+  <g transform="translate(40, 85)" filter="url(#boldShadow)">
+    <rect x="0" y="0" width="460" height="115" rx="24" fill="#FFF" stroke="#000" stroke-width="5"/>
+    <!-- Title Text -->
+    <text x="24" y="52" font-family="system-ui, sans-serif" font-weight="900" font-size="44" fill="#FF6B6B">
+      Little Explorer
+    </text>
+    <!-- Subtitle Banner -->
+    <g transform="translate(24, 68)">
+      <rect x="0" y="0" width="370" height="34" rx="10" fill="#FFD93D" stroke="#000" stroke-width="3"/>
+      <text x="185" y="23" font-family="system-ui, sans-serif" font-weight="900" font-size="16" fill="#000" text-anchor="middle" letter-spacing="0.5">
+        THE LOST PICNIC ADVENTURE
+      </text>
+    </g>
+  </g>
+
+  <!-- 20 Challenges Pill -->
+  <g transform="translate(40, 215)" filter="url(#shadow)">
+    <rect x="0" y="0" width="220" height="38" rx="12" fill="#8AC926" stroke="#000" stroke-width="3.5"/>
+    <text x="110" y="24" font-family="system-ui, sans-serif" font-weight="900" font-size="14" fill="#FFF" text-anchor="middle">
+      ⭐ 20 FUN CHALLENGES!
+    </text>
+  </g>
+
+  <!-- Feature List Pills -->
+  <g transform="translate(40, 265)">
+    <g transform="translate(0, 0)" filter="url(#shadow)">
+      <rect x="0" y="0" width="170" height="32" rx="10" fill="#FFF" stroke="#000" stroke-width="3"/>
+      <text x="85" y="21" font-family="system-ui, sans-serif" font-weight="800" font-size="12" fill="#000" text-anchor="middle">
+        🔍 Find Hidden Items
+      </text>
+    </g>
+    <g transform="translate(0, 40)" filter="url(#shadow)">
+      <rect x="0" y="0" width="170" height="32" rx="10" fill="#FFF" stroke="#000" stroke-width="3"/>
+      <text x="85" y="21" font-family="system-ui, sans-serif" font-weight="800" font-size="12" fill="#000" text-anchor="middle">
+        🎨 Match Colours
+      </text>
+    </g>
+    <g transform="translate(0, 80)" filter="url(#shadow)">
+      <rect x="0" y="0" width="170" height="32" rx="10" fill="#FFF" stroke="#000" stroke-width="3"/>
+      <text x="85" y="21" font-family="system-ui, sans-serif" font-weight="800" font-size="12" fill="#000" text-anchor="middle">
+        🔺 Discover Shapes
+      </text>
+    </g>
+  </g>
+
+  <!-- Bottom Safety Strip -->
+  <g transform="translate(40, 420)" filter="url(#shadow)">
+    <rect x="0" y="0" width="380" height="34" rx="10" fill="#191A23" stroke="#000" stroke-width="3"/>
+    <text x="190" y="22" font-family="system-ui, sans-serif" font-weight="800" font-size="12" fill="#FFF" text-anchor="middle">
+      🛡️ 100% KID SAFE • NO ADS • PRIVACY FOCUSED
+    </text>
+  </g>
+</svg>
