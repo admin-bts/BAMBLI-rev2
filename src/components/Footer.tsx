@@ -85,21 +85,39 @@ export function Footer({ currentLang, onPlayFree, onNavigate }: FooterProps) {
                 : "A modern digital playground wrapped inside a children's storybook. Designed to turn screen time into joyful learning adventures."}
             </p>
 
-            {/* Social Channels: Instagram & Facebook */}
+            {/* Social Channels: Threads, Instagram & Facebook */}
             <div className="flex flex-wrap items-center gap-2.5 pt-2">
               <a
-                href="https://instagram.com/bambli.learning"
+                href="https://www.threads.com/@bambli.learning?igshid=NTc4MTIwNjQ2YQ=="
+                target="_blank"
+                rel="noreferrer"
+                className="bg-white border-[2.5px] border-black px-3 py-1.5 rounded-full text-xs font-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-black hover:text-white transition-all flex items-center gap-1.5"
+                title="Threads @bambli.learning"
+              >
+                <svg
+                  viewBox="0 0 192 192"
+                  className="w-4 h-4"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.905 97.5619 44.745C97.4457 44.7443 97.3305 44.7443 97.2144 44.7443C82.4051 44.7443 70.0587 51.1409 62.5397 62.7807L75.5637 71.6864C81.1666 63.0068 90.0648 61.1409 97.2202 61.1409C97.2971 61.1409 97.3738 61.1409 97.4494 61.1415C106.361 61.1968 113.081 63.7674 117.428 68.7845C120.598 72.4462 122.712 77.4883 123.732 83.7952C115.983 82.4809 107.6 82.0806 98.6432 82.5851C73.3711 84.0132 57.2003 98.4055 58.3057 118.353C58.8672 128.478 63.8998 137.166 72.4632 143.759C79.7015 149.334 89.0148 152.058 98.7099 151.428C111.573 150.591 121.688 145.688 128.783 136.854C134.161 130.146 137.53 121.437 138.951 110.311C144.755 113.85 149.052 118.503 151.398 124.104C155.395 133.628 155.647 149.334 142.652 162.319C131.279 173.679 117.716 178.617 97.0135 178.77C74.0499 178.598 56.6039 171.104 45.152 156.478C34.4256 142.769 28.8804 123.226 28.6836 96C28.8804 68.7742 34.4256 49.2312 45.152 35.5218C56.6039 20.8956 74.0479 13.402 96.9945 13.2302C120.108 13.4036 137.858 20.9351 149.756 35.6215C155.591 42.8168 159.996 51.7285 162.876 62.0561L178.552 57.7737C175.081 45.1246 169.649 34.1957 162.298 25.1152C147.428 6.75121 125.822 -2.83184 97.05 -3H96.94C68.2276 -2.83184 46.877 6.79018 32.472 25.297C19.626 41.7799 12.999 64.7449 12.7738 95.9294V96V96.0706C12.999 127.255 19.626 150.22 32.472 166.703C46.877 185.21 68.2276 194.832 96.94 195H97.05C121.887 194.815 139.732 188.29 154.649 173.549C174.115 154.291 173.529 130.24 167.15 115.605C162.598 105.147 153.888 96.6558 141.537 88.9883ZM97.9354 135.052C87.3162 135.669 76.2792 130.929 75.7383 120.612C75.3372 112.984 81.1662 104.482 100.203 103.398C102.412 103.273 104.573 103.212 106.687 103.212C114.005 103.212 120.845 103.943 127.076 105.353C124.796 133.667 111.421 134.464 97.9354 135.052Z" />
+                </svg>
+                <span>Threads</span>
+              </a>
+
+              <a
+                href="https://www.instagram.com/bambli.online?igsi=b2I3cWR2dWNkdWdr"
                 target="_blank"
                 rel="noreferrer"
                 className="bg-white border-[2.5px] border-black px-3 py-1.5 rounded-full text-xs font-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#FF7096] hover:text-white transition-all flex items-center gap-1.5"
-                title="Instagram @bambli.learning"
+                title="Instagram @bambli.online"
               >
                 <Instagram className="w-4 h-4" />
                 <span>Instagram</span>
               </a>
 
               <a
-                href="https://facebook.com/bamblilearning"
+                href="https://www.facebook.com/share/1CsUKJ6ERf/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noreferrer"
                 className="bg-white border-[2.5px] border-black px-3 py-1.5 rounded-full text-xs font-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#1877F2] hover:text-white transition-all flex items-center gap-1.5"
