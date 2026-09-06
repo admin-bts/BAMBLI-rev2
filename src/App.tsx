@@ -22,6 +22,7 @@ import { GameDetailModal } from './components/GameDetailModal';
 import { DedicatedGameDetailPage } from './components/DedicatedGameDetailPage';
 import { ParentEmailGateModal, NewsletterSubscriberPayload } from './components/ParentEmailGateModal';
 import { playPop, playFanfare } from './utils/audio';
+import { subscribeToNewsletter } from './utils/newsletter';
 
 export default function App() {
   const [currentLang, setCurrentLang] = useState<Language>('en');
@@ -110,8 +111,13 @@ export default function App() {
   };
 
   const handleNewsletterSubmit = (payload: NewsletterSubscriberPayload) => {
-    // Clean integration point for future newsletter provider (e.g. Mailchimp / ConvertKit / Klaviyo / Firestore)
-    console.log('[Bambli Parent Newsletter Gate Submission]:', payload);
+    subscribeToNewsletter({
+      email: payload.email,
+      source: 'parent_gate',
+      gameId: payload.gameId,
+      gameTitle: payload.gameTitle,
+      consent: payload.consent,
+    });
   };
 
   const handleAddStar = () => {

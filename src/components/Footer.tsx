@@ -5,6 +5,7 @@ import { TRANSLATIONS } from '../data/translations';
 import { BambliMascot, BambliWordmark } from './BambliMascot';
 import { BambliBrandBadge } from './BambliBrandBadge';
 import { playFanfare } from '../utils/audio';
+import { subscribeToNewsletter } from '../utils/newsletter';
 
 interface FooterProps {
   currentLang: Language;
@@ -21,6 +22,7 @@ export function Footer({ currentLang, onNavigate }: FooterProps) {
     if (footerEmail.includes('@')) {
       playFanfare();
       setSubscribed(true);
+      subscribeToNewsletter({ email: footerEmail, source: 'footer' });
       setFooterEmail('');
     }
   };
