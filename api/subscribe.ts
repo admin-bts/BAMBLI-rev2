@@ -31,6 +31,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
+  if (Number.isNaN(Number(listId))) {
+    console.error('[Brevo subscribe] BREVO_LIST_ID is not a valid number:', listId);
+    res.status(500).json({ ok: false, error: 'Newsletter list is misconfigured' });
+    return;
+  }
+
   try {
     const brevoResponse = await fetch('https://api.brevo.com/v3/contacts', {
       method: 'POST',
@@ -59,8 +65,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const errorBody = await brevoResponse.json().catch(() => ({}));
-    res.status(502).json({ ok: false, error: errorBody?.message || 'Failed to subscribe' });
-  } catch {
+    console.error('[Brevo subscribe] Brevo API rejected the request', {
+      status: brevoResponse.status,
+      body: errorBody,
+    });
+    res.status(502).json({
+      ok: false,
+      error: errorBody?.message || 'Failed to subscribe',
+      brevoStatus: brevoResponse.status,
+    });
+  } catch (err) {
+    console.error('[Brevo subscribe] Failed to reach Brevo', err);
     res.status(502).json({ ok: false, error: 'Failed to reach newsletter service' });
   }
 }
