@@ -8,19 +8,112 @@ interface SubscribeRequestBody {
   consent?: boolean;
 }
 
+// "Kids Games Newsletter Contacts" database, shared with our Notion integration.
+const NOTION_DATABASE_ID = '4c68892d-8e66-4d18-b36c-ade7ab5b71de';
+
 const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method !== 'POST') {
-    res.status(405).json({ ok: false, error: 'Method not allowed' });
-    return;
-  }
+interface SyncResult {
+  skipped?: true;
+  ok: boolean;
+  error?: string;
+}
 
+async function syncToBrevo(email: string, source: string, gameId: string, gameTitle: string, consent: boolean): Promise<SyncResult> {
   const apiKey = process.env.BREVO_API_KEY;
   const listId = process.env.BREVO_LIST_ID;
 
   if (!apiKey || !listId) {
-    res.status(500).json({ ok: false, error: 'Newsletter service is not configured' });
+    return { skipped: true, ok: false, error: 'Brevo is not configured' };
+  }
+
+  if (Number.isNaN(Number(listId))) {
+    console.error('[subscribe] BREVO_LIST_ID is not a valid number:', listId);
+    return { ok: false, error: 'BREVO_LIST_ID is misconfigured' };
+  }
+
+  try {
+    const response = await fetch('https://api.brevo.com/v3/contacts', {
+      method: 'POST',
+      headers: {
+        'api-key': apiKey,
+        'content-type': 'application/json',
+        accept: 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        listIds: [Number(listId)],
+        updateEnabled: true,
+        attributes: {
+          SOURCE: source,
+          GAME_ID: gameId,
+          GAME_TITLE: gameTitle,
+          NEWSLETTER_CONSENT: consent,
+        },
+      }),
+    });
+
+    // Brevo returns 201 for a new contact, 204 for an update (updateEnabled: true)
+    if (response.status === 201 || response.status === 204) {
+      return { ok: true };
+    }
+
+    const errorBody = await response.json().catch(() => ({}));
+    console.error('[subscribe] Brevo rejected the request', { status: response.status, body: errorBody });
+    return { ok: false, error: errorBody?.message || `Brevo returned ${response.status}` };
+  } catch (err) {
+    console.error('[subscribe] Failed to reach Brevo', err);
+    return { ok: false, error: 'Failed to reach Brevo' };
+  }
+}
+
+async function syncToNotion(email: string, source: string, gameId: string, gameTitle: string, consent: boolean): Promise<SyncResult> {
+  const apiKey = process.env.NOTION_API_KEY;
+
+  if (!apiKey) {
+    return { skipped: true, ok: false, error: 'Notion is not configured' };
+  }
+
+  const notes = gameTitle
+    ? `Signed up via ${source} on bambli.online (game: ${gameTitle} / ${gameId}).`
+    : `Signed up via ${source} on bambli.online.`;
+
+  try {
+    const response = await fetch('https://api.notion.com/v1/pages', {
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${apiKey}`,
+        'content-type': 'application/json',
+        'Notion-Version': '2022-06-28',
+      },
+      body: JSON.stringify({
+        parent: { database_id: NOTION_DATABASE_ID },
+        properties: {
+          Name: { title: [{ text: { content: email } }] },
+          Email: { email },
+          'Marketing Consent': { checkbox: consent },
+          Source: { select: { name: 'Website' } },
+          Notes: { rich_text: [{ text: { content: notes } }] },
+        },
+      }),
+    });
+
+    if (response.ok) {
+      return { ok: true };
+    }
+
+    const errorBody = await response.json().catch(() => ({}));
+    console.error('[subscribe] Notion rejected the request', { status: response.status, body: errorBody });
+    return { ok: false, error: errorBody?.message || `Notion returned ${response.status}` };
+  } catch (err) {
+    console.error('[subscribe] Failed to reach Notion', err);
+    return { ok: false, error: 'Failed to reach Notion' };
+  }
+}
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (req.method !== 'POST') {
+    res.status(405).json({ ok: false, error: 'Method not allowed' });
     return;
   }
 
@@ -31,51 +124,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  if (Number.isNaN(Number(listId))) {
-    console.error('[Brevo subscribe] BREVO_LIST_ID is not a valid number:', listId);
-    res.status(500).json({ ok: false, error: 'Newsletter list is misconfigured' });
-    return;
-  }
+  const cleanEmail = email.trim().toLowerCase();
+  const cleanSource = source || 'website';
+  const cleanGameId = gameId || '';
+  const cleanGameTitle = gameTitle || '';
+  const cleanConsent = consent !== false;
 
-  try {
-    const brevoResponse = await fetch('https://api.brevo.com/v3/contacts', {
-      method: 'POST',
-      headers: {
-        'api-key': apiKey,
-        'content-type': 'application/json',
-        accept: 'application/json',
-      },
-      body: JSON.stringify({
-        email: email.trim().toLowerCase(),
-        listIds: [Number(listId)],
-        updateEnabled: true,
-        attributes: {
-          SOURCE: source || 'website',
-          GAME_ID: gameId || '',
-          GAME_TITLE: gameTitle || '',
-          NEWSLETTER_CONSENT: consent !== false,
-        },
-      }),
-    });
+  const [brevo, notion] = await Promise.all([
+    syncToBrevo(cleanEmail, cleanSource, cleanGameId, cleanGameTitle, cleanConsent),
+    syncToNotion(cleanEmail, cleanSource, cleanGameId, cleanGameTitle, cleanConsent),
+  ]);
 
-    // Brevo returns 201 for a new contact, 204 for an update (updateEnabled: true)
-    if (brevoResponse.status === 201 || brevoResponse.status === 204) {
-      res.status(200).json({ ok: true });
-      return;
-    }
-
-    const errorBody = await brevoResponse.json().catch(() => ({}));
-    console.error('[Brevo subscribe] Brevo API rejected the request', {
-      status: brevoResponse.status,
-      body: errorBody,
-    });
-    res.status(502).json({
-      ok: false,
-      error: errorBody?.message || 'Failed to subscribe',
-      brevoStatus: brevoResponse.status,
-    });
-  } catch (err) {
-    console.error('[Brevo subscribe] Failed to reach Brevo', err);
-    res.status(502).json({ ok: false, error: 'Failed to reach newsletter service' });
-  }
+  const succeeded = brevo.ok || notion.ok;
+  res.status(succeeded ? 200 : 502).json({ ok: succeeded, brevo, notion });
 }
