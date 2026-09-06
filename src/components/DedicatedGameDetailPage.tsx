@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, Play, Download, ShieldCheck, CheckCircle2, Sparkles, Star, Globe2, Monitor, BatteryCharging, FileCode, Lock } from 'lucide-react';
+import { ArrowLeft, Play, ShieldCheck, CheckCircle2, Sparkles, Star, Globe2, Monitor, BatteryCharging, FileCode, Lock } from 'lucide-react';
 import { GameProduct, Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
 import { playPop, playFanfare, playChime } from '../utils/audio';
@@ -105,7 +105,7 @@ export function DedicatedGameDetailPage({
             {currentLang === 'ms' ? game.descriptionMs : game.description}
           </p>
 
-          {/* Primary Call To Action - Download Standalone HTML */}
+          {/* Primary Call To Action - Play or Download */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
             <button
               onClick={() => {
@@ -114,14 +114,14 @@ export function DedicatedGameDetailPage({
               }}
               className="flex-1 bg-[#8AC926] text-white border-[3.5px] border-black py-4 px-6 rounded-2xl font-black text-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#7cb622] active:translate-y-0.5 active:shadow-none transition-all flex items-center justify-center gap-2.5"
             >
-              <Download className="w-6 h-6 stroke-[2.5]" />
-              <span>{currentLang === 'ms' ? 'MUAT TURUN PERMAINAN (.HTML)' : 'DOWNLOAD GAME (.HTML)'}</span>
+              <Play className="w-6 h-6 stroke-[2.5] fill-white" />
+              <span>{currentLang === 'ms' ? 'MAIN SEKARANG' : 'PLAY NOW'}</span>
             </button>
           </div>
 
           <div className="flex items-center gap-2 text-xs font-bold text-black/75">
             <ShieldCheck className="w-4 h-4 text-[#8AC926]" />
-            <span>Delivered as 1 single .html file • 100% Offline • No Wi-Fi or ads</span>
+            <span>Delivered as 1 downloadable game • 100% Offline • No Wi-Fi or ads</span>
           </div>
         </div>
       </div>
@@ -239,12 +239,12 @@ export function DedicatedGameDetailPage({
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-bold text-black/80">
           <div className="bg-white border-2 border-black rounded-xl p-3 shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)]">
             <span className="block font-black text-black mb-1">📄 Format Fail:</span>
-            <span>Tepat 1 fail .html kendiri (tiada zip, tiada pemasang, tiada iklan luar).</span>
+            <span>Tepat 1 fail permainan kendiri (tiada zip, tiada pemasang, tiada iklan luar).</span>
           </div>
 
           <div className="bg-white border-2 border-black rounded-xl p-3 shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)]">
             <span className="block font-black text-black mb-1">💻 Keserasian:</span>
-            <span>Buka menggunakan Safari, Chrome, Edge pada Mac, iPad, Windows, atau Chromebook.</span>
+            <span>Muat turun berfungsi pada telefon Android, Mac, Windows, atau Chromebook. Pengguna iPhone/iPad: sila Main Sekarang dalam talian.</span>
           </div>
 
           <div className="bg-white border-2 border-black rounded-xl p-3 shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)]">

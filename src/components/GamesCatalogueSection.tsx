@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Search, Filter, Play, Download, Lock, Sparkles, ArrowRight } from 'lucide-react';
+import { Search, Filter, Play, Lock, Sparkles, ArrowRight } from 'lucide-react';
 import { GameProduct, Language, LearningPillar } from '../types';
 import { LEARNING_WORLDS } from '../data/worlds';
 import { TRANSLATIONS } from '../data/translations';
@@ -291,9 +291,9 @@ export function GamesCatalogueSection({
                         }
                       }}
                       className="bg-[#8AC926] text-white border-2 border-black px-3 py-1.5 rounded-xl text-xs font-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#7cb622] active:translate-y-0.5 transition-all flex items-center gap-1.5"
-                      title={currentLang === 'ms' ? 'Muat Turun Fail Luar Talian .HTML' : 'Download Offline .HTML File'}
+                      title={currentLang === 'ms' ? 'Main Dalam Talian atau Muat Turun' : 'Play Online or Download'}
                     >
-                      <Download className="w-3.5 h-3.5 stroke-[2.5]" />
+                      <Play className="w-3.5 h-3.5 stroke-[2.5] fill-white" />
                       <span>{t.btn_play_free}</span>
                     </button>
                   ) : (

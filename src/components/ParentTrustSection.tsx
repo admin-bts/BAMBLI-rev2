@@ -68,6 +68,22 @@ export function ParentTrustSection({ currentLang }: ParentTrustSectionProps) {
         ? 'Dunia "Word Garden" dan aktiviti berpandu kami membawakan kosa kata dwibahasa harian supaya kanak-kanak membina keyakinan dalam kedua-dua bahasa secara semula jadi.'
         : 'Through our "Word Garden" world and bilingual vocabulary pairing, kids naturally connect Malaysian everyday words with English phrases in an intuitive, joyful context.',
     },
+    {
+      q: currentLang === 'ms'
+        ? 'Bagaimana saya boleh muat turun atau bermain permainan Bambli?'
+        : 'How do I download or play a Bambli game?',
+      a: currentLang === 'ms'
+        ? 'Ketik "MAIN SEKARANG" pada mana-mana permainan, kemudian sahkan anda ibu bapa. Anda akan melihat dua pilihan: ketik "MAIN DALAM TALIAN SEKARANG" untuk terus bermain dalam pelayar (berfungsi pada semua peranti, termasuk iPhone & iPad), atau ketik "MUAT TURUN PERMAINAN SEKARANG" untuk menyimpan permainan pada telefon Android, komputer riba, atau desktop untuk bermain luar talian pada bila-bila masa.'
+        : 'Tap "PLAY NOW" on any game, then confirm you\'re a parent. You\'ll then see two options: tap "PLAY ONLINE NOW" to start playing instantly in your browser (works on any device, including iPhone & iPad), or tap "DOWNLOAD GAME NOW" to save the game to Android phones, laptops, or desktops for offline play anytime.',
+    },
+    {
+      q: currentLang === 'ms'
+        ? 'Patutkah saya pilih Main Dalam Talian atau Muat Turun?'
+        : 'Should I choose Play Online or Download?',
+      a: currentLang === 'ms'
+        ? 'Main Dalam Talian sesuai untuk pengguna iPhone & iPad — iOS tidak boleh membuka fail permainan yang dimuat turun secara tempatan, jadi ini cara terbaik untuk mereka bermain. Ia juga bagus untuk main serta-merta dan hanya memerlukan sambungan internet semasa memuatkan. Muat Turun pula sesuai untuk telefon Android, komputer riba, dan desktop apabila anda mahu bermain sepenuhnya luar talian pada bila-bila masa — seperti semasa penerbangan atau di kawasan tanpa internet — kerana permainan berjalan terus dari peranti anda tanpa memerlukan internet selepas dimuat turun.'
+        : 'Play Online is the way to go for iPhone & iPad users — iOS can\'t open a downloaded game file locally, so this is the only reliable way for them to play. It\'s also great for quick instant play, needing only an internet connection to load. Download is best for Android phones, laptops, and desktops when you want to play completely offline anytime — like on a flight or in areas with no internet — since the game runs from your device with zero internet needed after downloading.',
+    },
   ];
 
   const toggleFaq = (idx: number) => {

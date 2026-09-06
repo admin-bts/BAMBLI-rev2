@@ -1,4 +1,4 @@
-import { Sparkles, Play, Download, BookOpen } from 'lucide-react';
+import { Sparkles, Play, BookOpen } from 'lucide-react';
 import { GameProduct, Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
 import { playPop, playChime } from '../utils/audio';
@@ -131,7 +131,7 @@ export function StartPlayingSection({
                     🇲🇾 English & Bahasa Melayu
                   </span>
                   <span className="bg-white/95 border-2 border-black px-2.5 py-1 rounded-xl shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)]">
-                    💾 Offline .HTML Available
+                    💾 Offline Download Available
                   </span>
                 </div>
               </div>
@@ -146,8 +146,8 @@ export function StartPlayingSection({
                     }}
                     className="bg-[#8AC926] text-white border-[3.5px] border-black px-5 py-2.5 rounded-2xl font-black text-sm sm:text-base tracking-wide shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#7cb622] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-2"
                   >
-                    <Download className="w-4 h-4 stroke-[2.5]" />
-                    <span>{currentLang === 'ms' ? 'MUAT TURUN (.HTML)' : 'DOWNLOAD GAME (.HTML)'}</span>
+                    <Play className="w-4 h-4 stroke-[2.5] fill-white" />
+                    <span>{currentLang === 'ms' ? 'MAIN SEKARANG' : 'PLAY NOW'}</span>
                   </button>
                 </div>
 

@@ -17,8 +17,8 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     hero_badge: 'DOWNLOADABLE INTERACTIVE GAMES',
     hero_title_1: 'Big Learning.',
     hero_title_2: 'Little Adventures.',
-    hero_subtitle: 'Child-safe standalone interactive HTML games. Parents download once to play offline anytime — zero ads, zero internet required!',
-    hero_cta_play: 'DOWNLOAD FREE GAME (.HTML)',
+    hero_subtitle: 'Child-safe standalone interactive games. Parents download once to play offline anytime — zero ads, zero internet required!',
+    hero_cta_play: 'DOWNLOAD FREE GAME',
     hero_cta_explore: 'EXPLORE ALL GAMES',
     hero_pill_safety: '100% Offline & Ad-Free',
     hero_pill_bilingual: 'English & BM 🇲🇾',
@@ -26,9 +26,9 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     hero_mascot_prompt: 'Tap Bambli to say hello!',
 
     // Start playing
-    start_title: 'Download & Play — It’s FREE!',
-    start_subtitle: 'Download our standalone .HTML game files directly to your device. Play offline anytime without internet, ads, or installation!',
-    try_demo: 'DOWNLOAD GAME (.HTML)',
+    start_title: 'Play & Download — It’s FREE!',
+    start_subtitle: 'Play online instantly, or download our games directly to your device. Enjoy offline anytime without internet, ads, or installation!',
+    try_demo: 'PLAY NOW',
     play_full: 'FULL ADVENTURE',
 
     // Worlds
@@ -87,7 +87,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     games_count: 'games',
     status_coming_soon: 'COMING SOON',
     btn_details: 'Game Details',
-    btn_play_free: 'DOWNLOAD (.HTML) →',
+    btn_play_free: 'PLAY NOW →',
     btn_unlock: 'UNLOCK GAME →',
 
     // Lead magnet
@@ -150,8 +150,8 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     hero_badge: 'PERMAINAN INTERAKTIF MUAT TURUN',
     hero_title_1: 'Pembelajaran Hebat.',
     hero_title_2: 'Pengembaraan Cilik.',
-    hero_subtitle: 'Permainan HTML interaktif kendiri yang selamat untuk kanak-kanak. Ibu bapa muat turun sekali untuk dimainkan luar talian bila-bila masa — sifar iklan, tanpa memerlukan sambungan internet!',
-    hero_cta_play: 'MUAT TURUN PERCUMA (.HTML)',
+    hero_subtitle: 'Permainan interaktif kendiri yang selamat untuk kanak-kanak. Ibu bapa muat turun sekali untuk dimainkan luar talian bila-bila masa — sifar iklan, tanpa memerlukan sambungan internet!',
+    hero_cta_play: 'MUAT TURUN PERCUMA',
     hero_cta_explore: 'TEROKAI SEMUA PERMAINAN',
     hero_pill_safety: '100% Luar Talian & Bebas Iklan',
     hero_pill_bilingual: 'Bahasa Inggeris & BM 🇲🇾',
@@ -159,9 +159,9 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     hero_mascot_prompt: 'Sentuh Bambli untuk tegur!',
 
     // Start playing
-    start_title: 'Muat Turun & Main — Ianya PERCUMA!',
-    start_subtitle: 'Muat turun fail permainan .HTML kendiri terus ke peranti anda. Main luar talian pada bila-bila masa tanpa internet, iklan atau pemasangan!',
-    try_demo: 'MUAT TURUN (.HTML)',
+    start_title: 'Main & Muat Turun — Ianya PERCUMA!',
+    start_subtitle: 'Main serta-merta dalam talian, atau muat turun permainan terus ke peranti anda. Nikmati luar talian pada bila-bila masa tanpa internet, iklan atau pemasangan!',
+    try_demo: 'MAIN SEKARANG',
     play_full: 'PENGEMBARAAN PENUH',
 
     // Worlds
@@ -220,7 +220,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     games_count: 'permainan',
     status_coming_soon: 'AKAN DATANG',
     btn_details: 'Butiran Permainan',
-    btn_play_free: 'MUAT TURUN (.HTML) →',
+    btn_play_free: 'MAIN SEKARANG →',
     btn_unlock: 'BUKA PERMAINAN →',
 
     // Lead magnet

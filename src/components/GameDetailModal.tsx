@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, Play, Download, Lock, Check, Sparkles, Star, ShieldCheck } from 'lucide-react';
+import { X, Play, Lock, Check, Sparkles, Star, ShieldCheck } from 'lucide-react';
 import { GameProduct, Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
 import { playPop, playFanfare } from '../utils/audio';
@@ -214,8 +214,8 @@ export function GameDetailModal({
                   }}
                   className="w-full sm:w-auto bg-[#8AC926] border-[3.5px] border-black px-7 py-3 rounded-2xl font-black text-white text-sm sm:text-base shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#7cb622] active:translate-y-0.5 active:shadow-none transition-all flex items-center justify-center gap-2"
                 >
-                  <Download className="w-5 h-5 stroke-[2.5]" />
-                  <span>{currentLang === 'ms' ? 'MUAT TURUN PERMAINAN (.HTML)' : 'DOWNLOAD GAME (.HTML)'}</span>
+                  <Play className="w-5 h-5 stroke-[2.5] fill-white" />
+                  <span>{currentLang === 'ms' ? 'MAIN SEKARANG' : 'PLAY NOW'}</span>
                 </button>
               </div>
             ) : purchasedDemo ? (

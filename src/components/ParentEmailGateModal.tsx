@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react';
-import { X, Download, ShieldCheck, Mail, Check, Sparkles, FileCode, ArrowRight, Lock } from 'lucide-react';
+import { X, Download, Play, ShieldCheck, Mail, Check, Sparkles, FileCode, ArrowRight, Lock } from 'lucide-react';
 import { GameProduct, Language } from '../types';
 import { playPop, playFanfare, playChime } from '../utils/audio';
 
@@ -9,6 +9,17 @@ export interface NewsletterSubscriberPayload {
   gameTitle: string;
   consent: boolean;
   timestamp: string;
+}
+
+// iOS Safari can't open a downloaded standalone .html file locally, and a non-gesture
+// window/anchor trigger is unreliable there too — so iOS gets Play Online instead of
+// an auto-download. iPadOS 13+ reports as 'MacIntel' but has touch support.
+function isIOSDevice(): boolean {
+  if (typeof navigator === 'undefined') return false;
+  return (
+    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+  );
 }
 
 interface ParentEmailGateModalProps {
@@ -97,10 +108,14 @@ export function ParentEmailGateModal({
 
     playFanfare();
     setIsUnlocked(true);
-    // Automatically trigger the download for parent convenience
-    setTimeout(() => {
-      handleDownloadFile();
-    }, 300);
+    // Automatically trigger the download for parent convenience — skip on iOS, where a
+    // non-gesture trigger is unreliable and the downloaded file can't be opened locally
+    // anyway; iOS users get the explicit Play Online / Download buttons instead.
+    if (!isIOSDevice()) {
+      setTimeout(() => {
+        handleDownloadFile();
+      }, 300);
+    }
   };
 
   const handleDownloadFile = async () => {
@@ -139,6 +154,13 @@ export function ParentEmailGateModal({
     }
   };
 
+  const handlePlayOnline = () => {
+    const targetUrl = game.playInBrowserUrl || game.deliveryUrl;
+    if (!targetUrl) return;
+    playChime();
+    window.open(targetUrl, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/65 backdrop-blur-sm overflow-y-auto">
       <div className="w-full max-w-xl bg-[#FFFDF0] border-[6px] border-black rounded-[36px] p-5 sm:p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative flex flex-col gap-5 max-h-[92vh] overflow-y-auto">
@@ -157,11 +179,11 @@ export function ParentEmailGateModal({
                   Parent Zone
                 </span>
                 <span className="bg-white border-2 border-black px-2 py-0.5 rounded-full text-[10px] font-black">
-                  Standalone .HTML
+                  Play or Download
                 </span>
               </div>
               <h3 className="font-black text-xl sm:text-2xl text-black leading-tight">
-                {currentLang === 'ms' ? 'Muat Turun Luar Talian' : 'Download Offline Game'}
+                {currentLang === 'ms' ? 'Main atau Muat Turun' : 'Play or Download'}
               </h3>
             </div>
           </div>
@@ -215,8 +237,8 @@ export function ParentEmailGateModal({
               </div>
               <p className="text-xs font-bold text-black/75 leading-relaxed">
                 {currentLang === 'ms'
-                  ? 'Bambli adalah 100% selamat untuk kanak-kanak. Untuk memuat turun fail permainan luar talian percuma, sila sahkan bahawa anda adalah ibu bapa dan masukkan e-mel anda.'
-                  : 'Bambli is 100% child-safe. To download this free offline standalone game, please confirm you are a parent and enter your email for learning updates.'}
+                  ? 'Bambli adalah 100% selamat untuk kanak-kanak. Untuk main dalam talian atau memuat turun fail permainan luar talian percuma ini, sila sahkan bahawa anda adalah ibu bapa dan masukkan e-mel anda.'
+                  : 'Bambli is 100% child-safe. To play online or download this free offline standalone game, please confirm you are a parent and enter your email for learning updates.'}
               </p>
             </div>
 
@@ -305,13 +327,13 @@ export function ParentEmailGateModal({
               </div>
               <h4 className="font-black text-xl text-white">
                 {currentLang === 'ms'
-                  ? 'Ibu Bapa Disahkan! Fail Sedia Dimuat Turun'
-                  : 'Parent Verified! Your Offline Game is Ready'}
+                  ? 'Ibu Bapa Disahkan! Permainan Sedia'
+                  : 'Parent Verified! Your Game is Ready'}
               </h4>
               <p className="text-xs font-bold text-white/95 max-w-sm">
                 {currentLang === 'ms'
-                  ? `Fail standalone .html untuk "${game.title}" sedia untuk anda main tanpa internet.`
-                  : `The standalone single .html file for "${game.title}" is ready. No internet or Wi-Fi required!`}
+                  ? `"${game.title}" sedia untuk dimainkan serta-merta dalam talian, atau muat turun permainan untuk main luar talian.`
+                  : `"${game.title}" is ready to play instantly online, or download the game to play offline anytime.`}
               </p>
             </div>
 
@@ -328,10 +350,21 @@ export function ParentEmailGateModal({
               </div>
               <p className="text-xs font-bold text-black/70">
                 {currentLang === 'ms'
-                  ? 'Dua kali klik fail .html ini pada komputer riba, iPad, atau Chromebook untuk bermain pada bila-bila masa.'
-                  : 'Double-click the downloaded .html file on your laptop, iPad, or Chromebook to play anytime without internet.'}
+                  ? 'Dua kali klik fail permainan yang dimuat turun ini pada telefon Android, komputer riba, atau Chromebook untuk bermain pada bila-bila masa.'
+                  : 'Double-click the downloaded game file on your Android phone, laptop, or Chromebook to play anytime without internet.'}
               </p>
             </div>
+
+            {/* Big Play Online Button (primary action — works on every platform, including iOS) */}
+            <button
+              onClick={handlePlayOnline}
+              className="w-full bg-[#FF6B6B] text-white border-[4px] border-black py-4 px-6 rounded-2xl font-black text-lg shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] hover:bg-[#ff5252] active:translate-y-0.5 active:shadow-none transition-all flex items-center justify-center gap-3"
+            >
+              <Play className="w-6 h-6 stroke-[2.5] fill-white" />
+              <span>
+                {currentLang === 'ms' ? 'MAIN DALAM TALIAN SEKARANG' : 'PLAY ONLINE NOW'}
+              </span>
+            </button>
 
             {/* Big Download Button */}
             <button
@@ -344,10 +377,20 @@ export function ParentEmailGateModal({
                 {isDownloading
                   ? 'Downloading File...'
                   : currentLang === 'ms'
-                  ? 'MUAT TURUN LAGI (.HTML)'
-                  : 'DOWNLOAD AGAIN (.HTML)'}
+                  ? 'MUAT TURUN PERMAINAN SEKARANG'
+                  : 'DOWNLOAD GAME NOW'}
               </span>
             </button>
+
+            {/* Platform Compatibility Disclaimer */}
+            <div className="bg-[#FFF0E0] border-2 border-[#FF8E3C] rounded-xl p-3 text-xs font-bold text-black/85 flex items-start gap-2">
+              <span className="text-base leading-none">⚠️</span>
+              <span>
+                {currentLang === 'ms'
+                  ? 'Sila ambil perhatian: Muat turun hanya berfungsi pada telefon Android dan komputer riba/desktop. Pengguna iPhone & iPad (iOS) tidak dapat membuka fail yang dimuat turun — sila ketik "MAIN DALAM TALIAN SEKARANG" di atas.'
+                  : 'Please note: Downloading only works on Android phones and laptop/desktop computers. iPhone & iPad (iOS) users won\'t be able to open a downloaded file — please tap "PLAY ONLINE NOW" above instead.'}
+              </span>
+            </div>
 
             {/* How to run guide */}
             <div className="bg-[#FFF7CC] border-2 border-black rounded-xl p-3 text-xs font-bold text-black/85 flex flex-col gap-1">
@@ -359,8 +402,8 @@ export function ParentEmailGateModal({
               </span>
               <span>
                 {currentLang === 'ms'
-                  ? '2. Klik dua kali pada fail .html tersebut. Ia akan dibuka secara luar talian dalam pelayar Chrome/Safari tanpa internet!'
-                  : '2. Double-click the .html file. It immediately launches in any browser (Chrome, Safari, Edge) 100% offline!'}
+                  ? '2. Klik dua kali pada fail permainan yang dimuat turun. Ia akan dibuka secara luar talian dalam pelayar Chrome tanpa internet!'
+                  : '2. Double-click the downloaded game file. It immediately launches in your browser (Chrome, Edge) 100% offline!'}
               </span>
             </div>
 

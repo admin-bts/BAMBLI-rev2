@@ -1,4 +1,4 @@
-import { Download } from 'lucide-react';
+import { Play } from 'lucide-react';
 import { GameProduct, Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
 import { GameCoverImage } from './GameCoverImage';
@@ -98,7 +98,7 @@ export function FeaturedAdventureSection({
                 onClick={onPlayDemo}
                 className="bg-[#4ECDC4] border-[4px] border-black px-6 sm:px-8 py-3.5 rounded-2xl font-black text-black text-base sm:text-lg shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] hover:bg-[#3dbdb4] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center gap-2"
               >
-                <Download className="w-5 h-5 stroke-[2.5]" />
+                <Play className="w-5 h-5 stroke-[2.5] fill-black" />
                 <span>{t.btn_play_free}</span>
               </button>
 
@@ -121,7 +121,7 @@ export function FeaturedAdventureSection({
                   alt={currentLang === 'ms' ? game.titleMs : game.title}
                 />
                 <div className="absolute top-3.5 left-3.5 bg-black text-white px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider border-2 border-white shadow-[2px_2px_0px_0px_rgba(0,0,0,0.4)]">
-                  {currentLang === 'ms' ? '💾 Muat Turun Fail .HTML' : '💾 Standalone .HTML Download'}
+                  {currentLang === 'ms' ? '🎮 Main atau Muat Turun' : '🎮 Play Online or Download'}
                 </div>
                 <div className="absolute bottom-3.5 right-3.5 bg-[#4ECDC4] text-black px-3.5 py-1.5 rounded-full text-xs font-black border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                   {currentLang === 'ms' ? '100% Percuma Luar Talian' : '100% Free Offline Play'}

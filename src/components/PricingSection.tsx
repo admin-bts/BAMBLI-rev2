@@ -1,4 +1,4 @@
-import { Sparkles, Download, Star } from 'lucide-react';
+import { Sparkles, Play, Star } from 'lucide-react';
 import { Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
 import { playPop } from '../utils/audio';
@@ -24,19 +24,19 @@ export function PricingSection({ currentLang, onSelectFreePlan }: PricingSection
           : 'The Lost Picnic Adventure in Wonder Woods with Bambli.',
       color: '#4ECDC4',
       textColor: 'text-black',
-      cta: currentLang === 'ms' ? 'MUAT TURUN LITTLE EXPLORER' : 'DOWNLOAD LITTLE EXPLORER',
+      cta: currentLang === 'ms' ? 'MAIN SEKARANG' : 'PLAY NOW',
       features: [
         'Wonder Woods visual storytelling & rich soundscape',
         '10 interactive challenge tasks (food, fruits, flowers)',
         'Bilingual audio prompts in English & Bahasa Melayu',
-        'Single standalone .HTML file for 100% offline play',
+        'Download the game to play 100% offline anytime',
         '100% Safe, zero ads, zero in-app purchases',
       ],
       featuresMs: [
         'Penceritaan visual & audio Hutan Ajaib yang memukau',
         '10 tugasan interaktif (makanan, buah-buahan, bunga)',
         'Audio dwi-bahasa dalam Bahasa Inggeris & BM',
-        'Satu fail .HTML kendiri untuk mainan luar talian 100%',
+        'Muat turun permainan untuk main 100% luar talian',
         '100% Selamat, tiada iklan langsung',
       ],
     },
@@ -52,19 +52,19 @@ export function PricingSection({ currentLang, onSelectFreePlan }: PricingSection
           : 'Bilingual word search puzzles in Word Garden to sharpen young minds.',
       color: '#FF7096',
       textColor: 'text-black',
-      cta: currentLang === 'ms' ? 'MUAT TURUN PUZZLE PLAY' : 'DOWNLOAD PUZZLE PLAY',
+      cta: currentLang === 'ms' ? 'MAIN SEKARANG' : 'PLAY NOW',
       features: [
         'Word Garden bilingual search puzzles & fun clues',
         'English & Bahasa Melayu vocabulary boost',
         'Interactive word highlight and celebratory chimes',
-        'Single standalone .HTML file for 100% offline play',
+        'Download the game to play 100% offline anytime',
         '100% Child-safe, COPPA compliant & offline ready',
       ],
       featuresMs: [
         'Teka kata dwibahasa Taman Bunga yang menyeronokkan',
         'Meningkatkan perbendaharaan kata Bahasa Inggeris & BM',
         'Sorotan perkataan interaktif dan kesan bunyi ceria',
-        'Satu fail .HTML kendiri untuk mainan luar talian 100%',
+        'Muat turun permainan untuk main 100% luar talian',
         '100% Selamat, patuh privasi kanak-kanak',
       ],
     },
@@ -144,7 +144,7 @@ export function PricingSection({ currentLang, onSelectFreePlan }: PricingSection
                 }}
                 className="w-full bg-[#8AC926] text-white border-[3.5px] border-black py-3 rounded-2xl font-black text-sm sm:text-base tracking-wide shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:bg-[#7cb622] active:translate-y-0.5 active:shadow-none transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
-                <Download className="w-4 h-4 stroke-[2.5]" />
+                <Play className="w-4 h-4 stroke-[2.5] fill-white" />
                 <span>{game.cta}</span>
               </button>
             </div>
