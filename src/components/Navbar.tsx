@@ -5,7 +5,6 @@ import {
   Star,
   Sparkles,
   Music,
-  Download,
 } from 'lucide-react';
 import { Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
@@ -21,7 +20,6 @@ interface NavbarProps {
   currentLang: Language;
   onLangChange: (lang: Language) => void;
   starCount: number;
-  onOpenStarterAdventure: () => void;
   onNavigate: (sectionId: string) => void;
 }
 
@@ -29,7 +27,6 @@ export function Navbar({
   currentLang,
   onLangChange,
   starCount,
-  onOpenStarterAdventure,
   onNavigate,
 }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -172,18 +169,6 @@ export function Navbar({
             </button>
           </div>
 
-          {/* Primary CTA */}
-          <button
-            onClick={() => {
-              playPop(600);
-              onOpenStarterAdventure();
-            }}
-            className="hidden sm:inline-flex items-center gap-1.5 bg-[#FF6B6B] border-[3px] border-black px-4 py-1.5 rounded-2xl font-black text-white text-xs sm:text-sm tracking-wide shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 hover:bg-[#ff5252] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
-          >
-            <Download className="w-3.5 h-3.5 stroke-[2.5]" />
-            <span>{t.nav_play_free}</span>
-          </button>
-
           {/* Mobile Hamburger Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -225,17 +210,6 @@ export function Navbar({
           >
             <span>⭐</span>
             <span>{currentLang === 'ms' ? 'Pek Permainan (Akan Datang)' : 'Game Packs (Coming Soon)'}</span>
-          </button>
-
-          <button
-            onClick={() => {
-              setMobileMenuOpen(false);
-              onOpenStarterAdventure();
-            }}
-            className="w-full bg-[#FF6B6B] border-[3.5px] border-black p-3 rounded-2xl font-black text-white text-base tracking-wide shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center gap-2 active:translate-y-0.5 active:shadow-none"
-          >
-            <Download className="w-5 h-5 stroke-[2.5]" />
-            <span>{t.nav_play_free}</span>
           </button>
         </div>
       )}

@@ -149,7 +149,6 @@ export default function App() {
         currentLang={currentLang}
         onLangChange={setCurrentLang}
         starCount={starCount}
-        onOpenStarterAdventure={() => handleDownloadFlow('little-explorer')}
         onNavigate={handleNavigate}
       />
 
@@ -175,7 +174,6 @@ export default function App() {
             {/* Section 1: Hero */}
             <HeroSection
               currentLang={currentLang}
-              onPlayFree={() => handleDownloadFlow('little-explorer')}
               onExploreGames={() => handleNavigate('games')}
               onAddStar={handleAddStar}
             />
@@ -238,7 +236,6 @@ export default function App() {
       {/* Section 11: Final CTA & Footer */}
       <Footer
         currentLang={currentLang}
-        onPlayFree={() => handleDownloadFlow('little-explorer')}
         onNavigate={handleNavigate}
       />
 

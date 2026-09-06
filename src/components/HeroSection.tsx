@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Download, Compass, ShieldCheck, Heart, Star } from 'lucide-react';
+import { Compass, ShieldCheck, Heart, Star } from 'lucide-react';
 import { Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
 import { BambliMascot, BambliWordmark } from './BambliMascot';
@@ -8,14 +8,12 @@ import { playFanfare, playJump } from '../utils/audio';
 
 interface HeroSectionProps {
   currentLang: Language;
-  onPlayFree: () => void;
   onExploreGames: () => void;
   onAddStar: () => void;
 }
 
 export function HeroSection({
   currentLang,
-  onPlayFree,
   onExploreGames,
   onAddStar,
 }: HeroSectionProps) {
@@ -108,14 +106,6 @@ export function HeroSection({
 
               {/* Call-to-Action Buttons */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 w-full sm:w-auto pt-2">
-                <button
-                  onClick={onPlayFree}
-                  className="bg-[#FF6B6B] border-[4px] border-black px-7 sm:px-9 py-4 rounded-2xl sm:rounded-3xl font-black text-white text-lg sm:text-xl tracking-wide shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:bg-[#ff5252] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-3"
-                >
-                  <Download className="w-6 h-6 stroke-[2.5]" />
-                  <span>{t.hero_cta_play}</span>
-                </button>
-
                 <button
                   onClick={onExploreGames}
                   className="bg-white border-[4px] border-black px-6 sm:px-8 py-4 rounded-2xl sm:rounded-3xl font-black text-black text-base sm:text-lg tracking-wide shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:bg-[#4ECDC4] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all flex items-center justify-center gap-2"

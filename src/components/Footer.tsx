@@ -1,18 +1,17 @@
 import { useState, type FormEvent } from 'react';
-import { Download, Heart, ShieldCheck, Instagram, Facebook, Send } from 'lucide-react';
+import { Heart, ShieldCheck, Instagram, Facebook, Send } from 'lucide-react';
 import { Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
 import { BambliMascot, BambliWordmark } from './BambliMascot';
 import { BambliBrandBadge } from './BambliBrandBadge';
-import { playPop, playFanfare } from '../utils/audio';
+import { playFanfare } from '../utils/audio';
 
 interface FooterProps {
   currentLang: Language;
-  onPlayFree: () => void;
   onNavigate: (sectionId: string) => void;
 }
 
-export function Footer({ currentLang, onPlayFree, onNavigate }: FooterProps) {
+export function Footer({ currentLang, onNavigate }: FooterProps) {
   const [footerEmail, setFooterEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const t = TRANSLATIONS[currentLang];
@@ -50,17 +49,6 @@ export function Footer({ currentLang, onPlayFree, onNavigate }: FooterProps) {
                 ? 'Pengembaraan hebat bermula dengan cabaran kecil.'
                 : 'Big adventures start with little challenges.'}
             </p>
-
-            <button
-              onClick={() => {
-                playPop(550);
-                onPlayFree();
-              }}
-              className="mt-2 bg-[#FF6B6B] border-[4px] border-black px-8 sm:px-10 py-4 rounded-3xl font-black text-white text-lg sm:text-xl tracking-wide shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:bg-[#ff5252] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all flex items-center gap-3"
-            >
-              <Download className="w-6 h-6 stroke-[2.5]" />
-              <span>{t.nav_play_free}</span>
-            </button>
           </div>
 
           <div className="relative z-10 shrink-0">
