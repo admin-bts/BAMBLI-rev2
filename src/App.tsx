@@ -233,7 +233,7 @@ export default function App() {
             {/* Section 10: Pricing & Adventure Packs */}
             <PricingSection
               currentLang={currentLang}
-              onSelectFreePlan={() => handleDownloadFlow('little-explorer')}
+              onSelectFreePlan={handleDownloadFlow}
             />
           </>
         )}

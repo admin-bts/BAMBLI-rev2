@@ -5,7 +5,7 @@ import { playPop } from '../utils/audio';
 
 interface PricingSectionProps {
   currentLang: Language;
-  onSelectFreePlan: () => void;
+  onSelectFreePlan: (gameId: string) => void;
 }
 
 export function PricingSection({ currentLang, onSelectFreePlan }: PricingSectionProps) {
@@ -140,7 +140,7 @@ export function PricingSection({ currentLang, onSelectFreePlan }: PricingSection
               <button
                 onClick={() => {
                   playPop(520);
-                  onSelectFreePlan();
+                  onSelectFreePlan(game.id);
                 }}
                 className="w-full bg-[#8AC926] text-white border-[3.5px] border-black py-3 rounded-2xl font-black text-sm sm:text-base tracking-wide shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:bg-[#7cb622] active:translate-y-0.5 active:shadow-none transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
