@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { GAMES_CATALOGUE } from '../src/data/games';
-import { getAppUrl, getBillTransactions, refGameId } from './_lib/toyyibpay';
+import { GAMES_CATALOGUE } from '../src/data/games.js';
+import { getAppUrl, getBillTransactions, refGameId } from './_lib/toyyibpay.js';
 
 // Best-effort in-memory de-dupe for repeated webhook deliveries. Not durable
 // across cold starts or multiple concurrent instances — accepted low-harm

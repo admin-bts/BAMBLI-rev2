@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { GAMES_CATALOGUE } from '../src/data/games';
-import { getBillTransactions, refGameId } from './_lib/toyyibpay';
+import { GAMES_CATALOGUE } from '../src/data/games.js';
+import { getBillTransactions, refGameId } from './_lib/toyyibpay.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'GET') {

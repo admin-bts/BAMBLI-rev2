@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { GAMES_CATALOGUE } from '../src/data/games';
-import { createBillEndpoint, encodeReturnToken, getAppUrl, hostedPaymentUrl, makeExternalReferenceNo } from './_lib/toyyibpay';
+import { GAMES_CATALOGUE } from '../src/data/games.js';
+import { createBillEndpoint, encodeReturnToken, getAppUrl, hostedPaymentUrl, makeExternalReferenceNo } from './_lib/toyyibpay.js';
 
 interface CreatePaymentRequestBody {
   gameId?: string;
