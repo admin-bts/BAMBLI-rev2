@@ -148,7 +148,7 @@ export function GamesCatalogueSection({
               : 'bg-white hover:bg-gray-100 text-black'
           }`}
         >
-          {currentLang === 'ms' ? 'Semua Permainan (2)' : 'All Games (2)'}
+          {currentLang === 'ms' ? `Semua Permainan (${games.length})` : `All Games (${games.length})`}
         </button>
 
         {LEARNING_WORLDS.filter((w) => games.some((g) => g.pillar === w.id)).map((world) => {
@@ -184,7 +184,7 @@ export function GamesCatalogueSection({
       {/* Result Count */}
       <div className="flex items-center justify-between mb-6 text-xs sm:text-sm font-black text-black/70">
         <span>
-          {t.showing_games} {filteredGames.length} of 2 {t.games_count}
+          {t.showing_games} {filteredGames.length} of {games.length} {t.games_count}
         </span>
         {selectedAgeId && (
           <span className="bg-[#FFE66D] border-2 border-black px-2.5 py-0.5 rounded-full text-black">
@@ -300,12 +300,14 @@ export function GamesCatalogueSection({
                     <button
                       onClick={() => {
                         playPop(480);
-                        onOpenDetails(game);
+                        if (onOpenOfflineGate) {
+                          onOpenOfflineGate(game);
+                        }
                       }}
                       className="bg-[#8054C2] text-white border-2 border-black px-3.5 py-1.5 rounded-xl text-xs font-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#7043b3] active:translate-y-0.5 transition-all flex items-center gap-1"
                     >
                       <Lock className="w-3 h-3" />
-                      <span>Unlock</span>
+                      <span>Unlock RM {game.priceMYR.toFixed(2)}</span>
                     </button>
                   )}
                 </div>

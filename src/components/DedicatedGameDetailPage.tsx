@@ -82,9 +82,15 @@ export function DedicatedGameDetailPage({
             <span className="bg-white border-2 border-black px-3 py-0.5 rounded-full text-xs font-black">
               🎯 {currentLang === 'ms' ? game.difficultyMs : game.difficulty}
             </span>
-            <span className="bg-[#8AC926] text-white border-2 border-black px-3 py-0.5 rounded-full text-xs font-black">
-              100% Free
-            </span>
+            {game.isFree ? (
+              <span className="bg-[#8AC926] text-white border-2 border-black px-3 py-0.5 rounded-full text-xs font-black">
+                100% Free
+              </span>
+            ) : (
+              <span className="bg-[#FF6B6B] text-white border-2 border-black px-3 py-0.5 rounded-full text-xs font-black">
+                RM {game.priceMYR.toFixed(2)}
+              </span>
+            )}
           </div>
 
           <div>
@@ -112,10 +118,20 @@ export function DedicatedGameDetailPage({
                 playPop(520);
                 onOpenOfflineGate(game);
               }}
-              className="flex-1 bg-[#8AC926] text-white border-[3.5px] border-black py-4 px-6 rounded-2xl font-black text-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#7cb622] active:translate-y-0.5 active:shadow-none transition-all flex items-center justify-center gap-2.5"
+              className={`flex-1 text-white border-[3.5px] border-black py-4 px-6 rounded-2xl font-black text-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none transition-all flex items-center justify-center gap-2.5 ${
+                game.isFree ? 'bg-[#8AC926] hover:bg-[#7cb622]' : 'bg-[#8054C2] hover:bg-[#7043b3]'
+              }`}
             >
-              <Play className="w-6 h-6 stroke-[2.5] fill-white" />
-              <span>{currentLang === 'ms' ? 'MAIN SEKARANG' : 'PLAY NOW'}</span>
+              {game.isFree ? (
+                <Play className="w-6 h-6 stroke-[2.5] fill-white" />
+              ) : (
+                <Lock className="w-6 h-6" />
+              )}
+              <span>
+                {game.isFree
+                  ? currentLang === 'ms' ? 'MAIN SEKARANG' : 'PLAY NOW'
+                  : currentLang === 'ms' ? 'BUKA PERMAINAN' : `UNLOCK GAME (RM ${game.priceMYR.toFixed(2)})`}
+              </span>
             </button>
           </div>
 
@@ -244,7 +260,11 @@ export function DedicatedGameDetailPage({
 
           <div className="bg-white border-2 border-black rounded-xl p-3 shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)]">
             <span className="block font-black text-black mb-1">💻 Keserasian:</span>
-            <span>Muat turun berfungsi pada telefon Android, Mac, Windows, atau Chromebook. Pengguna iPhone/iPad: sila Main Sekarang dalam talian.</span>
+            <span>
+              {game.playInBrowserUrl
+                ? 'Muat turun berfungsi pada telefon Android, Mac, Windows, atau Chromebook. Pengguna iPhone/iPad: sila Main Sekarang dalam talian.'
+                : 'Muat turun hanya berfungsi pada telefon Android, komputer riba, atau desktop. Tidak tersedia untuk pengguna iPhone/iPad (iOS).'}
+            </span>
           </div>
 
           <div className="bg-white border-2 border-black rounded-xl p-3 shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)]">

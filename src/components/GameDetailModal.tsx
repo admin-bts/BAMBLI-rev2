@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { X, Play, Lock, Check, Sparkles, Star, ShieldCheck } from 'lucide-react';
+import { X, Play, Lock, Sparkles, Star, ShieldCheck } from 'lucide-react';
 import { GameProduct, Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
-import { playPop, playFanfare } from '../utils/audio';
+import { playPop } from '../utils/audio';
 import { GameCoverImage } from './GameCoverImage';
 
 interface GameDetailModalProps {
@@ -21,17 +21,11 @@ export function GameDetailModal({
   onOpenOfflineGate,
 }: GameDetailModalProps) {
   const [activeScreenshotIdx, setActiveScreenshotIdx] = useState(0);
-  const [purchasedDemo, setPurchasedDemo] = useState(false);
 
   if (!game) return null;
 
   const t = TRANSLATIONS[currentLang];
   const activeScreenshot = game.screenshots[activeScreenshotIdx] || game.screenshots[0];
-
-  const handleUnlockDemo = () => {
-    playFanfare();
-    setPurchasedDemo(true);
-  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm overflow-y-auto">
@@ -218,14 +212,14 @@ export function GameDetailModal({
                   <span>{currentLang === 'ms' ? 'MAIN SEKARANG' : 'PLAY NOW'}</span>
                 </button>
               </div>
-            ) : purchasedDemo ? (
-              <div className="bg-[#8AC926] text-white border-[3.5px] border-black px-6 py-3 rounded-2xl font-black text-sm flex items-center gap-2 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-                <Check className="w-4 h-4" />
-                <span>Unlocked! Loading Game...</span>
-              </div>
             ) : (
               <button
-                onClick={handleUnlockDemo}
+                onClick={() => {
+                  onClose();
+                  if (onOpenOfflineGate) {
+                    onOpenOfflineGate(game);
+                  }
+                }}
                 className="w-full sm:w-auto bg-[#8054C2] border-[3.5px] border-black px-7 py-3 rounded-2xl font-black text-white text-base shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#7043b3] active:translate-y-0.5 active:shadow-none transition-all flex items-center justify-center gap-2"
               >
                 <Lock className="w-4 h-4" />

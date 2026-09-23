@@ -24,6 +24,23 @@ import { ParentEmailGateModal, NewsletterSubscriberPayload } from './components/
 import { playPop, playFanfare } from './utils/audio';
 import { subscribeToNewsletter } from './utils/newsletter';
 
+// Browser-safe counterpart to api/_lib/toyyibpay.ts's encodeReturnToken — kept
+// separate (rather than importing that file) since it uses Node's Buffer,
+// which isn't available in the browser bundle.
+function decodeReturnToken(token: string): { gameId: string; ref: string } | null {
+  try {
+    const base64 = token.replace(/-/g, '+').replace(/_/g, '/');
+    const padded = base64 + '=='.slice(0, (4 - (base64.length % 4)) % 4);
+    const parsed = JSON.parse(atob(padded));
+    if (parsed && typeof parsed.gameId === 'string' && typeof parsed.ref === 'string') {
+      return parsed;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 export default function App() {
   const [currentLang, setCurrentLang] = useState<Language>('en');
   const [starCount, setStarCount] = useState<number>(3);
@@ -34,6 +51,15 @@ export default function App() {
   const [activeDetailGame, setActiveDetailGame] = useState<GameProduct | null>(null);
   const [dedicatedPageGame, setDedicatedPageGame] = useState<GameProduct | null>(null);
   const [parentGateGame, setParentGateGame] = useState<GameProduct | null>(null);
+
+  // Paid-game payment flow (ToyyibPay): tracks the return-redirect verification
+  // for whichever game the buyer just paid for, keyed by gameId so a stale
+  // result never gets applied to a different game opened afterward.
+  const [paymentReturn, setPaymentReturn] = useState<{
+    gameId: string;
+    status: 'verifying' | 'paid' | 'error';
+    error?: string;
+  } | null>(null);
 
   // Flagship game for Section 4
   const flagshipGame =
@@ -59,6 +85,56 @@ export default function App() {
     handleHashChange();
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  // Detect a return redirect from ToyyibPay's hosted payment page (paid games
+  // only) and verify the payment server-side before unlocking anything.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('bambli_pay');
+    const billCode = params.get('billcode');
+    if (!token || !billCode) return;
+
+    const decoded = decodeReturnToken(token);
+    // Always strip our own query params so a page refresh doesn't re-verify —
+    // done regardless of whether decoding succeeded.
+    window.history.replaceState({}, '', window.location.pathname + window.location.hash);
+
+    if (!decoded) return;
+    const targetGame = GAMES_CATALOGUE.find((g) => g.id === decoded.gameId);
+    if (!targetGame) return;
+
+    setParentGateGame(targetGame);
+    setPaymentReturn({ gameId: decoded.gameId, status: 'verifying' });
+
+    fetch(`/api/verify-payment?billCode=${encodeURIComponent(billCode)}&gameId=${encodeURIComponent(decoded.gameId)}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.ok && data.paid) {
+          setPaymentReturn({ gameId: decoded.gameId, status: 'paid' });
+        } else {
+          setPaymentReturn({
+            gameId: decoded.gameId,
+            status: 'error',
+            error:
+              currentLang === 'ms'
+                ? 'Pembayaran belum disahkan. Sila cuba lagi atau hubungi kami.'
+                : 'Payment could not be confirmed yet. Please try again or contact us.',
+          });
+        }
+      })
+      .catch(() => {
+        setPaymentReturn({
+          gameId: decoded.gameId,
+          status: 'error',
+          error:
+            currentLang === 'ms'
+              ? 'Gagal mengesahkan pembayaran. Sila cuba lagi.'
+              : 'Failed to verify payment. Please try again.',
+        });
+      });
+    // Only ever runs once on mount for whatever query params were present on load.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleNavigate = (sectionId: string) => {
@@ -108,6 +184,38 @@ export default function App() {
   const handleOpenOfflineGate = (game: GameProduct) => {
     playPop(480);
     setParentGateGame(game);
+  };
+
+  const handleCreatePayment = async (game: GameProduct, email: string, phone: string) => {
+    try {
+      const response = await fetch('/api/create-payment', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ gameId: game.id, email, phone }),
+      });
+      const data = await response.json();
+      if (data?.ok && data.paymentUrl) {
+        window.location.href = data.paymentUrl;
+        return;
+      }
+      setPaymentReturn({
+        gameId: game.id,
+        status: 'error',
+        error:
+          currentLang === 'ms'
+            ? 'Gagal menyediakan pembayaran. Sila cuba lagi.'
+            : 'Failed to set up payment. Please try again.',
+      });
+    } catch {
+      setPaymentReturn({
+        gameId: game.id,
+        status: 'error',
+        error:
+          currentLang === 'ms'
+            ? 'Gagal menyediakan pembayaran. Sila cuba lagi.'
+            : 'Failed to set up payment. Please try again.',
+      });
+    }
   };
 
   const handleNewsletterSubmit = (payload: NewsletterSubscriberPayload) => {
@@ -232,8 +340,9 @@ export default function App() {
 
             {/* Section 10: Pricing & Adventure Packs */}
             <PricingSection
+              games={GAMES_CATALOGUE}
               currentLang={currentLang}
-              onSelectFreePlan={handleDownloadFlow}
+              onSelectPlan={handleDownloadFlow}
             />
           </>
         )}
@@ -251,8 +360,22 @@ export default function App() {
         isOpen={parentGateGame !== null}
         game={parentGateGame}
         currentLang={currentLang}
-        onClose={() => setParentGateGame(null)}
+        onClose={() => {
+          setParentGateGame(null);
+          setPaymentReturn(null);
+        }}
         onNewsletterSubmit={handleNewsletterSubmit}
+        onRequestPayment={handleCreatePayment}
+        paymentState={
+          parentGateGame && paymentReturn?.gameId === parentGateGame.id
+            ? paymentReturn.status === 'error' ? 'idle' : paymentReturn.status
+            : 'idle'
+        }
+        paymentError={
+          parentGateGame && paymentReturn?.gameId === parentGateGame.id && paymentReturn.status === 'error'
+            ? paymentReturn.error ?? null
+            : null
+        }
       />
 
       {/* 2. Quick Game Detail Modal (if used) */}
